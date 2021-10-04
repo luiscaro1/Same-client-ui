@@ -1,24 +1,10 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import { authActions } from "./services/redux/store/actions";
-import { authSelectors } from "./services/redux/store/selectors";
-import { useDispatch, useSelector } from "react-redux";
+import useStyles from "./_style";
 
 export default function Home() {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
 
-  const token = useSelector(authSelectors.selectToken);
-
-  const login = async () => {
-    await dispatch(authActions.login("<Pass credentials here>"));
-  };
-
-  return (
-    <div>
-      <p>{token} </p>
-      <Button onClick={login} variant="contained">
-        Hello World
-      </Button>
-    </div>
-  );
+  return <div className={classes.root}>HHome Page</div>;
 }

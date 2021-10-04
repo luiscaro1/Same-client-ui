@@ -6,7 +6,7 @@ const { LOGIN_SUCCESSFUL, LOGIN_FAILED } = authTypes;
 export const login = (credentials) => async (dispatch) => {
   //TODO: copy and paste the login url
   try {
-    const res = await axios.post("<Login URL goes here>", credentials);
+    const res = await axios.post("http://localhost:5000/Same/login", credentials);
 
     //succesful
     dispatch({

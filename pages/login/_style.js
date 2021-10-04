@@ -1,7 +1,15 @@
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  root: {},
+  red: {
+
+    color:'red',
+    fontSize: 20
+  },
+  blue:{
+    color:'blue',
+    fontSize:30
+  }
 });
 
 export default useStyles

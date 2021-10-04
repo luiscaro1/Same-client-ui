@@ -6,8 +6,9 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
 
+// react component
 const Login = () => {
-    // applies styling to components
+  // applies styling to components
   const classes = useStyles();
 
   // function to dispatch events
@@ -18,6 +19,8 @@ const Login = () => {
     uausername: "",
     uapassword: "",
   });
+
+  console.log(values);
 
   // maps textfield values to state values
   const handleChange = (e) => {
@@ -35,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <form className={classes.root} onSubmit={handleSumbit}>
+    <form onSubmit={handleSumbit}>
       <FormGroup>
         <TextField
           name="uausername"

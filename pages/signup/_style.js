@@ -1,15 +1,18 @@
+import { TextField } from "@mui/material";
+import { red } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  red: {
-
-    color:'red',
-    fontSize: 20
+  TextField:{
+    color: red,
+    textAlign: "center",
+    alignContent: "center",
+    alignItems: "center"
   },
-  blue:{
-    color:'blue',
-    fontSize:30
+  registerButton:{
+    color: "red"
   }
+
 });
 
 export default useStyles

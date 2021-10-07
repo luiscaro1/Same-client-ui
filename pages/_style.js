@@ -1,60 +1,62 @@
 import { makeStyles } from "@mui/styles";
 import { height } from "@mui/system";
+import { grey } from "@mui/material/colors";
+import { COLORS } from "../contants";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor:"black",
-    textAlign:"center",
-    color:"white",
-    fontWeight:'bold'
+    backgroundColor: "black",
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
   },
-  title:{
-      alignItems:"center",
-      fontSize:'3rem'
+  logo: {
+    width: 100,
   },
-  about:{
-      backgroundColor:"#000000",
-      fontSize:'1rem',
-      alignItems:"center",
-      position:"absolute",
+  sampleImages: {
+    width: "100%",
+    maxWidth: 300,
   },
-  horse:{
-    backgroundColor:"#00000",
-    marginLeft:400
+
+  actionButton: {
+    color: "black",
+    backgroundColor: COLORS.lightGreen,
+
+    "&:hover": {
+      backgroundColor: COLORS.darkGreen,
+    },
+
+    width: 200,
+    height: 50,
+    margin: 10,
   },
-  horse2:{
-    backgroundColor:"#00000",
-    marginLeft:700
+  icons: {
+    height: "100%",
+  },
+  featuresGrid: {
+    marginTop: 20,
+    marginBottom: 40,
+  },
+  featureTitle: {
+    marginLeft: 10,
+  },
+  features: {
+    marginTop: 20,
+    marginLeft: "5%",
+  },
+  feature: {
+    marginTop: 20,
+    marginBottom:20
+  },
+  description: {
+    textAlign: "left",
   },
 
   card:{
-      // marginTop:200,
-      // height:400,
-      // width:440,
-      background:'#000000',
-      marginTop:300
-
-  },
-  card2:{
-    // marginTop:200,
-    // height:400,
-    // width:440,
-    background:'#000000',
-    marginBottom:300,
-    marginLeft:400
-},
-  card_media:{
-      height:330,
-      width:330,
-      position:"absolute",
-      textAlign:"center",
-  },
-  card_title:{
-      color:"white",
-      fontWeight:'bold'
-  },
-
+    backgroundColor:grey[900],
+    color:'white'
+  }
+  
 });
 
-
-export default useStyles
+export default useStyles;

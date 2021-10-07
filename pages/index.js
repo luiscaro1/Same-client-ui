@@ -13,21 +13,20 @@ import useStyles from "./_style";
 import { Grid } from "@mui/material";
 
 const Home = () => {
-
-  const router = useRouter()
+  const router = useRouter();
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <CssBaseline>
         <Grid container direction="column">
-          <Grid item>
+          <Grid className={classes.section} item>
             <Toolbar>
               <img className={classes.logo} src="samelogox.png" />
             </Toolbar>
           </Grid>
 
-          <Grid item>
+          <Grid className={classes.section} item>
             <Grid container item direction="row" justifyContent="center">
               <Typography variant="h4">
                 LFG & VOICECHAT GAMING & SERVICES
@@ -35,40 +34,59 @@ const Home = () => {
             </Grid>
           </Grid>
 
-          <Grid container item justifyContent={"space-around"}>
+          <Grid
+            className={classes.section}
+            container
+            item
+            justifyContent={"space-around"}
+          >
             <Grid item xs={4}>
               <img
                 className={classes.sampleImages}
-                src={IMAGES.sample1}
+                src={IMAGES.homeSample1}
                 alt={"Game sample"}
               />
             </Grid>
             <Grid item xs={4}>
               <img
                 className={classes.sampleImages}
-                src={IMAGES.sample3}
+                src={IMAGES.homeSample3}
                 alt={"Game sample"}
               />
             </Grid>
             <Grid item xs={4}>
               <img
                 className={classes.sampleImages}
-                src={IMAGES.sample2}
+                src={IMAGES.homeSample2}
                 alt={"Game sample"}
               />
             </Grid>
           </Grid>
 
-          <Grid item container direction="row" justifyContent="center">
-            <Button onClick={()=>router.push('/login')} className={classes.actionButton} variant="contained">
+          <Grid
+            className={classes.section}
+            item
+            container
+            direction="row"
+            justifyContent="center"
+          >
+            <Button
+              onClick={() => router.push("/login")}
+              className={classes.actionButton}
+              variant="contained"
+            >
               Login
             </Button>
-            <Button onClick={()=>router.push('/signup')} className={classes.actionButton} variant="contained">
+            <Button
+              onClick={() => router.push("/signup")}
+              className={classes.actionButton}
+              variant="contained"
+            >
               Signup
             </Button>
           </Grid>
 
-          <Card className={classes.card}>
+          <Card className={`${classes.card} ${classes.section}}`}>
             <Grid className={classes.features} container direction="column">
               <Grid item container>
                 <Typography variant="h4">Outstanding Features</Typography>

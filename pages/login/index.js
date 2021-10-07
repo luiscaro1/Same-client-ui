@@ -1,10 +1,12 @@
 import React from "react";
+import { Grid, Card, CardContent, Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
+import { IMAGES } from "../../contants";
 
 // react component
 const Login = () => {
@@ -19,8 +21,6 @@ const Login = () => {
     uausername: "",
     uapassword: "",
   });
-
-  console.log(values);
 
   // maps textfield values to state values
   const handleChange = (e) => {
@@ -38,24 +38,49 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSumbit}>
-      <FormGroup>
-        <TextField
-          name="uausername"
-          required
-          label="username"
-          onChange={handleChange}
+    <Grid className={classes.root} height='100vh' container direction="row"  >
+      <Grid className={classes.imageBackground} item xs={8}>
+        <img
+          className={classes.loginBackground}
+          src={IMAGES.loginBackground}
+          alt="login background"
         />
-        <TextField
-          name="uapassword"
-          type="password"
-          required
-          label="password"
-          onChange={handleChange}
-        />
-        <Button type="submit">Login</Button>
-      </FormGroup>
-    </form>
+      </Grid>
+      <Grid className={classes.formColumn} item xs={4}>
+        <Box className={classes.formBox}>
+          <CardContent>
+            <form onSubmit={handleSumbit}>
+              <FormGroup>
+                <Grid container direction="column">
+                  <Grid item className={classes.formItem}>
+                    <TextField
+                      name="uausername"
+                      required
+                      label="username"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item className={classes.formItem}>
+                    <TextField
+                      name="uapassword"
+                      type="password"
+                      required
+                      label="password"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item className={classes.formItem}>
+                    <Button variant="contained" type="submit">
+                      Login
+                    </Button>
+                  </Grid>
+                </Grid>
+              </FormGroup>
+            </form>
+          </CardContent>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 

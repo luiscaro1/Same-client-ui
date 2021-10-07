@@ -46,17 +46,19 @@ const useStyles = makeStyles({
   },
   feature: {
     marginTop: 20,
-    marginBottom:20
+    marginBottom: 20,
   },
   description: {
     textAlign: "left",
   },
 
-  card:{
-    backgroundColor:grey[900],
-    color:'white'
-  }
-  
+  card: {
+    backgroundColor: grey[900],
+    color: "white",
+  },
+  section: {
+    margin: "20px 0px 40px 0px",
+  },
 });
 
 export default useStyles;

@@ -1,15 +1,19 @@
 import { makeStyles } from "@mui/styles";
+import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
-  red: {
-
-    color:'red',
-    fontSize: 20
+  formColumn: {
+    backgroundColor: "white",
   },
-  blue:{
-    color:'blue',
-    fontSize:30
-  }
+  formItem: {
+    margin: "10px 0px 10px 0px",
+  },
+  loginBackground: {
+    width: "100%",
+  },
+  imageBackground: {
+    backgroundColor: COLORS.darkGrey,
+  },
 });
 
-export default useStyles
+export default useStyles;

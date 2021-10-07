@@ -84,7 +84,7 @@ const Signup = () => {
                 onChange={handleChange}
               />
               <Button style={{ width: "7vh", backgroundColor: "#36F499", color: "black" }}variant="contained">
-                Register
+                Login
               </Button>
               <Box style={{ color: "#6F6868", fontFamily: "IMPACT", marginTop: "33.8vh"}}>
                 Copyrights@SameDev2021

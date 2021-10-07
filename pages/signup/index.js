@@ -65,7 +65,7 @@ const Signup = () => {
           <form onSubmit={handleSumbit} style={{}}>
             <FormGroup style={{ alignItems:"center", marginTop: "15vh"}}>
               <h1 style={{ fontFamily: "IMPACT", fontSize: "2.5vh", color:"#6F6868", marginBottom: "5vh" } }>
-                WELCOME GAMERS
+                WELCOME GAMERS!
                 </h1>
               <TextField
                 style={{ width: "15vh", marginBottom: "2vh", textAlign: "center"}}

@@ -1,0 +1,3 @@
+export const GET_ALL_GAMES ='GET_ALL_GAMES'
+export const GAME_ERROR ="GAME_ERROR"
+export const VIEW_GAME_PAGE="VIEW_GAME_PAGE"

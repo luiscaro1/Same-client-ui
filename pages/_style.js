@@ -20,9 +20,9 @@ const useStyles = makeStyles({
   },
 
   card:{
-      marginTop:200,
-      height:400,
-      width:440,
+      // marginTop:200,
+      // height:400,
+      // width:440,
       background:'#A0918D',
 
   },

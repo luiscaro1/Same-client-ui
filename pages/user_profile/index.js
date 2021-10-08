@@ -1,61 +1,75 @@
 import React from "react";
+import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
-import FormGroup from "@mui/material/FormGroup";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../services/redux/store/actions";
+// import Box from '@mui/material/Box';
+import {CssBaseline} from "@mui/material";
+// import FormGroup from "@mui/material/FormGroup";
+// import { useDispatch } from "react-redux";
+// import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
+import Typography from '@mui/material/Typography';
+import {Avatar, Grid, Card, CardContent} from "@mui/material";
+import { typography } from "@mui/system";
+
 
 // react component
 const UserProfile = () => {
   // applies styling to components
   const classes = useStyles();
-
-  // function to dispatch events
-  const dispatch = useDispatch();
-
-  // hold the values of the text fields
-  const [values, setValues] = React.useState({
-    uausername: "",
-    uapassword: "",
-  });
-
-  console.log(values);
-
-  // maps textfield values to state values
-  const handleChange = (e) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  // submits the values
-  const handleSumbit = (e) => {
-    e.preventDefault();
-
-    dispatch(authActions.login(values));
-  };
-
   return (
-    <form onSubmit={handleSumbit}>
-      <FormGroup>
-        <TextField
-          name="uausername"
-          required
-          label="username"
-          onChange={handleChange}
+    <div className={classes.root}>
+      <CssBaseline>
+        <Grid className={classes.topGrid}>
+          <Toolbar>
+            <img className={classes.logo} 
+            src="samelogox.png" 
+          />
+        </Toolbar>
+        </Grid>
+        <Grid className={classes.todoDelMedio}>
+          <Grid className={classes.middleGrid}> 
+            <Card className={classes.card}
+            >
+            <Grid container spacing={2}>
+              <Avatar className={classes.circle} 
+              alt = "Same"
+              src="circle.png"
+              />
+              <Button className={classes.addFriendButton}>
+                Add friends
+              </Button>
+            </Grid>
+            <typography className={classes.typo1}>
+              Username
+            </typography>
+            </Card>
+          </Grid>
+          <Grid className={classes.bottomGrid}>
+            <card className={classes.card2}>
+              <CardContent className={classes.content}>
+                <Typography className={classes.square2}>
+                  the description of the user goes here, and all fo the
+                  games that the user plays
+                </Typography>
+              </CardContent>
+            </card>
+          </Grid>
+        </Grid>
+        
+        {/* <Card className={classes.card}>
+        <Avatar className={classes.circle} 
+        alt = "Same"
+        src="circle.png"
+        
         />
-        <TextField
-          name="uapassword"
-          type="password"
-          required
-          label="password"
-          onChange={handleChange}
-        />
-        <Button type="submit">UserProfile</Button>
-      </FormGroup>
-    </form>
+        Username: the uausername goes here
+        id: the uaid goes here
+        </Card>
+        <Card className={classes.card}>
+        id: the uaid goes here
+        </Card> */}
+      </CssBaseline>
+    </div>
   );
 };
 

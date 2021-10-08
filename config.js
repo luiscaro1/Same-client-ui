@@ -5,6 +5,7 @@ const config =
         auth_api: {
           base_url: "http://localhost:5000",
           login_route: "/Same/login",
+          signup_route: "/Same/accounts",
         },
         game_api: {
           base_url: "http://localhost:5004",

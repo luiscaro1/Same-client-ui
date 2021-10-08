@@ -22,7 +22,7 @@ const Home = () => {
         <Grid container direction="column">
           <Grid className={classes.section} item>
             <Toolbar>
-              <img className={classes.logo} src="samelogox.png" />
+              <img className={classes.logo} src={IMAGES.logo} />
             </Toolbar>
           </Grid>
 

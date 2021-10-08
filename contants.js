@@ -14,4 +14,6 @@ export const IMAGES = {
   homeSample2: "individualchat.png",
   homeSample3: "userprofile.png",
   loginBackground: "fourhorses.png",
+  horsesLeft:"twohorsesleft.png",
+  horsesRight:"twohorsesright.png"
 };

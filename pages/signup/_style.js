@@ -18,8 +18,8 @@ const useStyles = makeStyles({
 
   },
   formItem2: {
-    // margin: "50px 0px 30px 0px",
-    marginTop:40,
+    // margin: "20px 0px 30px 0px",
+    marginTop:20,
     marginLeft:30,
   },
  
@@ -43,9 +43,7 @@ const useStyles = makeStyles({
 
     width: 200,
     height: 50,
-    margin: 14,
-    marginTop:18,
-    
+    margin: 15
   },
 });
 

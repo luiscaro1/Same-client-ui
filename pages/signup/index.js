@@ -11,7 +11,7 @@ import AppBar from "@mui/material/AppBar";
 import { COLORS } from "../../contants";
 
 // react component
-const Login = () => {
+const SignUp = () => {
   // applies styling to components
   const classes = useStyles();
 
@@ -20,7 +20,10 @@ const Login = () => {
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
+    firstname:"",
+    lastname:"",
     uausername: "",
+    uaemail:"",
     uapassword: "",
   });
 
@@ -36,7 +39,7 @@ const Login = () => {
   const handleSumbit = (e) => {
     e.preventDefault();
 
-    dispatch(authActions.login(values));
+    dispatch(authActions.login(values)); //needs to be change for signup process
   };
 
   return (
@@ -61,7 +64,34 @@ const Login = () => {
             <form onSubmit={handleSumbit}>
               <FormGroup>
                 <Grid container direction="column">
-                  <Grid item className={classes.formItem}>
+                <Grid item className={classes.formItem}>
+                  
+                  <TextField
+                    name="firstname"
+                    required
+                    label="name"
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item className={classes.formItem2}>
+                  
+                  <TextField
+                    name="lastname"
+                    required
+                    label="lastname"
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item className={classes.formItem2}>
+                  
+                  <TextField
+                    name="uaemail"
+                    required
+                    label="email"
+                    onChange={handleChange}
+                  />
+                </Grid>
+                  <Grid item className={classes.formItem2}>
                   
                     <TextField
                       name="uausername"
@@ -70,6 +100,7 @@ const Login = () => {
                       onChange={handleChange}
                     />
                   </Grid>
+                  
                   <Grid item className={classes.formItem2}>
                     <TextField
                       name="uapassword"
@@ -79,9 +110,10 @@ const Login = () => {
                       onChange={handleChange}
                     />
                   </Grid>
+                  
                   <Grid item className={classes.formItem2}>
                     <Button variant="contained" type="submit" className={classes.actionButton}>
-                      Login
+                      Register
                     </Button>
                   </Grid>
                 </Grid>
@@ -94,4 +126,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Card, CardContent, Box, Typography } from "@mui/material";
+import { Grid, CardContent, Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
@@ -7,8 +7,6 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
 import { IMAGES } from "../../contants";
-import AppBar from "@mui/material/AppBar";
-import { COLORS } from "../../contants";
 
 // react component
 const Login = () => {
@@ -40,15 +38,9 @@ const Login = () => {
   };
 
   return (
-    <Grid className={classes.root} height='100vh' container direction="row"  >
-      <Grid container>
-        <Grid item xs={12} >
-        <AppBar style={{backgroundColor:COLORS.normalGrey}}>
-              <img className={classes.logo} src="samelogox.png" />
-          </AppBar>
-        </Grid>
-          </Grid>
+    <Grid className={classes.root} height="100vh" container direction="row">
       <Grid className={classes.imageBackground} item xs={8}>
+        <img className={classes.logo} src={IMAGES.logo} />
         <img
           className={classes.loginBackground}
           src={IMAGES.loginBackground}
@@ -61,16 +53,29 @@ const Login = () => {
             <form onSubmit={handleSumbit}>
               <FormGroup>
                 <Grid container direction="column">
-                  <Grid item className={classes.formItem}>
-                  
+                  <Grid item container justifyContent="center">
+                    <Typography variant="h6">Login</Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
                     <TextField
+                      className={classes.inputs}
                       name="uausername"
                       required
                       label="username"
                       onChange={handleChange}
                     />
                   </Grid>
-                  <Grid item className={classes.formItem2}>
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
                     <TextField
                       name="uapassword"
                       type="password"
@@ -79,8 +84,17 @@ const Login = () => {
                       onChange={handleChange}
                     />
                   </Grid>
-                  <Grid item className={classes.formItem2}>
-                    <Button variant="contained" type="submit" className={classes.actionButton}>
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      className={classes.actionButton}
+                    >
                       Login
                     </Button>
                   </Grid>

@@ -3,28 +3,21 @@ import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
   formColumn: {
-    backgroundColor:COLORS.lightGrey,
+    backgroundColor: "white",
   },
   logo: {
-    marginTop:30,
-    marginLeft:30,
-    marginBottom:10,
+    marginTop: 30,
+    marginLeft: 30,
+    marginBottom: 10,
     width: 100,
   },
-  formItem: {
-    // margin: "100px 0px 10px 0px",
-    marginTop:100,
-    marginLeft:30
 
+  formItem: {
+    margin: "10px 0px 10px 0px",
   },
-  formItem2: {
-    // margin: "20px 0px 30px 0px",
-    marginTop:20,
-    marginLeft:30,
-  },
- 
+
   loginBackground: {
-    marginTop:20,
+    marginTop: 20,
     width: "100%",
   },
   imageBackground: {
@@ -32,10 +25,10 @@ const useStyles = makeStyles({
   },
   appbar: {
     width: "100%",
-    backgroundColor:COLORS.normalGrey,
+    backgroundColor: "black",
   },
   actionButton: {
-    backgroundColor: COLORS.normalGrey,
+    backgroundColor: COLORS.lightGreen,
 
     "&:hover": {
       backgroundColor: COLORS.darkGreen,
@@ -43,7 +36,12 @@ const useStyles = makeStyles({
 
     width: 200,
     height: 50,
-    margin: 15
+    margin: 14,
+    marginTop: 18,
+  },
+  targetMessage: {
+    color: "white",
+    margin: "0px 20px 0px 20px",
   },
 });
 

@@ -1,17 +1,22 @@
 import React from "react";
-import { Grid, Card, CardContent, Box, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
-import FormGroup from "@mui/material/FormGroup";
+import {
+  Grid,
+  CardContent,
+  Box,
+  Typography,
+  Button,
+  FormGroup,
+  TextField,
+  Checkbox,
+} from "@mui/material";
+import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
 import { IMAGES } from "../../contants";
-import AppBar from "@mui/material/AppBar";
-import { COLORS } from "../../contants";
 
 // react component
-const SignUp = () => {
+const Login = () => {
   // applies styling to components
   const classes = useStyles();
 
@@ -20,11 +25,12 @@ const SignUp = () => {
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
-    firstname:"",
-    lastname:"",
     uausername: "",
-    uaemail:"",
     uapassword: "",
+    confirmpassword: "",
+    firstname: "",
+    lastname: "",
+    uaemail: "",
   });
 
   // maps textfield values to state values
@@ -39,19 +45,13 @@ const SignUp = () => {
   const handleSumbit = (e) => {
     e.preventDefault();
 
-    dispatch(authActions.login(values)); //needs to be change for signup process
+    dispatch(authActions.login(values));
   };
 
   return (
-    <Grid className={classes.root} height='100vh' container direction="row"  >
-      <Grid container>
-        <Grid item xs={12} >
-        <AppBar style={{backgroundColor:COLORS.normalGrey}}>
-              <img className={classes.logo} src="samelogox.png" />
-          </AppBar>
-        </Grid>
-          </Grid>
+    <Grid className={classes.root} height="100vh" container direction="row">
       <Grid className={classes.imageBackground} item xs={8}>
+        <img className={classes.logo} src={IMAGES.logo} />
         <img
           className={classes.loginBackground}
           src={IMAGES.loginBackground}
@@ -63,58 +63,128 @@ const SignUp = () => {
           <CardContent>
             <form onSubmit={handleSumbit}>
               <FormGroup>
+                <Grid item container justifyContent="center">
+                  <Typography variant="h6">Signup</Typography>
+                </Grid>
                 <Grid container direction="column">
-                <Grid item className={classes.formItem}>
-                  
-                  <TextField
-                    name="firstname"
-                    required
-                    label="name"
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item className={classes.formItem2}>
-                  
-                  <TextField
-                    name="lastname"
-                    required
-                    label="lastname"
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item className={classes.formItem2}>
-                  
-                  <TextField
-                    name="uaemail"
-                    required
-                    label="email"
-                    onChange={handleChange}
-                  />
-                </Grid>
-                  <Grid item className={classes.formItem2}>
-                  
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
                     <TextField
-                      name="uausername"
+                      name="firstname"
                       required
-                      label="username"
+                      label="First Name"
                       onChange={handleChange}
                     />
                   </Grid>
-                  
-                  <Grid item className={classes.formItem2}>
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
+                    <TextField
+                      name="lastname"
+                      required
+                      label="Last Name"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
+                    <TextField
+                      name="uaemail"
+                      required
+                      label="Email"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
+                    <TextField
+                      name="uausername"
+                      required
+                      label="User Name"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
                     <TextField
                       name="uapassword"
                       type="password"
                       required
-                      label="password"
+                      label="Password"
                       onChange={handleChange}
                     />
                   </Grid>
-                  
-                  <Grid item className={classes.formItem2}>
-                    <Button variant="contained" type="submit" className={classes.actionButton}>
-                      Register
-                    </Button>
+                  <Grid
+                    item
+                    className={classes.formItem}
+                    container
+                    justifyContent="center"
+                  >
+                    <TextField
+                      name="confirmpassword"
+                      type="confirmpassword"
+                      required
+                      label="Confirm Password"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+
+                  <Grid item container direction="row">
+                    <Grid item container xs>
+                      <Grid
+                        item
+                        container
+                        direction="row"
+                        justifyContent="center"
+                      >
+                        <Typography variant="body2">
+                          I am 18 years or older <Checkbox />
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        item
+                        className={classes.formItem}
+                        container
+                        justifyContent="center"
+                      >
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          className={classes.actionButton}
+                        >
+                          Signup
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                  <Grid item container justifyContent="center" marginTop="20px">
+                    <Link href="/termsofservice">
+                      <a>
+                        <Typography variant="caption">
+                          Terms Of Service
+                        </Typography>
+                      </a>
+                    </Link>
                   </Grid>
                 </Grid>
               </FormGroup>
@@ -126,4 +196,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

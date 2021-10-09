@@ -5,8 +5,8 @@ import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "red",
     aligncontent: "center",
+    backgroundColor: COLORS.darkGrey,
     color: "black",
     fontWeight: "bold",
   },
@@ -31,8 +31,8 @@ const useStyles = makeStyles({
 
   card: {
     aligncontent: "center",
-    backgroundColor: COLORS.darkGrey,
-    color: COLORS.lightGreen,
+    backgroundColor: COLORS.lightGrey,
+    
     height: 300,
     justifyContent: "center",
   },
@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   content:{
     backgroundcolor: COLORS.lightGreen,
     height: 300,
-    width: 300,
+     width: 300,
   },
 
   square1:{
@@ -60,6 +60,8 @@ const useStyles = makeStyles({
   square2:{
     variant:"body2",
     color: COLORS.darkGrey,
+    backgroundColor: COLORS.lightGreen,
+    height: 150,
     textAlign: "left",
   },
   topGrid:{
@@ -67,21 +69,35 @@ const useStyles = makeStyles({
   },
   middleGrid:{
     backgroundColor: COLORS.darkGrey,
-    width: 300,
+    width: 350,
     alignContent: "left",
   },
   bottomGrid:{
-    backgroundColor: COLORS.lightGreen,
-    width: 300,
+    backgroundColor: COLORS.lightGrey,
+    width: 350,
   },
   todoDelMedio:{
-    marginLeft: 600,
-    marginRight:500,
+     //marginLeft: 200,
+     backgroundColor: COLORS.darkGrey,
+    // marginRight:500,
   },
   typo1:{
     marginLeft:30,
+    fontWeight:"bold",
+    fontSize: "2rem"
   },
-
+  leftSideHorses:{
+    width: 580,
+    height: 600,
+  },
+  rightSideHorses:{
+    marginTop: 20,
+    width: 580,
+    height: 600,
+  },
+  wholeContainer:{
+    //alignItems: "center",
+  }
 });
 
 export default useStyles;

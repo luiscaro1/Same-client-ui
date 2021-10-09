@@ -25,33 +25,48 @@ const UserProfile = () => {
           />
         </Toolbar>
         </Grid>
-        <Grid className={classes.todoDelMedio}>
-          <Grid className={classes.middleGrid}> 
-            <Card className={classes.card}
-            >
-            <Grid container spacing={2}>
-              <Avatar className={classes.circle} 
-              alt = "Same"
-              src="circle.png"
-              />
-              <Button className={classes.addFriendButton}>
-                Add friends
-              </Button>
-            </Grid>
-            <Typography className={classes.typo1}>
-              Username
-            </Typography>
-            </Card>
+        <Grid container className = {classes.wholeContainer}direction="row">
+          <Grid  >
+            <img
+            className={classes.leftSideHorses}
+              src = {IMAGES.horsesLeft}
+            />
           </Grid>
-          <Grid className={classes.bottomGrid}>
-            <card className={classes.card2}>
-              <CardContent className={classes.content}>
-                <Typography className={classes.square2}>
-                  the description of the user goes here, and all fo the
-                  games that the user plays
-                </Typography>
-              </CardContent>
-            </card>
+          <Grid className={classes.todoDelMedio}>
+            <Grid className={classes.middleGrid}> 
+              <Card className={classes.card}
+              >
+              <Grid container spacing={2}>
+                <Avatar className={classes.circle} 
+                alt = "Same"
+                src="circle.png"
+                />
+                <Button className={classes.addFriendButton}>
+                  Add friends
+                </Button>
+              </Grid>
+              <Typography className={classes.typo1}>
+                Username
+              </Typography>
+              </Card>
+            </Grid>
+            <Grid className={classes.bottomGrid}>
+              <card className={classes.card2}>
+                <CardContent className={classes.content}>
+                  Bio
+                  <Typography className={classes.square2}>
+                    the description of the user goes here, and all fo the
+                    games that the user plays
+                  </Typography>
+                </CardContent>
+              </card>
+            </Grid>
+          </Grid>
+          <Grid>
+            <img
+              className={classes.rightSideHorses}
+              src = {IMAGES.horsesRight}
+            />
           </Grid>
         </Grid>
         

@@ -29,7 +29,7 @@ const Home = () => {
           <Grid className={classes.section} item>
             <Grid container item direction="row" justifyContent="center">
               <Typography variant="h4">
-                LFG & VOICECHAT GAMING & SERVICES
+                LFG, VOICECHAT & GAMING SERVICES
               </Typography>
             </Grid>
           </Grid>

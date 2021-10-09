@@ -4,7 +4,8 @@ import config from "../../../../config";
 
 const { game_api } = config;
 
-const { GET_ALL_GAMES, GAME_ERROR, VIEW_GAME_PAGE } = gameTypes;
+const { GET_ALL_GAMES, GAME_ERROR, VIEW_GAME_PAGE, GET_LFG_LOBBIES } =
+  gameTypes;
 
 export const getAllGames = () => async (dispatch) => {
   try {
@@ -19,11 +20,9 @@ export const getAllGames = () => async (dispatch) => {
 };
 
 export const getGameById = (id) => async (dispatch) => {
-   
   try {
     const res = await axios.get(
-      game_api.base_url + game_api.get_game_by_id_route+
-      id
+      game_api.base_url + game_api.get_game_by_id_route + id
     );
 
     dispatch({ type: VIEW_GAME_PAGE, payload: res.data });
@@ -32,6 +31,18 @@ export const getGameById = (id) => async (dispatch) => {
   }
 };
 
-export const setCurrentGame = (gameData)=>dispatch=>{
-    dispatch({ type: VIEW_GAME_PAGE, payload: gameData });
-}
+export const setCurrentGame = (gameData) => (dispatch) => {
+  dispatch({ type: VIEW_GAME_PAGE, payload: gameData });
+};
+
+export const getLfgLobbies = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      game_api.base_url + game_api.get_lfg_lobbies + id
+    );
+
+    dispatch({ type: GET_LFG_LOBBIES, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};

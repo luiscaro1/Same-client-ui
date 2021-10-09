@@ -64,7 +64,9 @@ const Login = () => {
             <form onSubmit={handleSumbit}>
               <FormGroup>
                 <Grid item container justifyContent="center">
-                  <Typography variant="h6">Signup</Typography>
+                  <Typography color="primary" variant="h6">
+                    Signup
+                  </Typography>
                 </Grid>
                 <Grid container direction="column">
                   <Grid
@@ -74,6 +76,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
+                      sx={{ color: "text.primary" }}
                       name="firstname"
                       required
                       label="First Name"
@@ -156,7 +159,7 @@ const Login = () => {
                         direction="row"
                         justifyContent="center"
                       >
-                        <Typography variant="body2">
+                        <Typography color='secondary' variant="body2">
                           I am 18 years or older <Checkbox />
                         </Typography>
                       </Grid>

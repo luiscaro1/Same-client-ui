@@ -11,6 +11,7 @@ const config =
           base_url: "http://localhost:5004",
           get_all_games_route: "/game/all",
           get_game_by_id_route: "/game/",
+          get_lfg_lobbies: "/lfg/",
         },
       };
 

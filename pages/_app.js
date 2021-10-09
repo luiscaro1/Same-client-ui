@@ -6,21 +6,37 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import propTypes from "prop-types";
-
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { createWrapper } from "next-redux-wrapper";
 import store from "../services/redux";
 
 function MyApp({ Component, pageProps }) {
+  const theme = createTheme({
+    palette: {
+      mode: "dark",
+      primary: {
+        main: "#36F499",
+      },
+
+      secondary: {
+        main: "#fefcfc",
+      },
+
+     
+    },
+  });
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </ThemeProvider>
   );
 }
 
 MyApp.propTypes = {
-  Component: propTypes.Component,
-  pageProps: propTypes.pageProps,
+  Component: propTypes.func,
+  pageProps: propTypes.instanceOf(Object),
 };
 
 const makestore = () => store;

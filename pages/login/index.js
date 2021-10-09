@@ -54,7 +54,7 @@ const Login = () => {
               <FormGroup>
                 <Grid container direction="column">
                   <Grid item container justifyContent="center">
-                    <Typography variant="h6">Login</Typography>
+                    <Typography color="primary" variant="h6">Login</Typography>
                   </Grid>
                   <Grid
                     item

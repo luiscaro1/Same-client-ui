@@ -1,16 +1,20 @@
 import React from "react";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import "../global.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import propTypes from "prop-types";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { createWrapper } from "next-redux-wrapper";
 import store from "../services/redux";
+import { authActions } from "../services/redux/store/actions";
 
 function MyApp({ Component, pageProps }) {
+  const dispatch = useDispatch();
+
   const theme = createTheme({
     palette: {
       mode: "dark",
@@ -21,10 +25,17 @@ function MyApp({ Component, pageProps }) {
       secondary: {
         main: "#fefcfc",
       },
-
-     
     },
   });
+
+  const verifyAuth = () => {
+    dispatch(authActions.verifyAuth());
+  };
+
+  React.useEffect(() => {
+    verifyAuth();
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>

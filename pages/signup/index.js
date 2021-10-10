@@ -25,12 +25,12 @@ const Login = () => {
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
-    uausername: "",
-    uapassword: "",
-    confirmpassword: "",
-    firstname: "",
-    lastname: "",
-    uaemail: "",
+    user_name: "",
+    password: "",
+    confirm_password: "",
+    first_name: "",
+    last_name: "",
+    email: "",
   });
 
   // maps textfield values to state values
@@ -77,7 +77,7 @@ const Login = () => {
                   >
                     <TextField
                       sx={{ color: "text.primary" }}
-                      name="firstname"
+                      name="first_name"
                       required
                       label="First Name"
                       onChange={handleChange}
@@ -90,7 +90,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="lastname"
+                      name="last_name"
                       required
                       label="Last Name"
                       onChange={handleChange}
@@ -103,7 +103,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="uaemail"
+                      name="email"
                       required
                       label="Email"
                       onChange={handleChange}
@@ -116,7 +116,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="uausername"
+                      name="user_name"
                       required
                       label="User Name"
                       onChange={handleChange}
@@ -129,7 +129,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="uapassword"
+                      name="password"
                       type="password"
                       required
                       label="Password"
@@ -143,8 +143,8 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="confirmpassword"
-                      type="confirmpassword"
+                      name="confirm_password"
+                      type="password"
                       required
                       label="Confirm Password"
                       onChange={handleChange}
@@ -159,7 +159,7 @@ const Login = () => {
                         direction="row"
                         justifyContent="center"
                       >
-                        <Typography color='secondary' variant="body2">
+                        <Typography color="secondary" variant="body2">
                           I am 18 years or older <Checkbox />
                         </Typography>
                       </Grid>

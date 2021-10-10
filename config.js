@@ -6,6 +6,7 @@ const config =
           base_url: "http://localhost:5000",
           login_route: "/Same/login",
           signup_route: "/Same/accounts",
+          verify_auth:"/Same/accounts/getCookieOwner"
         },
         game_api: {
           base_url: "http://localhost:5004",

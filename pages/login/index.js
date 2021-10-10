@@ -18,8 +18,8 @@ const Login = () => {
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
-    uausername: "",
-    uapassword: "",
+    user_name: "",
+    password: "",
   });
 
   // maps textfield values to state values
@@ -64,7 +64,7 @@ const Login = () => {
                   >
                     <TextField
                       className={classes.inputs}
-                      name="uausername"
+                      name="user_name"
                       required
                       label="username"
                       onChange={handleChange}
@@ -77,7 +77,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="uapassword"
+                      name="password"
                       type="password"
                       required
                       label="password"

@@ -5,14 +5,68 @@ import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "red",
-    aligncontent: "center",
+    backgroundColor:"white",
     color: "black",
     fontWeight: "bold",
+  },
+
+  logobar:{
+    backgroundColor:COLORS.lightGreen,
+    width:"118%"
   },
   
   logo: {
     width: 100,
+  },
+  blackbox:{
+    backgroundColor:"black",
+    alignItems:"left",
+    width:400,
+    height:800
+
+  },
+  leftbox:{
+    fontWeight:"bold",
+    width:400,
+    height:800
+  },
+  usercard:{
+    backgroundColor:"black",
+    color:"white",
+    width:400,
+    height:500
+
+  },
+  whitebox:{
+    backgroundColor:"white",
+    marginBottom:10,
+  },
+  rightbox:{
+    backgroundColor:"white",
+    width:"100%"
+    
+  },
+  userprofile:{
+    width:250,
+    height:250,
+    marginLeft:48,
+    marginTop:20,
+    position:"absolute",
+    
+
+  },
+  usernamegrid:{
+    marginTop:300,
+    position:"absolute",
+    alignItems:"center",
+    textAlign:"center"
+
+  },
+  usernametxt:{
+    fontWeight:"bold",
+    fontSize:"2rem",
+    marginLeft:50
+    
   },
 
   addFriendButton:{
@@ -22,65 +76,123 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: COLORS.darkGreen,
     },
-
-    width: 100,
-    height: 50,
-    marginTop: 50,
+    
+    width: 5,
+    height: 35,
+    // width: 5,
+    // height: 26,
+    marginLeft:20
+    
     // marginBottom: 150,
   },
 
-  card: {
-    aligncontent: "center",
-    backgroundColor: COLORS.darkGrey,
-    color: COLORS.lightGreen,
-    height: 300,
-    justifyContent: "center",
+  biobox:{
+    margin:"410px 0px 0px 30px"
   },
-  card2:{
-    backgroundColor: COLORS.lightGreen,
-    color: COLORS.darkGrey,
-    height: 200,
-    width:100,
+  bio:{
+    margin:"10px 0px 30px 0px",
+    color:COLORS.lightGreen
   },
-  circle:{
-    height:150,
-    width: 150,
+  friendsbox:{
+    margin:"0px 0px 30px 30px",
+
   },
-  content:{
-    backgroundcolor: COLORS.lightGreen,
-    height: 300,
-    width: 300,
+  friends:{
+    margin:"0px 0px 30px 30px",
+    color:COLORS.lightGreen,
   },
 
-  square1:{
-    variant:"h1",
-    color: COLORS.lightGreen
+  platformbox:{
+    margin:"0px 0px 20px 30px",
+
+  },
+  platform:{
+    margin:"0px 0px 20px 30px",
+    color:COLORS.lightGreen,
+  },
+  messageButton:{
+    color: "black",
+    backgroundColor: COLORS.lightGreen,
+
+    "&:hover": {
+      backgroundColor: COLORS.darkGreen,
+    },
+    margin:"57px 0px 0px 660px",
+    
+
+  }, 
+  message:{
+    fontWeight:"bold"
+
   },
 
-  square2:{
-    variant:"body2",
-    color: COLORS.darkGrey,
-    textAlign: "left",
+  buttonand3points:{
+    alignItems:"center",
+    position:"absolute",
+    textAlign:"center"
   },
-  topGrid:{
-    backgroundColor: "grey"
+   
+  threepoints:{
+    margin:"57px 0px 0px 20px"
+    
+   
+    
+  
   },
-  middleGrid:{
-    backgroundColor: COLORS.darkGrey,
-    width: 300,
-    alignContent: "left",
-  },
-  bottomGrid:{
-    backgroundColor: COLORS.lightGreen,
-    width: 300,
-  },
-  todoDelMedio:{
-    marginLeft: 600,
-    marginRight:500,
-  },
-  typo1:{
-    marginLeft:30,
-  },
+
+
+  // card: {
+  //   aligncontent: "center",
+  //   backgroundColor: COLORS.darkGrey,
+  //   color: COLORS.lightGreen,
+  //   height: 300,
+  //   justifyContent: "center",
+  // },
+  // card2:{
+  //   backgroundColor: COLORS.lightGreen,
+  //   color: COLORS.darkGrey,
+  //   height: 200,
+  //   width:100,
+  // },
+  // circle:{
+  //   height:150,
+  //   width: 150,
+  // },
+  // content:{
+  //   backgroundcolor: COLORS.lightGreen,
+  //   height: 300,
+  //   width: 300,
+  // },
+
+  // square1:{
+  //   variant:"h1",
+  //   color: COLORS.lightGreen
+  // },
+
+  // square2:{
+  //   variant:"body2",
+  //   color: COLORS.darkGrey,
+  //   textAlign: "left",
+  // },
+  // topGrid:{
+  //   backgroundColor: "grey"
+  // },
+  // middleGrid:{
+  //   backgroundColor: COLORS.darkGrey,
+  //   width: 300,
+  //   alignContent: "left",
+  // },
+  // bottomGrid:{
+  //   backgroundColor: COLORS.lightGreen,
+  //   width: 300,
+  // },
+  // todoDelMedio:{
+  //   marginLeft: 600,
+  //   marginRight:500,
+  // },
+  // typo1:{
+  //   marginLeft:30,
+  // },
 
 });
 

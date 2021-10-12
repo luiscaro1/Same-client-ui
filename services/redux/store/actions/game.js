@@ -4,8 +4,13 @@ import config from "../../../../config";
 
 const { game_api } = config;
 
-const { GET_ALL_GAMES, GAME_ERROR, VIEW_GAME_PAGE, GET_LFG_LOBBIES } =
-  gameTypes;
+const {
+  GET_ALL_GAMES,
+  GAME_ERROR,
+  VIEW_GAME_PAGE,
+  GET_LFG_LOBBIES,
+  ADD_LOBBY,
+} = gameTypes;
 
 export const getAllGames = () => async (dispatch) => {
   try {
@@ -45,4 +50,24 @@ export const getLfgLobbies = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: GAME_ERROR, payload: err });
   }
+};
+
+export const addLfgLobby = (description) => async (dispatch, getState) => {
+  const state = getState();
+
+  const { auth, game } = state;
+
+  if (auth.token && game.currentGame) {
+    try {
+      await axios.post(game_api.base_url + game_api.create_lfg_lobby, {
+        description,
+        gid: game.currentGame.data.gid,
+        uid: auth.token.uid,
+      });
+
+      dispatch({ type: ADD_LOBBY });
+    } catch (err) {
+      dispatch({ type: GAME_ERROR, payload: err });
+    }
+  } else dispatch({ type: GAME_ERROR, payload: "Missing user or Game data" });
 };

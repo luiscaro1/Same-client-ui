@@ -13,6 +13,7 @@ const config =
           get_all_games_route: "/game/all",
           get_game_by_id_route: "/game/",
           get_lfg_lobbies: "/lfg/",
+          create_lfg_lobby: "/lfg/create",
         },
       };
 

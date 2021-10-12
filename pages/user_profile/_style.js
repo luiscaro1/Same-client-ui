@@ -8,65 +8,53 @@ const useStyles = makeStyles({
     backgroundColor:"white",
     color: "black",
     fontWeight: "bold",
+    maxWidth:"100%",
+    height:"100vh"
   },
 
   logobar:{
     backgroundColor:COLORS.lightGreen,
-    width:"118%"
+    width:"100%"
   },
   
   logo: {
     width: 100,
   },
   blackbox:{
-    backgroundColor:"black",
     alignItems:"left",
     width:400,
-    height:800
-
+    height:655,
   },
   leftbox:{
+    backgroundColor:"black",
     fontWeight:"bold",
     width:400,
-    height:800
+    height:655
   },
   usercard:{
     backgroundColor:"black",
     color:"white",
     width:400,
-    height:500
+    height:655
 
-  },
-  whitebox:{
-    backgroundColor:"white",
-    marginBottom:10,
-  },
-  rightbox:{
-    backgroundColor:"white",
-    width:"100%"
-    
   },
   userprofile:{
     width:250,
     height:250,
     marginLeft:48,
-    marginTop:20,
+    marginTop:10,
     position:"absolute",
-    
-
   },
   usernamegrid:{
-    marginTop:300,
+    marginTop:280,
     position:"absolute",
     alignItems:"center",
-    textAlign:"center"
-
+    textAlign:"center",
   },
   usernametxt:{
     fontWeight:"bold",
     fontSize:"2rem",
-    marginLeft:50
-    
+    marginLeft:50,  
   },
 
   addFriendButton:{
@@ -87,27 +75,27 @@ const useStyles = makeStyles({
   },
 
   biobox:{
-    margin:"410px 0px 0px 30px"
+    margin:"0px 0px 0px 30px",
+    
   },
   bio:{
-    margin:"10px 0px 30px 0px",
-    color:COLORS.lightGreen
+    margin:"10px 0px 5px 0px",
+    color:COLORS.lightGreen,
+    
   },
   friendsbox:{
-    margin:"0px 0px 30px 30px",
-
+    margin:"10px 0px 10px 30px",
   },
   friends:{
-    margin:"0px 0px 30px 30px",
+    margin:"10px 0px 5px 0px",
     color:COLORS.lightGreen,
+    
   },
-
   platformbox:{
     margin:"0px 0px 20px 30px",
-
   },
   platform:{
-    margin:"0px 0px 20px 30px",
+    // margin:"0px 0px 10px 30px",
     color:COLORS.lightGreen,
   },
   messageButton:{
@@ -117,28 +105,41 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: COLORS.darkGreen,
     },
-    margin:"57px 0px 0px 660px",
-    
-
+    margin:"100px 0px 0px 1100px",
   }, 
   message:{
     fontWeight:"bold"
-
   },
 
-  buttonand3points:{
+  inforight:{
     alignItems:"center",
     position:"absolute",
     textAlign:"center"
   },
    
   threepoints:{
-    margin:"57px 0px 0px 20px"
-    
-   
-    
-  
+    margin:"105px 0px 0px 20px"
   },
+  info:{
+    margin:"350px 0px 0px 0px"
+},
+
+buttongrid:{
+  alignItems:"right",
+  
+},
+
+tabgrid:{
+
+},
+
+tabs:{
+  "& .Mui-selected": {
+    color: "black",
+    fontFamily:"Roboto",
+    fontSize:"1rem"
+   }
+},
 
 
   // card: {

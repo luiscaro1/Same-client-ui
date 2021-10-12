@@ -2,26 +2,33 @@ import React from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 // import Box from '@mui/material/Box';
-import {CssBaseline} from "@mui/material";
+import {Collapse, CssBaseline} from "@mui/material";
 // import FormGroup from "@mui/material/FormGroup";
 // import { useDispatch } from "react-redux";
 // import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
 import Typography from '@mui/material/Typography';
-import {Avatar, Grid, Card, CardContent,Box} from "@mui/material";
+import {Avatar, Grid, Card, CardContent,Box,Tabs,Tab} from "@mui/material";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { IMAGES } from "../../contants";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import { COLORS } from "../../contants";
 
 // react component
 const UserProfile = () => {
   // applies styling to components
   const classes = useStyles();
+
+  const [value,setValue]=React.useState('one');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <Grid className={classes.root} container direction="row">
       <CssBaseline>
-        <Grid className={classes.middle} container direction="column">
+        {/* <Grid className={classes.middle} styles={{backgroundColor:"white"}} container direction="column"> */}
           <Grid className={classes.logobar}>
           <Toolbar>
               <img className={classes.logo} src={IMAGES.logo} />
@@ -39,38 +46,54 @@ const UserProfile = () => {
             <PersonAddAlt1Icon className={classes.iconaddfriend}></PersonAddAlt1Icon>
               </Button>
             </Grid>
-          <Grid className={classes.biobox} item sx={4}>
+            <Grid className={classes.info} container direction="column">
+            <Grid className={classes.biobox} item xs={2}>
             <Typography variant="h5" fontWeight={"bold"}>Bio</Typography>
             <Typography className={classes.bio} variant="h6">
               Hey I'm the user and I am looking for someone to play with!
             </Typography>
             </Grid> 
-            <Grid className={classes.friendsbox} container sx={2}>
+            <Grid className={classes.friendsbox} item xs={2}>
             <Typography variant="h5" fontWeight={"bold"}>Friends</Typography>
             <Typography className={classes.friends} variant="h6">
               100
             </Typography>
             </Grid>
-            <Grid className={classes.platformbox} container sx={2}>
+            <Grid className={classes.platformbox} item xs={2}>
             <Typography variant="h5" fontWeight={"bold"}>Platform</Typography>
             <Typography className={classes.platform} variant="h6">
               Any consoles
             </Typography>
             </Grid>
+            </Grid>
           </CardContent>
           </Box> 
-          <Grid className={classes.whitebox}>
-            <Grid className={classes.rightbox}>
-              <Grid className={classes.buttonand3points} container direction="row">
-              <Button className={classes.messageButton}>
+        </Grid>
+        <Grid className={classes.inforight} container direction="column">
+          <Grid className={classes.buttongrid} container direction="row">
+          <Button className={classes.messageButton}>
             <Typography className={classes.message}> Message</Typography>
-              </Button>
-              <MoreVertIcon className={classes.threepoints}></MoreVertIcon>
-              </Grid>
-            </Grid>
+          </Button>
+          <MoreVertIcon className={classes.threepoints}></MoreVertIcon>
+          </Grid>
+          <Grid className={classes.tabgrid} item >
+            <Box sx={{width:"100%"}}>
+              <Tabs className={classes.tabs}
+                value={value}
+                onChange={handleChange}
+                TabIndicatorProps={{style:{backgroundColor:COLORS.lightGreen}}}
+                >
+                  <Tab value="one" label="Games"></Tab>
+                  <Tab value="two" label="Friends"></Tab>
+                  <Tab Value="three" label="Posts"></Tab>
+                </Tabs>
+            </Box>
           </Grid>
         </Grid>
-      </Grid>
+            
+         
+        
+      {/* </Grid> */}
       
       
         {/* <Grid className={classes.topGrid}>

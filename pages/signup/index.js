@@ -10,18 +10,22 @@ import {
   Checkbox,
 } from "@mui/material";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
 import { IMAGES } from "../../contants";
+import { authSelectors } from "../../services/redux/store/selectors";
 
 // react component
 const Login = () => {
   // applies styling to components
   const classes = useStyles();
-
+  const router = useRouter();
   // function to dispatch events
   const dispatch = useDispatch();
+
+  const auth = useSelector(authSelectors.selectToken);
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
@@ -47,6 +51,10 @@ const Login = () => {
 
     dispatch(authActions.login(values));
   };
+
+  React.useEffect(() => {
+    if (auth) router.push("/");
+  }, [auth]);
 
   return (
     <Grid className={classes.root} height="100vh" container direction="row">

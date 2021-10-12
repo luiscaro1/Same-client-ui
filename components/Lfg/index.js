@@ -14,7 +14,10 @@ import {
 } from "@mui/material";
 
 import { gameActions } from "../../services/redux/store/actions";
-import { gameSelectors } from "../../services/redux/store/selectors";
+import {
+  gameSelectors,
+  authSelectors,
+} from "../../services/redux/store/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import useStyles from "./_style";
@@ -27,7 +30,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  
+
   boxShadow: 24,
   p: 4,
 };
@@ -37,14 +40,19 @@ const Lfg = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { game_id } = router.query;
+  const auth = useSelector(authSelectors.selectToken);
   const currentGame = useSelector(gameSelectors.selectCurrentGame);
+  const [values, setValues] = React.useState({});
 
   const getLfgLobbies = () => {
     if (game_id) dispatch(gameActions.getLfgLobbies(game_id));
   };
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    if (!auth) router.push("/login");
+    else setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   React.useEffect(() => {
@@ -66,10 +74,19 @@ const Lfg = () => {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Typography color="secondary" id="transition-modal-title" variant="h6" component="h2">
+            <Typography
+              color="secondary"
+              id="transition-modal-title"
+              variant="h6"
+              component="h2"
+            >
               Text in a modal
             </Typography>
-            <Typography color="secondary" id="transition-modal-description" sx={{ mt: 2 }}>
+            <Typography
+              color="secondary"
+              id="transition-modal-description"
+              sx={{ mt: 2 }}
+            >
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </Typography>
           </Box>
@@ -78,7 +95,9 @@ const Lfg = () => {
 
       <Grid spacing={2} container direction="column">
         <Grid container item alignItems="center" spacing={1} xs>
-          <Button onClick={handleOpen} variant="outlined">Create</Button>
+          <Button onClick={handleOpen} variant="outlined">
+            Create
+          </Button>
         </Grid>
         {currentGame?.lobbies?.map((lobby) => {
           return (
@@ -115,7 +134,7 @@ const Lfg = () => {
                     <Grid item container alignItems="center" xs={1}>
                       <img className={classes.platforms} src={IMAGES.pc} />
                     </Grid>
-                    <Grid item xs={1} container alignItems='center'>
+                    <Grid item xs={1} container alignItems="center">
                       <Button variant="contained">Join</Button>
                     </Grid>
                   </Grid>

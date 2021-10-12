@@ -1,20 +1,26 @@
 import React from "react";
 import { Grid, CardContent, Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import { useRouter } from "next/router";
 import { TextField } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+import { authSelectors } from "../../services/redux/store/selectors";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
 import { IMAGES } from "../../contants";
+
 
 // react component
 const Login = () => {
   // applies styling to components
   const classes = useStyles();
-
+  const router = useRouter()
   // function to dispatch events
   const dispatch = useDispatch();
+
+  const auth = useSelector(authSelectors.selectToken)
+  
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
@@ -37,6 +43,10 @@ const Login = () => {
     dispatch(authActions.login(values));
   };
 
+  React.useEffect(()=>{
+    if(auth) router.push('/')
+  },[auth])
+
   return (
     <Grid className={classes.root} height="100vh" container direction="row">
       <Grid className={classes.imageBackground} item xs={8}>
@@ -54,7 +64,9 @@ const Login = () => {
               <FormGroup>
                 <Grid container direction="column">
                   <Grid item container justifyContent="center">
-                    <Typography color="primary" variant="h6">Login</Typography>
+                    <Typography color="primary" variant="h6">
+                      Login
+                    </Typography>
                   </Grid>
                   <Grid
                     item

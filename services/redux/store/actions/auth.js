@@ -10,7 +10,6 @@ const { auth_api } = config;
 export const login = (credentials) => async (dispatch) => {
   //TODO: copy and paste the login url
 
-  console.log(auth_api.base_url + auth_api.login_route);
 
   try {
     const res = await axios.post(

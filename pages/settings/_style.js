@@ -12,14 +12,14 @@ const useStyles = makeStyles({
 
   logobar:{
     backgroundColor:COLORS.lightGreen,
-    width:"100%"
+    width:"100%",
   },
   
   blackbox:{
     backgroundColor:"black",
     alignItems:"left",
     width:400,
-    height:800
+    height:"100vh"
 
   },
 

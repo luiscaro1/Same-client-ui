@@ -1,9 +1,19 @@
 import { gameTypes } from "../actions/types";
 
-const { GET_ALL_GAMES, GAME_ERROR, VIEW_GAME_PAGE } = gameTypes;
+const {
+  GET_ALL_GAMES,
+  GAME_ERROR,
+  VIEW_GAME_PAGE,
+  GET_LFG_LOBBIES,
+  GET_FEED_POSTS,
+} = gameTypes;
 
 const initialState = {
-  currentGame: null,
+  currentGame: {
+    data: null,
+    lobbies: null,
+    posts: null,
+  },
   games: null,
   error: null,
   loading: true,
@@ -31,7 +41,27 @@ const gameReducer = (state = initialState, action) => {
     case VIEW_GAME_PAGE: {
       return {
         ...state,
-        currentGame: action.payload,
+        currentGame: { ...state.currentGame, data: action.payload },
+      };
+    }
+
+    case GET_LFG_LOBBIES: {
+      return {
+        ...state,
+        currentGame: {
+          ...state.currentGame,
+          lobbies: action.payload,
+        },
+      };
+    }
+
+    case GET_FEED_POSTS: {
+      return {
+        ...state,
+        currentGame: {
+          ...state.currentGame,
+          posts: action.payload,
+        },
       };
     }
 

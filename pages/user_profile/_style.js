@@ -156,9 +156,10 @@ ExptabGrid:{
 
  postCard:{
    marginLeft: 30,
-   marginTop: 10,
-  backgroundColor: COLORS.lightGreen,
-  maxHeight: 400,
+   marginTop: 5,
+   marginBottom:5,
+  backgroundColor: "white",
+  //maxHeight: 500,
   maxWidth: 500,
   content: "center",
  },
@@ -168,7 +169,23 @@ ExptabGrid:{
   width:80,
   margin: "10px 10px 10px 10px",
 
+ },
+ postAvatar:{
+  height: 100,
+  width: 100,
+ },
+
+ cardMediaPost:{
+  //maxHeight: 350,
+  maxWidth: 300,
+  marginLeft: 100,
+  marginTop: 10,
+ },
+ cardPostComment:{
+   color: COLORS.darkGrey,
+   fontSize: "1rem"
  }
+
 
 });
 

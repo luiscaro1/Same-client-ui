@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 // import Box from '@mui/material/Box';
-import {CardHeader, CardMedia, Collapse, CssBaseline} from "@mui/material";
+import {CardHeader, CardMedia, Collapse, CssBaseline, fabClasses} from "@mui/material";
 // import FormGroup from "@mui/material/FormGroup";
 // import { useDispatch } from "react-redux";
 // import { authActions } from "../../services/redux/store/actions";
@@ -15,6 +15,7 @@ import { IMAGES } from "../../contants";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { COLORS } from "../../contants";
 import ListItem from '@mui/material/ListItem';
+import { typography } from "@mui/system";
 
 
 function TabPanel(props) {
@@ -147,27 +148,88 @@ const UserProfile = () => {
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                   <Grid container direction="column" className = {classes.PostGrid}>  
-                    <Grid item xs={2} className = {classes.ExptabGridScroll}>
-                      {/* needs to be finished esta en proceso */}
+                    <Grid item xs={1} className = {classes.ExptabGridScroll}>
+                      {/* needs to be finished esta en proceso*/}
                       <Card className = {classes.postCard}>
-                      <img 
-                          src = "disgust.png"/>
-                      </Card>
-                      <Card className = {classes.postCard}>
-                        <img 
-                          src = "anger.png"
+                        <CardHeader
+                          avatar={
+                            <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                            </Avatar>
+                          }
+                          title={"Title of the Post"}
+                          subheader={"timestamp of the post"}
                         />
-                      </Card>
-                      <Card className = {classes.postCard}>
-                        <img 
-                          src = "sadness.png"
+                        <CardMedia className={classes.cardMediaPost}
+                          component="img"
+                          image="disgust.png"
+                          alt="imageId"
                         />
-                      </Card>
+                        <CardContent>
+                          <Typography className={classes.cardPostComment}>
+                            comment of the user
+                          </Typography>
+                        </CardContent>
+                      </Card> 
                       <Card className = {classes.postCard}>
-                        <img 
-                          src = "fear.png"
+                        <CardHeader
+                          avatar={
+                            <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                            </Avatar>
+                          }
+                          title={"Title of the Post"}
+                          subheader={"timestamp of the post"}
                         />
-                      </Card>
+                        <CardMedia className={classes.cardMediaPost}
+                          component="img"
+                          image="anger.png"
+                          alt="imageId"
+                        />
+                        <CardContent>
+                          <Typography className={classes.cardPostComment}>
+                            comment of the user
+                          </Typography>
+                        </CardContent>
+                      </Card> 
+                      <Card className = {classes.postCard}>
+                        <CardHeader
+                          avatar={
+                            <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                            </Avatar>
+                          }
+                          title={"Title of the Post"}
+                          subheader={"timestamp of the post"}
+                        />
+                        <CardMedia className={classes.cardMediaPost}
+                          component="img"
+                          image="sadness.png"
+                          alt="imageId"
+                        />
+                        <CardContent>
+                          <Typography className={classes.cardPostComment}>
+                            comment of the user
+                          </Typography>
+                        </CardContent>
+                      </Card> 
+                      <Card className = {classes.postCard}>
+                        <CardHeader
+                          avatar={
+                            <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                            </Avatar>
+                          }
+                          title={"Title of the Post"}
+                          subheader={"timestamp of the post"}
+                        />
+                        <CardMedia className={classes.cardMediaPost}
+                          component="img"
+                          image="fear.png"
+                          alt="imageId"
+                        />
+                        <CardContent>
+                          <Typography className={classes.cardPostComment}>
+                            comment of the user
+                          </Typography>
+                        </CardContent>
+                      </Card> 
                     </Grid>
                   </Grid>
                 </TabPanel>

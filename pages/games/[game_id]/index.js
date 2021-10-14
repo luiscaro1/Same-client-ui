@@ -8,6 +8,7 @@ import { gameActions } from "../../../services/redux/store/actions";
 import { gameSelectors } from "../../../services/redux/store/selectors";
 import TabPanel from "../../../components/TabPanel";
 import Lfg from "../../../components/Lfg";
+import Feed from "../../../components/Feed";
 
 import { IMAGES } from "../../../contants";
 
@@ -42,7 +43,7 @@ const GameFeed = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Grid container justifyContent='center'>
+      <Grid container justifyContent="center">
         <img src={IMAGES.apex} />
       </Grid>
       {/* <Typography color="primary" variant="h3">
@@ -65,7 +66,7 @@ const GameFeed = () => {
         <Lfg />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <Feed />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

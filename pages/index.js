@@ -61,7 +61,6 @@ const Home = () => {
                 alt={"Game sample"}
               />
             </Grid>
-            
           </Grid>
 
           <Grid

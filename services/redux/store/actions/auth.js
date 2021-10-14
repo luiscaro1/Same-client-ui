@@ -10,7 +10,6 @@ const { auth_api } = config;
 export const login = (credentials) => async (dispatch) => {
   //TODO: copy and paste the login url
 
-
   try {
     const res = await axios.post(
       auth_api.base_url + auth_api.login_route,
@@ -55,7 +54,6 @@ export const signup = (credentials) => async (dispatch) => {
 };
 
 export const verifyAuth = () => async (dispatch) => {
-  console.log(auth_api.base_url + auth_api.verify_auth);
   try {
     const res = await axios.get(auth_api.base_url + auth_api.verify_auth, {
       withCredentials: true,

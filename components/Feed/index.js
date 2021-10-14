@@ -13,7 +13,7 @@ import {
   Box,
   TextField,
 } from "@mui/material";
-
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { gameActions } from "../../services/redux/store/actions";
 import {
   gameSelectors,
@@ -31,30 +31,35 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  height: 400,
+  height: 450,
   bgcolor: "background.paper",
 
   boxShadow: 24,
   p: 4,
 };
 
-const Lfg = () => {
+const Feed = () => {
   const router = useRouter();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { game_id } = router.query;
   const auth = useSelector(authSelectors.selectToken);
   const currentGame = useSelector(gameSelectors.selectCurrentGame);
-  const [description, setDescription] = React.useState("");
+  const [values, setValues] = React.useState({
+    files: null,
+    text: "",
+  });
 
-  const getLfgLobbies = () => {
-    if (game_id) dispatch(gameActions.getLfgLobbies(game_id));
+  console.log(values);
+
+  const getFeedPosts = () => {
+    if (game_id) dispatch(gameActions.getPostsById(game_id));
   };
-  const addLfgLobby = async (e) => {
+  const addFeedPost = async (e) => {
     e.preventDefault();
 
-    if (description !== "")
-      await dispatch(gameActions.addLfgLobby(description));
+    if (values.text || values.files)
+      await dispatch(gameActions.addFeedPost(values));
 
     handleClose();
   };
@@ -67,15 +72,32 @@ const Lfg = () => {
   const handleClose = () => setOpen(false);
 
   const handleChange = (e) => {
-    setDescription(e.target.value);
+    setValues({ ...values, text: e.target.value });
+  };
+
+  const handleFiles = (e) => {
+    if (e.target.files != null || e.target.files[0] != null) {
+      const p = [];
+
+      const files = [...e.target.files];
+
+      files.map((file) => {
+        p.push(file);
+      });
+
+      setValues({
+        ...values,
+        files: (values.files || []).concat(p),
+      });
+    }
   };
 
   React.useEffect(() => {
-    getLfgLobbies();
+    getFeedPosts();
   }, [game_id]);
 
   React.useEffect(() => {
-    listenForNewLobby(getLfgLobbies);
+    listenForNewLobby(getFeedPosts);
   }, []);
 
   return (
@@ -92,7 +114,7 @@ const Lfg = () => {
         }}
       >
         <Fade in={open}>
-          <form onSubmit={addLfgLobby}>
+          <form onSubmit={addFeedPost}>
             <Box sx={style}>
               <Grid container direction="column" spacing={2}>
                 <Grid item>
@@ -102,7 +124,7 @@ const Lfg = () => {
                     variant="h6"
                     component="h2"
                   >
-                    Look For Group
+                    Make a post
                   </Typography>
                 </Grid>
 
@@ -112,27 +134,43 @@ const Lfg = () => {
                     name="description"
                     type="text"
                     required
-                    label="What are you looking for?"
+                    label="What's on your mind?"
                     multiline
                     rows={12}
                     onChange={handleChange}
                   />
                 </Grid>
 
-                <Grid item container justifyContent="flex-end" spacing={2}>
-                  <Grid item>
-                    <Button
-                      variant="outlined"
-                      onClick={handleClose}
-                      color="error"
-                    >
-                      Cancel
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button type="submit" variant="outlined">
-                      Post
-                    </Button>
+                <Grid item>
+                  <Button>
+                    Attach
+                    <AttachFileIcon />
+                    <input
+                      className={classes.input}
+                      onChange={handleFiles}
+                      id="icon-button-file"
+                      multiple
+                      type="file"
+                    />
+                  </Button>
+                </Grid>
+
+                <Grid item>
+                  <Grid item container justifyContent="flex-end" spacing={2}>
+                    <Grid item>
+                      <Button
+                        variant="outlined"
+                        onClick={handleClose}
+                        color="error"
+                      >
+                        Cancel
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button type="submit" variant="outlined">
+                        Post
+                      </Button>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
@@ -144,12 +182,15 @@ const Lfg = () => {
       <Grid spacing={2} container direction="column">
         <Grid container item alignItems="center" spacing={1} xs>
           <Button onClick={handleOpen} variant="outlined">
-            Create
+            Write a post
           </Button>
         </Grid>
-        {currentGame?.lobbies?.map((lobby) => {
+        {currentGame?.posts?.map((post) => {
+          console.log(
+            "http://localhost:5002/stream/" + post.attachments[0].filename
+          );
           return (
-            <Grid key={lobby.lid} item xs>
+            <Grid key={post.pid} item xs>
               <Card>
                 <CardContent>
                   <Grid container direction="column" spacing={2}>
@@ -176,26 +217,17 @@ const Lfg = () => {
                       direction="column"
                       justifyContent="center"
                     >
-                      <Typography variant="body2">
-                        {lobby.description}
-                      </Typography>
+                      <Typography variant="body2">{post.text}</Typography>
                     </Grid>
-                    <Grid container justifyContent="flex-end" marginTop="10px">
-                      <Grid item container alignItems="center" xs={1}>
-                        <img className={classes.platforms} src={IMAGES.xbox} />
-                      </Grid>
-                      <Grid item container alignItems="center" xs={1}>
-                        <img
-                          className={classes.platforms}
-                          src={IMAGES.playstation}
-                        />
-                      </Grid>
-                      <Grid item container alignItems="center" xs={1}>
-                        <img className={classes.platforms} src={IMAGES.pc} />
-                      </Grid>
-                      <Grid item xs={1} container alignItems="center">
-                        <Button variant="contained">Join</Button>
-                      </Grid>
+
+                    <Grid item>
+                      <img
+                        style={{ width: "100%" }}
+                        src={
+                          "http://localhost:5002/stream/" +
+                          post.attachments[0].filename
+                        }
+                      />
                     </Grid>
                   </Grid>
                 </CardContent>
@@ -208,4 +240,4 @@ const Lfg = () => {
   );
 };
 
-export default Lfg;
+export default Feed;

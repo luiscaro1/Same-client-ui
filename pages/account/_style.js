@@ -1,6 +1,4 @@
-import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { height } from "@mui/system";
 import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
@@ -20,22 +18,19 @@ const useStyles = makeStyles({
   logo: {
     width: 100,
   },
+  //everything on the left side of the screen
   blackbox:{
     alignItems:"left",
     width:400,
-    height:655,
+    maxHeight: 700
   },
   leftbox:{
     backgroundColor:"black",
     fontWeight:"bold",
-    width:400,
-    height:655
   },
   usercard:{
     backgroundColor:"black",
     color:"white",
-    width:400,
-    height:655
 
   },
   userprofile:{
@@ -67,11 +62,7 @@ const useStyles = makeStyles({
     
     width: 5,
     height: 35,
-    // width: 5,
-    // height: 26,
     marginLeft:20
-    
-    // marginBottom: 150,
   },
 
   biobox:{
@@ -98,6 +89,8 @@ const useStyles = makeStyles({
     // margin:"0px 0px 10px 30px",
     color:COLORS.lightGreen,
   },
+
+  //everything on the right side of the screen
   messageButton:{
     color: "black",
     backgroundColor: COLORS.lightGreen,
@@ -105,20 +98,20 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: COLORS.darkGreen,
     },
-    margin:"100px 0px 0px 1100px",
+    margin:"100px 0px 0px 1300px",
   }, 
   message:{
     fontWeight:"bold"
   },
 
-  inforight:{
+  inforight:{ // esto es lo que esta causando lo de los margenes I think
     alignItems:"center",
     position:"absolute",
     textAlign:"center"
   },
    
   threepoints:{
-    margin:"105px 0px 0px 20px"
+    margin:"0px 0px 0px 1100px"
   },
   info:{
     margin:"350px 0px 0px 0px"
@@ -126,15 +119,17 @@ const useStyles = makeStyles({
 
 buttongrid:{
   alignItems:"right",
-  
 },
 
 tabgrid:{
-
+  marginRight: 50,
+  
 },
 
 tabs:{
-  marginRight: 370,
+  margin:"200px 0px 0px 420px",
+  // marginRight: 370,
+ 
   "& .Mui-selected": {
     color: "black",
     fontFamily:"Roboto",
@@ -143,59 +138,95 @@ tabs:{
 
 },
 
+ overviewgrid:{
+   fontWeight:"bold",
+   alignItems:"left",
+   justifyContent:"flex-left",
+   height:400,
+   width:500
 
-  // card: {
-  //   aligncontent: "center",
-  //   backgroundColor: COLORS.darkGrey,
-  //   color: COLORS.lightGreen,
-  //   height: 300,
-  //   justifyContent: "center",
-  // },
-  // card2:{
-  //   backgroundColor: COLORS.lightGreen,
-  //   color: COLORS.darkGrey,
-  //   height: 200,
-  //   width:100,
-  // },
-  // circle:{
-  //   height:150,
-  //   width: 150,
-  // },
-  // content:{
-  //   backgroundcolor: COLORS.lightGreen,
-  //   height: 300,
-  //   width: 300,
-  // },
+ },
 
-  // square1:{
-  //   variant:"h1",
-  //   color: COLORS.lightGreen
-  // },
+ textgrid:{
+  margin:"160px 0px 0px 0px",
+  alignItems:"left",
+  justifyContent:"left"
+ },
 
-  // square2:{
-  //   variant:"body2",
-  //   color: COLORS.darkGrey,
-  //   textAlign: "left",
-  // },
-  // topGrid:{
-  //   backgroundColor: "grey"
-  // },
-  // middleGrid:{
-  //   backgroundColor: COLORS.darkGrey,
-  //   width: 300,
-  //   alignContent: "left",
-  // },
-  // bottomGrid:{
-  //   backgroundColor: COLORS.lightGreen,
-  //   width: 300,
-  // },
-  // todoDelMedio:{
-  //   marginLeft: 600,
-  //   marginRight:500,
-  // },
-  // typo1:{
-  //   marginLeft:30,
-  // },
+ text:{
+   fontWeight:"bold",
+   fontSize:"1.3rem",
+   justifyContent:"left",
+   alignItems:"left",
+   margin:"0px 75px 0px 0px"
+ },
+ text2:{
+  fontWeight:"bold",
+  fontSize:"1.3rem",
+  margin:"30px 0px 0px 0px"
+ },
+ block:{
+  fontWeight:"bold",
+  fontSize:"1.3rem",
+  margin:"30px 95px 0px 0px"
+ },
+
+ delete:{
+  fontWeight:"bold",
+  fontSize:"1.3rem",
+  margin:"30px 50px 0px 0px",
+  color: "black",
+    backgroundColor: COLORS.lightGreen,
+
+    "&:hover": {
+      backgroundColor: COLORS.darkGreen,
+    },
+
+ },
+
+ emailtext:{
+  margin:"30px 70px 0px 0px",
+ },
+ biotext:{
+  margin:"30px 70px 0px 0px",
+  
+ },
+ platformtext:{
+   alignItems:"left",
+  margin:"30px 135px 10px 67.5px",
+ },
+
+ saveButton:{
+  margin:"60px 50px 40px 0px",
+  color: "black",
+    backgroundColor: COLORS.lightGreen,
+
+    "&:hover": {
+      backgroundColor: COLORS.darkGreen,
+    },
+
+ },
+
+ notificationgrid:{
+  margin:"160px 0px 0px 0px",
+  alignItems:"left",
+  justifyContent:"left",
+ },
+
+ mute:{
+  fontWeight:"bold",
+  fontSize:"1.3rem",
+  justifyContent:"left",
+  alignItems:"left",
+  margin:"20px 75px 0px 0px"
+ },
+
+ slidingButton:{
+    height:20,
+    width:40,
+    color:COLORS.darkGreen,
+    margin:"0px 0px 160px 30px"
+ },
 
 });
 

@@ -2,19 +2,17 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
-// import Box from '@mui/material/Box';
 import {CardHeader, CardMedia, Collapse, CssBaseline} from "@mui/material";
-// import FormGroup from "@mui/material/FormGroup";
-// import { useDispatch } from "react-redux";
-// import { authActions } from "../../services/redux/store/actions";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
 import Typography from '@mui/material/Typography';
-import {Avatar, Grid, Card, CardContent,Box,Tabs,Tab} from "@mui/material";
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import {Avatar, Grid, Card, CardContent,Box,Tabs,Tab,TextField} from "@mui/material";
+import SettingsIcon from '@mui/icons-material/Settings';
 import { IMAGES } from "../../contants";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { COLORS } from "../../contants";
-import ListItem from '@mui/material/ListItem';
+import Slider from '@mui/material/Slider';
 
 
 function TabPanel(props) {
@@ -50,8 +48,9 @@ function a11yProps(index) {
   };
 }
 
+
 // react component
-const UserProfile = () => {
+const AccountSettings = () => {
   // applies styling to components
   const classes = useStyles();
 
@@ -61,6 +60,8 @@ const UserProfile = () => {
     setValue(newValue);
   };
 
+  const dispatch = useDispatch();
+
   return (
     <Grid className={classes.root} container direction="row">
       <CssBaseline>
@@ -68,6 +69,7 @@ const UserProfile = () => {
         <Grid className={classes.logobar}>
           <Toolbar>
               <img className={classes.logo} src={IMAGES.logo} />
+              <MoreVertIcon className={classes.threepoints}></MoreVertIcon>
             </Toolbar>
           </Grid>
           <Grid className={classes.blackbox} container direction="column">
@@ -78,8 +80,9 @@ const UserProfile = () => {
                   <Typography className={classes.usernametxt} variant="h3">
                     Username
                   </Typography>
-                  <Button className={classes.addFriendButton}>
-                    <PersonAddAlt1Icon className={classes.iconaddfriend}></PersonAddAlt1Icon>
+                  <Button className={classes.addFriendButton} variant="contained"
+                      type="submit" >
+                    <SettingsIcon className={classes.iconSettings}></SettingsIcon>
                   </Button>
                 </Grid>
                 <Grid className={classes.info} container direction="column">
@@ -105,71 +108,82 @@ const UserProfile = () => {
               </CardContent>
             </Box> 
         </Grid>
-        <Grid className={classes.inforight} container direction="column">
-          <Grid className={classes.buttongrid} container direction="row">
-            <Button className={classes.messageButton}>
-              <Typography className={classes.message}> Message</Typography>
-            </Button>
-            <MoreVertIcon className={classes.threepoints}></MoreVertIcon>
-          </Grid>
+        <Grid className={classes.inforight} container direction="row">
           <Grid className={classes.tabgrid} item >
-            <Box sx={{width:"100%"}}>
+            <Box sx={{width:"100%", display:"flex"}}>
               <Tabs className={classes.tabs}
                 value={value}
                 onChange={handleChange}
+                orientation="vertical"
+                variant="scrollable"
                 TabIndicatorProps={{style:{backgroundColor:COLORS.lightGreen}}}
                 >
-                  <Tab label="Games" {...a11yProps(0)}>
+                  <Tab label="Account overview" {...a11yProps(0)}>
                 
                   </Tab>
-                  <Tab label="Friends" {...a11yProps(1)}>
+                  <Tab label="Edit Profile" {...a11yProps(1)}>
 
                   </Tab>
-                  <Tab label="Posts" {...a11yProps(2)}>
+                  <Tab label="Change Password" {...a11yProps(2)}>
 
                   </Tab>
+                  <Tab label="Notification settings" {...a11yProps(3)}>
+
+                  </Tab>
+                  
                 </Tabs>
                 <TabPanel value={value} index={0}>
-                  <Grid container direction="row" className = {classes.ExptabGrid}>  
-                  <Avatar alt="Apex Legend" src={"ApexLegend.jpg"} className = {classes.gameAvatars}/>
-                  <Avatar alt="Genshin Impact" src={"genshin.jpg"} className = {classes.gameAvatars}/>
-                  <Avatar alt="League of Legends" src= {"leagueOfLegends.png"} className = {classes.gameAvatars}/>
+                  <Grid className={classes.overviewgrid} container direction="column">
+                    <Grid item className={classes.textgrid} sx={8} direction="row">
+                      <Typography className={classes.text}>Username:  myuser</Typography>
+                      <Typography className={classes.text2}>Email:  myuser@gmail.com</Typography>
+                      <Typography className={classes.block}>Blocked Users  0</Typography>
+                    <Button className={classes.delete}>Delete Account</Button>
+                    </Grid>
                   </Grid>
                 </TabPanel>
 
                 <TabPanel value={value} index={1}>
-                  <Grid container direction="row" className = {classes.ExptabGrid}>  
-                  <Avatar alt="Luis" src={"anger.png"} className = {classes.gameAvatars}/>
-                  <Avatar alt="Naomy" src={"sadness.png"} className = {classes.gameAvatars}/>
-                  <Avatar alt="Gabriel" src= {"disgust.png"} className = {classes.gameAvatars}/>
-                  <Avatar alt="Jovan" src= {"fear.png"} className = {classes.gameAvatars}/>
+                <Grid className={classes.overviewgrid} container direction="column">
+                    <Grid item className={classes.textgrid} sx={8}>
+                      <TextField label="Username"className={classes.text} variant="filled"></TextField>
+                      <TextField label="Email" className={classes.emailtext} variant="filled"></TextField>
+                      <TextField label="Bio"className={classes.biotext} variant="filled" multiline rowsmax={Infinity}> </TextField>
+                    <TextField label="Platform" className={classes.platformtext} variant="filled"> </TextField>
+                    <Button 
+                      variant="contained"
+                      type="submit"
+                      className={classes.saveButton}>Save</Button>
+                    </Grid>
                   </Grid>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                  <Grid container direction="column" className = {classes.PostGrid}>  
-                    <Grid item xs={2} className = {classes.ExptabGridScroll}>
-                      {/* needs to be finished esta en proceso */}
-                      <Card className = {classes.postCard}>
-                      <img 
-                          src = "disgust.png"/>
-                      </Card>
-                      <Card className = {classes.postCard}>
-                        <img 
-                          src = "anger.png"
-                        />
-                      </Card>
-                      <Card className = {classes.postCard}>
-                        <img 
-                          src = "sadness.png"
-                        />
-                      </Card>
-                      <Card className = {classes.postCard}>
-                        <img 
-                          src = "fear.png"
-                        />
-                      </Card>
+                <Grid className={classes.overviewgrid} container direction="column">
+                    <Grid item className={classes.textgrid} sx={8}>
+                      <TextField label="Current Password"className={classes.text} variant="filled"></TextField>
+                      <TextField label="New Password" className={classes.emailtext} variant="filled"></TextField>
+                      <TextField label="Confirm New Password"className={classes.platformtext} variant="filled"> </TextField>
+                    <Button 
+                      variant="contained"
+                      type="submit"
+                      className={classes.saveButton}>Save</Button>
                     </Grid>
                   </Grid>
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                <Grid className={classes.notificationgrid} container>
+                      <Grid item xs={8} direction="row">
+                        <Typography className={classes.mute}> Mute</Typography>
+                        <Box sx={{ width: 300 }}>
+                          <Slider className={classes.slidingButton}
+                            aria-label="Mute"
+                            defaultValue={2}
+                          />
+                        </Box>
+                      </Grid>
+                      
+                    </Grid>
+                  
                 </TabPanel>
             </Box>
           </Grid>
@@ -179,5 +193,5 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default AccountSettings;
 

@@ -3,7 +3,7 @@ import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
   formColumn: {
-    backgroundColor: "white",
+    backgroundColor:COLORS.lightGrey
   },
   logo: {
     marginTop: 30,

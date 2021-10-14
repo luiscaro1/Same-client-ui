@@ -1,6 +1,5 @@
 FROM node:alpine
 
-RUN mkdir /app
 WORKDIR /app
 
 EXPOSE $PORT

@@ -53,7 +53,7 @@ const useStyles = makeStyles({
   },
 
   card: {
-    backgroundColor: grey[900],
+    backgroundColor: COLORS.lightGrey,
     color: "white",
   },
   section: {

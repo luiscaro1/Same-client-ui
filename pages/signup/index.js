@@ -10,27 +10,31 @@ import {
   Checkbox,
 } from "@mui/material";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
 import { IMAGES } from "../../contants";
+import { authSelectors } from "../../services/redux/store/selectors";
 
 // react component
 const Login = () => {
   // applies styling to components
   const classes = useStyles();
-
+  const router = useRouter();
   // function to dispatch events
   const dispatch = useDispatch();
 
+  const auth = useSelector(authSelectors.selectToken);
+
   // hold the values of the text fields
   const [values, setValues] = React.useState({
-    uausername: "",
-    uapassword: "",
-    confirmpassword: "",
-    firstname: "",
-    lastname: "",
-    uaemail: "",
+    user_name: "",
+    password: "",
+    confirm_password: "",
+    first_name: "",
+    last_name: "",
+    email: "",
   });
 
   // maps textfield values to state values
@@ -48,6 +52,10 @@ const Login = () => {
     dispatch(authActions.login(values));
   };
 
+  React.useEffect(() => {
+    if (auth) router.push("/");
+  }, [auth]);
+
   return (
     <Grid className={classes.root} height="100vh" container direction="row">
       <Grid className={classes.imageBackground} item xs={8}>
@@ -64,7 +72,9 @@ const Login = () => {
             <form onSubmit={handleSumbit}>
               <FormGroup>
                 <Grid item container justifyContent="center">
-                  <Typography variant="h6">Signup</Typography>
+                  <Typography color="primary" variant="h6">
+                    Signup
+                  </Typography>
                 </Grid>
                 <Grid container direction="column">
                   <Grid
@@ -74,7 +84,8 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="firstname"
+                      sx={{ color: "text.primary" }}
+                      name="first_name"
                       required
                       label="First Name"
                       onChange={handleChange}
@@ -87,7 +98,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="lastname"
+                      name="last_name"
                       required
                       label="Last Name"
                       onChange={handleChange}
@@ -100,7 +111,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="uaemail"
+                      name="email"
                       required
                       label="Email"
                       onChange={handleChange}
@@ -113,7 +124,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="uausername"
+                      name="user_name"
                       required
                       label="User Name"
                       onChange={handleChange}
@@ -126,7 +137,7 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="uapassword"
+                      name="password"
                       type="password"
                       required
                       label="Password"
@@ -140,8 +151,8 @@ const Login = () => {
                     justifyContent="center"
                   >
                     <TextField
-                      name="confirmpassword"
-                      type="confirmpassword"
+                      name="confirm_password"
+                      type="password"
                       required
                       label="Confirm Password"
                       onChange={handleChange}
@@ -156,7 +167,7 @@ const Login = () => {
                         direction="row"
                         justifyContent="center"
                       >
-                        <Typography variant="body2">
+                        <Typography color="secondary" variant="body2">
                           I am 18 years or older <Checkbox />
                         </Typography>
                       </Grid>

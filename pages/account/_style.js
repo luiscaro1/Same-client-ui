@@ -158,7 +158,14 @@ tabs:{
    fontSize:"1.3rem",
    justifyContent:"left",
    alignItems:"left",
-   margin:"0px 75px 0px 0px"
+   margin:"0px 75px 0px 0px",
+   color:"black",
+   "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "black"
+    },
+    "& .Mui-focused": {
+      color:"black"
+    },
  },
  text2:{
   fontWeight:"bold",
@@ -176,7 +183,7 @@ tabs:{
   fontSize:"1.3rem",
   margin:"30px 50px 0px 0px",
   color: "black",
-    backgroundColor: COLORS.lightGreen,
+  backgroundColor: COLORS.lightGreen,
 
     "&:hover": {
       backgroundColor: COLORS.darkGreen,
@@ -186,14 +193,34 @@ tabs:{
 
  emailtext:{
   margin:"30px 70px 0px 0px",
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "black"
+  },
+  "& .Mui-focused": {
+    color:"black"
+  },
+  
  },
  biotext:{
   margin:"30px 70px 0px 0px",
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "black"
+  },
+  "& .Mui-focused": {
+    color:"black"
+  },
   
  },
  platformtext:{
    alignItems:"left",
   margin:"30px 135px 10px 67.5px",
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "black",
+  },
+  "& .Mui-focused": {
+    color:"black"
+  },
+
  },
 
  saveButton:{
@@ -227,6 +254,9 @@ tabs:{
     color:COLORS.darkGreen,
     margin:"0px 0px 160px 30px"
  },
+ tabTextColor:{
+  color:"black",
+},
 
 });
 

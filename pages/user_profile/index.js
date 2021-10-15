@@ -125,13 +125,13 @@ const UserProfile = () => {
                 onChange={handleChange}
                 TabIndicatorProps={{style:{backgroundColor:COLORS.lightGreen}}}
                 >
-                  <Tab label="Games" {...a11yProps(0)}>
+                  <Tab label="Games" className={classes.cardPostHeader} {...a11yProps(0)}>
                 
                   </Tab>
-                  <Tab label="Friends" {...a11yProps(1)}>
+                  <Tab label="Friends" className={classes.cardPostHeader} {...a11yProps(1)}>
 
                   </Tab>
-                  <Tab label="Posts" {...a11yProps(2)}>
+                  <Tab label="Posts" className={classes.cardPostHeader} {...a11yProps(2)}>
 
                   </Tab>
                 </Tabs>

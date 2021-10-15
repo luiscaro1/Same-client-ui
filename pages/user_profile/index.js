@@ -16,6 +16,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { COLORS } from "../../contants";
 import ListItem from '@mui/material/ListItem';
 import { typography } from "@mui/system";
+//import TabPanel from "../../../components/TabPanel";
 
 
 function TabPanel(props) {
@@ -44,23 +45,27 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
+
+
+// react component
+
+const UserProfile = () => {
+  // applies styling to components
+  const classes = useStyles();
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+
+  
+  };
+  const a11yProps = (index) =>{
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
-// react component
-const UserProfile = () => {
-  // applies styling to components
-  const classes = useStyles();
-
-  const [value,setValue]=React.useState('one');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <Grid className={classes.root} container direction="row">
@@ -156,8 +161,8 @@ const UserProfile = () => {
                             <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
                             </Avatar>
                           }
-                          title={"Title of the Post"}
-                          subheader={"timestamp of the post"}
+                          title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                          subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
                         />
                         <CardMedia className={classes.cardMediaPost}
                           component="img"
@@ -172,12 +177,12 @@ const UserProfile = () => {
                       </Card> 
                       <Card className = {classes.postCard}>
                         <CardHeader
-                          avatar={
+                           avatar={
                             <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
                             </Avatar>
                           }
-                          title={"Title of the Post"}
-                          subheader={"timestamp of the post"}
+                          title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                          subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
                         />
                         <CardMedia className={classes.cardMediaPost}
                           component="img"
@@ -192,12 +197,12 @@ const UserProfile = () => {
                       </Card> 
                       <Card className = {classes.postCard}>
                         <CardHeader
-                          avatar={
+                           avatar={
                             <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
                             </Avatar>
                           }
-                          title={"Title of the Post"}
-                          subheader={"timestamp of the post"}
+                          title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                          subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
                         />
                         <CardMedia className={classes.cardMediaPost}
                           component="img"
@@ -212,12 +217,12 @@ const UserProfile = () => {
                       </Card> 
                       <Card className = {classes.postCard}>
                         <CardHeader
-                          avatar={
+                           avatar={
                             <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
                             </Avatar>
                           }
-                          title={"Title of the Post"}
-                          subheader={"timestamp of the post"}
+                          title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                          subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
                         />
                         <CardMedia className={classes.cardMediaPost}
                           component="img"
@@ -242,4 +247,3 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-

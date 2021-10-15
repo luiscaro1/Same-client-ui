@@ -1,6 +1,4 @@
-import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { height } from "@mui/system";
 import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
@@ -20,6 +18,7 @@ const useStyles = makeStyles({
   logo: {
     width: 100,
   },
+  //everything on the left side of the screen
   blackbox:{
     alignItems:"left",
     width:400,
@@ -63,11 +62,7 @@ const useStyles = makeStyles({
     
     width: 5,
     height: 35,
-    // width: 5,
-    // height: 26,
     marginLeft:20
-    
-    // marginBottom: 150,
   },
 
   biobox:{
@@ -94,6 +89,8 @@ const useStyles = makeStyles({
     // margin:"0px 0px 10px 30px",
     color:COLORS.lightGreen,
   },
+
+  //everything on the right side of the screen
   messageButton:{
     color: "black",
     backgroundColor: COLORS.lightGreen,
@@ -114,7 +111,7 @@ const useStyles = makeStyles({
   },
    
   threepoints:{
-    margin:"105px 0px 0px 20px"
+    margin:"0px 0px 0px 1100px"
   },
   info:{
     margin:"350px 0px 0px 0px"
@@ -126,68 +123,110 @@ buttongrid:{
 
 tabgrid:{
   marginRight: 50,
+  
 },
 
 tabs:{
-  marginRight: 370,
+  margin:"200px 0px 0px 420px",
+  // marginRight: 370,
+ 
   "& .Mui-selected": {
     color: "black",
     fontFamily:"Roboto",
     fontSize:"1rem"
    }
+
 },
 
-ExptabGrid:{
-  height: 500,
-  width:600,
- },
-
- PostGrid:{
-   backgroundColor: COLORS.darkGrey,
-  height: 500,
-  width:600,
- },
-
- ExptabGridScroll:{
-  flexGrow: 1,
-  overflow: "auto",
- },
-
- postCard:{
-   marginLeft: 30,
-   marginTop: 5,
-   marginBottom:5,
-  backgroundColor: "white",
-  //maxHeight: 500,
-  maxWidth: 500,
-  content: "center",
- },
-
- gameAvatars:{
-  height: 80,
-  width:80,
-  margin: "10px 10px 10px 10px",
+ overviewgrid:{
+   fontWeight:"bold",
+   alignItems:"left",
+   justifyContent:"flex-left",
+   height:400,
+   width:500
 
  },
- postAvatar:{
-  height: 100,
-  width: 100,
+
+ textgrid:{
+  margin:"160px 0px 0px 0px",
+  alignItems:"left",
+  justifyContent:"left"
  },
 
- cardMediaPost:{
-  //maxHeight: 350,
-  maxWidth: 300,
-  marginLeft: 100,
-  marginTop: 10,
+ text:{
+   fontWeight:"bold",
+   fontSize:"1.3rem",
+   justifyContent:"left",
+   alignItems:"left",
+   margin:"0px 75px 0px 0px"
  },
- cardPostComment:{
-   color: COLORS.darkGrey,
-   fontSize: "1rem"
+ text2:{
+  fontWeight:"bold",
+  fontSize:"1.3rem",
+  margin:"30px 0px 0px 0px"
  },
- cardPostHeader:{
-   color:"black",
+ block:{
+  fontWeight:"bold",
+  fontSize:"1.3rem",
+  margin:"30px 95px 0px 0px"
  },
 
+ delete:{
+  fontWeight:"bold",
+  fontSize:"1.3rem",
+  margin:"30px 50px 0px 0px",
+  color: "black",
+    backgroundColor: COLORS.lightGreen,
+
+    "&:hover": {
+      backgroundColor: COLORS.darkGreen,
+    },
+
+ },
+
+ emailtext:{
+  margin:"30px 70px 0px 0px",
+ },
+ biotext:{
+  margin:"30px 70px 0px 0px",
+  
+ },
+ platformtext:{
+   alignItems:"left",
+  margin:"30px 135px 10px 67.5px",
+ },
+
+ saveButton:{
+  margin:"60px 50px 40px 0px",
+  color: "black",
+    backgroundColor: COLORS.lightGreen,
+
+    "&:hover": {
+      backgroundColor: COLORS.darkGreen,
+    },
+
+ },
+
+ notificationgrid:{
+  margin:"160px 0px 0px 0px",
+  alignItems:"left",
+  justifyContent:"left",
+ },
+
+ mute:{
+  fontWeight:"bold",
+  fontSize:"1.3rem",
+  justifyContent:"left",
+  alignItems:"left",
+  margin:"20px 75px 0px 0px"
+ },
+
+ slidingButton:{
+    height:20,
+    width:40,
+    color:COLORS.darkGreen,
+    margin:"0px 0px 160px 30px"
+ },
 
 });
 

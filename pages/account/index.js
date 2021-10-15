@@ -13,6 +13,7 @@ import { IMAGES } from "../../contants";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { COLORS } from "../../contants";
 import Slider from '@mui/material/Slider';
+import FormGroup from "@mui/material/FormGroup";
 
 
 function TabPanel(props) {
@@ -54,13 +55,52 @@ const AccountSettings = () => {
   // applies styling to components
   const classes = useStyles();
 
-  const [value,setValue]=React.useState('one');
+  const dispatch = useDispatch();
+
+  const [value,setValue]=React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const dispatch = useDispatch();
+  const [editvalues, seteditValues] = React.useState({
+    username: "",
+    email: "",
+    bio:"",
+    platform:""
+  });
+
+  const profileEditHandleChange = (e) => {
+    seteditValues({
+      ...editvalues,
+      [e.target.name]: e.target.value,
+    });
+  };
+//submiting changes for edit profile
+  const edithandleSumbit = (e) => {
+    e.preventDefault();
+    dispatch(editvalues)
+    // dispatch(authActions.login(values));
+  };
+
+  const [changepasswordvalues, setPasswordValues] = React.useState({
+    password: "",
+    newpassword: "",
+    confirmpassword:""
+  });
+
+  const changePasswordHandleChange = (e) => {
+    setPasswordValues({
+      ...changepasswordvalues,
+      [e.target.name]: e.target.value,
+    });
+  };
+  //submitting changes for changing password
+  const passwordhandleSumbit = (e) => {
+    e.preventDefault();
+    dispatch(changepasswordvalues)
+    // dispatch(authActions.login(values));
+  };
 
   return (
     <Grid className={classes.root} container direction="row">
@@ -118,16 +158,16 @@ const AccountSettings = () => {
                 variant="scrollable"
                 TabIndicatorProps={{style:{backgroundColor:COLORS.lightGreen}}}
                 >
-                  <Tab label="Account overview" {...a11yProps(0)}>
+                  <Tab label="Account overview" className={classes.tabTextColor} {...a11yProps(0)}>
                 
                   </Tab>
-                  <Tab label="Edit Profile" {...a11yProps(1)}>
+                  <Tab label="Edit Profile" className={classes.tabTextColor} {...a11yProps(1)}>
 
                   </Tab>
-                  <Tab label="Change Password" {...a11yProps(2)}>
+                  <Tab label="Change Password" className={classes.tabTextColor} {...a11yProps(2)}>
 
                   </Tab>
-                  <Tab label="Notification settings" {...a11yProps(3)}>
+                  <Tab label="Notification settings" className={classes.tabTextColor} {...a11yProps(3)}>
 
                   </Tab>
                   
@@ -138,36 +178,93 @@ const AccountSettings = () => {
                       <Typography className={classes.text}>Username:  myuser</Typography>
                       <Typography className={classes.text2}>Email:  myuser@gmail.com</Typography>
                       <Typography className={classes.block}>Blocked Users  0</Typography>
-                    <Button className={classes.delete}>Delete Account</Button>
+                    <Button className={classes.delete}
+                      variant="contained"
+                      type="submit"
+                      
+                    >Delete Account</Button>
                     </Grid>
                   </Grid>
                 </TabPanel>
 
                 <TabPanel value={value} index={1}>
                 <Grid className={classes.overviewgrid} container direction="column">
+                <form onSubmit={edithandleSumbit}>
+                <FormGroup>
                     <Grid item className={classes.textgrid} sx={8}>
-                      <TextField label="Username"className={classes.text} variant="filled"></TextField>
-                      <TextField label="Email" className={classes.emailtext} variant="filled"></TextField>
-                      <TextField label="Bio"className={classes.biotext} variant="filled" multiline rowsmax={Infinity}> </TextField>
-                    <TextField label="Platform" className={classes.platformtext} variant="filled"> </TextField>
+
+                      <TextField label="Username"className={classes.text} 
+                      variant="outlined"
+                      // color="success"
+                      focused
+                      onChange={profileEditHandleChange} 
+                      inputProps={{ style: {color: 'black'}}}>
+                      </TextField>
+
+                      <TextField label="Email" className={classes.emailtext} 
+                      variant="outlined" 
+                      focused
+                      onChange={profileEditHandleChange} 
+                      inputProps={{ style: {color: 'black'}}}>
+                      </TextField>
+
+                      <TextField label="Bio"className={classes.biotext} 
+                      variant="outlined" 
+                      focused
+                      onChange={profileEditHandleChange} 
+                      multiline rowsmax={Infinity} 
+                      inputProps={{ style: {color: 'black'}}}>
+                      </TextField>
+
+                    <TextField label="Platform" className={classes.platformtext} 
+                    variant="outlined" 
+                    focused
+                    onChange={profileEditHandleChange} 
+                    inputProps={{ style: {color: 'black'}}}>
+                    </TextField>
+
                     <Button 
                       variant="contained"
                       type="submit"
                       className={classes.saveButton}>Save</Button>
                     </Grid>
+                    </FormGroup>
+                    </form>
                   </Grid>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                <Grid className={classes.overviewgrid} container direction="column">
+                  <Grid className={classes.overviewgrid} container direction="column">
+                  <form onSubmit={passwordhandleSumbit}>
+                  <FormGroup>
                     <Grid item className={classes.textgrid} sx={8}>
-                      <TextField label="Current Password"className={classes.text} variant="filled"></TextField>
-                      <TextField label="New Password" className={classes.emailtext} variant="filled"></TextField>
-                      <TextField label="Confirm New Password"className={classes.platformtext} variant="filled"> </TextField>
+                      <TextField label="Current Password"className={classes.text} 
+                      variant="outlined" 
+                      focused
+                      inputProps={{ style: {color: 'black'}}} 
+                      onChange={changePasswordHandleChange}>
+                      </TextField>
+
+                      <TextField label="New Password" className={classes.emailtext} 
+                      variant="outlined" 
+                      focused
+                      onChange={changePasswordHandleChange} 
+                      inputProps={{ style: {color: 'black'}}}>
+                      </TextField>
+
+                      <TextField label="Confirm New Password"className={classes.platformtext} 
+                      variant="outlined" 
+                      focused
+                      onChange={changePasswordHandleChange} 
+                      inputProps={{ style: {color: 'black'}}}> 
+                      </TextField>
+
                     <Button 
                       variant="contained"
                       type="submit"
                       className={classes.saveButton}>Save</Button>
                     </Grid>
+                    </FormGroup>
+                    </form>
                   </Grid>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
@@ -177,13 +274,12 @@ const AccountSettings = () => {
                         <Box sx={{ width: 300 }}>
                           <Slider className={classes.slidingButton}
                             aria-label="Mute"
-                            defaultValue={2}
+                            defaultValue={2} //need to change it so it does it on click
                           />
                         </Box>
                       </Grid>
                       
                     </Grid>
-                  
                 </TabPanel>
             </Box>
           </Grid>

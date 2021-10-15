@@ -23,19 +23,15 @@ const useStyles = makeStyles({
   blackbox:{
     alignItems:"left",
     width:400,
-    height:655,
+    maxHeight: 700
   },
   leftbox:{
     backgroundColor:"black",
     fontWeight:"bold",
-    width:400,
-    height:655
   },
   usercard:{
     backgroundColor:"black",
     color:"white",
-    width:400,
-    height:655
 
   },
   userprofile:{
@@ -105,13 +101,13 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: COLORS.darkGreen,
     },
-    margin:"100px 0px 0px 1100px",
+    margin:"100px 0px 0px 1300px",
   }, 
   message:{
     fontWeight:"bold"
   },
 
-  inforight:{
+  inforight:{ // esto es lo que esta causando lo de los margenes I think
     alignItems:"center",
     position:"absolute",
     textAlign:"center"
@@ -126,11 +122,10 @@ const useStyles = makeStyles({
 
 buttongrid:{
   alignItems:"right",
-  
 },
 
 tabgrid:{
-
+  marginRight: 50,
 },
 
 tabs:{
@@ -140,62 +135,59 @@ tabs:{
     fontFamily:"Roboto",
     fontSize:"1rem"
    }
-
 },
 
+ExptabGrid:{
+  height: 500,
+  width:600,
+ },
 
-  // card: {
-  //   aligncontent: "center",
-  //   backgroundColor: COLORS.darkGrey,
-  //   color: COLORS.lightGreen,
-  //   height: 300,
-  //   justifyContent: "center",
-  // },
-  // card2:{
-  //   backgroundColor: COLORS.lightGreen,
-  //   color: COLORS.darkGrey,
-  //   height: 200,
-  //   width:100,
-  // },
-  // circle:{
-  //   height:150,
-  //   width: 150,
-  // },
-  // content:{
-  //   backgroundcolor: COLORS.lightGreen,
-  //   height: 300,
-  //   width: 300,
-  // },
+ PostGrid:{
+   backgroundColor: COLORS.darkGrey,
+  height: 500,
+  width:600,
+ },
 
-  // square1:{
-  //   variant:"h1",
-  //   color: COLORS.lightGreen
-  // },
+ ExptabGridScroll:{
+  flexGrow: 1,
+  overflow: "auto",
+ },
 
-  // square2:{
-  //   variant:"body2",
-  //   color: COLORS.darkGrey,
-  //   textAlign: "left",
-  // },
-  // topGrid:{
-  //   backgroundColor: "grey"
-  // },
-  // middleGrid:{
-  //   backgroundColor: COLORS.darkGrey,
-  //   width: 300,
-  //   alignContent: "left",
-  // },
-  // bottomGrid:{
-  //   backgroundColor: COLORS.lightGreen,
-  //   width: 300,
-  // },
-  // todoDelMedio:{
-  //   marginLeft: 600,
-  //   marginRight:500,
-  // },
-  // typo1:{
-  //   marginLeft:30,
-  // },
+ postCard:{
+   marginLeft: 30,
+   marginTop: 5,
+   marginBottom:5,
+  backgroundColor: "white",
+  //maxHeight: 500,
+  maxWidth: 500,
+  content: "center",
+ },
+
+ gameAvatars:{
+  height: 80,
+  width:80,
+  margin: "10px 10px 10px 10px",
+
+ },
+ postAvatar:{
+  height: 100,
+  width: 100,
+ },
+
+ cardMediaPost:{
+  //maxHeight: 350,
+  maxWidth: 300,
+  marginLeft: 100,
+  marginTop: 10,
+ },
+ cardPostComment:{
+   color: COLORS.darkGrey,
+   fontSize: "1rem"
+ },
+ cardPostHeader:{
+   color:"black",
+ },
+
 
 });
 

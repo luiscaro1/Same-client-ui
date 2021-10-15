@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 // import Box from '@mui/material/Box';
-import {CardHeader, CardMedia, Collapse, CssBaseline} from "@mui/material";
+import {CardHeader, CardMedia, Collapse, CssBaseline, fabClasses} from "@mui/material";
 // import FormGroup from "@mui/material/FormGroup";
 // import { useDispatch } from "react-redux";
 // import { authActions } from "../../services/redux/store/actions";
@@ -15,6 +15,8 @@ import { IMAGES } from "../../contants";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { COLORS } from "../../contants";
 import ListItem from '@mui/material/ListItem';
+import { typography } from "@mui/system";
+//import TabPanel from "../../../components/TabPanel";
 
 
 function TabPanel(props) {
@@ -43,23 +45,27 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
+
+
+// react component
+
+const UserProfile = () => {
+  // applies styling to components
+  const classes = useStyles();
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+
+  
+  };
+  const a11yProps = (index) =>{
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
-// react component
-const UserProfile = () => {
-  // applies styling to components
-  const classes = useStyles();
-
-  const [value,setValue]=React.useState('one');
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <Grid className={classes.root} container direction="row">
@@ -119,13 +125,13 @@ const UserProfile = () => {
                 onChange={handleChange}
                 TabIndicatorProps={{style:{backgroundColor:COLORS.lightGreen}}}
                 >
-                  <Tab label="Games" {...a11yProps(0)}>
+                  <Tab label="Games" className={classes.cardPostHeader} {...a11yProps(0)}>
                 
                   </Tab>
-                  <Tab label="Friends" {...a11yProps(1)}>
+                  <Tab label="Friends" className={classes.cardPostHeader} {...a11yProps(1)}>
 
                   </Tab>
-                  <Tab label="Posts" {...a11yProps(2)}>
+                  <Tab label="Posts" className={classes.cardPostHeader} {...a11yProps(2)}>
 
                   </Tab>
                 </Tabs>
@@ -147,27 +153,88 @@ const UserProfile = () => {
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                   <Grid container direction="column" className = {classes.PostGrid}>  
-                    <Grid item xs={2} className = {classes.ExptabGridScroll}>
-                      {/* needs to be finished esta en proceso */}
+                    <Grid item xs={1} className = {classes.ExptabGridScroll}>
+                      {/* needs to be finished esta en proceso*/}
                       <Card className = {classes.postCard}>
-                      <img 
-                          src = "disgust.png"/>
-                      </Card>
-                      <Card className = {classes.postCard}>
-                        <img 
-                          src = "anger.png"
+                        <CardHeader
+                          avatar={
+                            <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                            </Avatar>
+                          }
+                          title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                          subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
                         />
-                      </Card>
-                      <Card className = {classes.postCard}>
-                        <img 
-                          src = "sadness.png"
+                        <CardMedia className={classes.cardMediaPost}
+                          component="img"
+                          image="disgust.png"
+                          alt="imageId"
                         />
-                      </Card>
+                        <CardContent>
+                          <Typography className={classes.cardPostComment}>
+                            comment of the user
+                          </Typography>
+                        </CardContent>
+                      </Card> 
                       <Card className = {classes.postCard}>
-                        <img 
-                          src = "fear.png"
+                        <CardHeader
+                           avatar={
+                            <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                            </Avatar>
+                          }
+                          title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                          subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
                         />
-                      </Card>
+                        <CardMedia className={classes.cardMediaPost}
+                          component="img"
+                          image="anger.png"
+                          alt="imageId"
+                        />
+                        <CardContent>
+                          <Typography className={classes.cardPostComment}>
+                            comment of the user
+                          </Typography>
+                        </CardContent>
+                      </Card> 
+                      <Card className = {classes.postCard}>
+                        <CardHeader
+                           avatar={
+                            <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                            </Avatar>
+                          }
+                          title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                          subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
+                        />
+                        <CardMedia className={classes.cardMediaPost}
+                          component="img"
+                          image="sadness.png"
+                          alt="imageId"
+                        />
+                        <CardContent>
+                          <Typography className={classes.cardPostComment}>
+                            comment of the user
+                          </Typography>
+                        </CardContent>
+                      </Card> 
+                      <Card className = {classes.postCard}>
+                        <CardHeader
+                           avatar={
+                            <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                            </Avatar>
+                          }
+                          title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                          subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
+                        />
+                        <CardMedia className={classes.cardMediaPost}
+                          component="img"
+                          image="fear.png"
+                          alt="imageId"
+                        />
+                        <CardContent>
+                          <Typography className={classes.cardPostComment}>
+                            comment of the user
+                          </Typography>
+                        </CardContent>
+                      </Card> 
                     </Grid>
                   </Grid>
                 </TabPanel>
@@ -180,4 +247,3 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-

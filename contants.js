@@ -6,6 +6,7 @@ export const COLORS = {
 };
 
 export const IMAGES = {
+
   logo: "/samelogox.png",
   homeSample1: "/Gamespage.png",
   homeSample2: "/individualchat.png",
@@ -15,4 +16,5 @@ export const IMAGES = {
   xbox:"/xbox.png",
   pc:'/pc.png',
   apex:'/apex.jpg'
+
 };

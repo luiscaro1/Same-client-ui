@@ -80,7 +80,7 @@ const UserProfile = () => {
             <Box className={classes.leftbox}>
               <CardContent className={classes.usercard}>
                 <Avatar className={classes.userprofile} alt="Same" src={"eula.jpg"}></Avatar>
-                <Grid className={classes.usernamegrid} container direction="row">
+                <Grid className={classes.usernamegrid} container alignItems={"center"} direction="row">
                   <Typography className={classes.usernametxt} variant="h3">
                     Username
                   </Typography>

@@ -1,6 +1,4 @@
-import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-import { height } from "@mui/system";
 import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
@@ -21,13 +19,14 @@ const useStyles = makeStyles({
     width: 100,
   },
   blackbox:{
-    alignItems:"left",
-    width:400,
-    maxHeight: 700
+    width:"25%",
+    height: "100%",
   },
   leftbox:{
     backgroundColor:"black",
     fontWeight:"bold",
+    height: "100%",
+    paddingTop: "20%"
   },
   usercard:{
     backgroundColor:"black",
@@ -35,18 +34,19 @@ const useStyles = makeStyles({
 
   },
   userprofile:{
-    width:250,
-    height:250,
-    marginLeft:48,
-    marginTop:10,
+    width: "300px",
+    height: "300px",
+    marginLeft: "5%",
+    marginTop: 10,
     position:"absolute",
   },
   usernamegrid:{
-    marginTop:280,
     position:"absolute",
-    alignItems:"center",
-    textAlign:"center",
+    alignItems: "center",
+    textAlign: "center",
+    marginTop:"400px"
   },
+
   usernametxt:{
     fontWeight:"bold",
     fontSize:"2rem",
@@ -61,37 +61,32 @@ const useStyles = makeStyles({
       backgroundColor: COLORS.darkGreen,
     },
     
-    width: 5,
+    width: "5%",
     height: 35,
-    // width: 5,
-    // height: 26,
     marginLeft:20
-    
-    // marginBottom: 150,
   },
 
   biobox:{
-    margin:"0px 0px 0px 30px",
+    margin:"100px 0px 0px 10%",
     
   },
   bio:{
-    margin:"10px 0px 5px 0px",
+    margin:"10px 0px 10px 0px",
     color:COLORS.lightGreen,
     
   },
   friendsbox:{
-    margin:"10px 0px 10px 30px",
+    margin:"10px 0px 10px 10%",
   },
   friends:{
-    margin:"10px 0px 5px 0px",
+    margin:"10px 0px 10px 0px",
     color:COLORS.lightGreen,
     
   },
   platformbox:{
-    margin:"0px 0px 20px 30px",
+    margin:"0px 0px 20px 10%",
   },
   platform:{
-    // margin:"0px 0px 10px 30px",
     color:COLORS.lightGreen,
   },
   messageButton:{
@@ -101,20 +96,21 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: COLORS.darkGreen,
     },
-    margin:"100px 0px 0px 1300px",
+    margin:"300px 0px 0px 20%",
   }, 
   message:{
     fontWeight:"bold"
   },
 
   inforight:{ // esto es lo que esta causando lo de los margenes I think
-    alignItems:"center",
+
     position:"absolute",
-    textAlign:"center"
+    width: "60%",
+    margin: "0 0 0 30%"
   },
    
   threepoints:{
-    margin:"105px 0px 0px 20px"
+    margin:"305px 0px 0px 5%"
   },
   info:{
     margin:"350px 0px 0px 0px"
@@ -122,6 +118,7 @@ const useStyles = makeStyles({
 
 buttongrid:{
   alignItems:"right",
+  margin: "0 0 0 0"
 },
 
 tabgrid:{
@@ -158,7 +155,6 @@ ExptabGrid:{
    marginTop: 5,
    marginBottom:5,
   backgroundColor: "white",
-  //maxHeight: 500,
   maxWidth: 500,
   content: "center",
  },
@@ -167,15 +163,14 @@ ExptabGrid:{
   height: 80,
   width:80,
   margin: "10px 10px 10px 10px",
-
  },
+ 
  postAvatar:{
   height: 100,
   width: 100,
  },
 
  cardMediaPost:{
-  //maxHeight: 350,
   maxWidth: 300,
   marginLeft: 100,
   marginTop: 10,
@@ -187,7 +182,6 @@ ExptabGrid:{
  cardPostHeader:{
    color:"black",
  },
-
 
 });
 

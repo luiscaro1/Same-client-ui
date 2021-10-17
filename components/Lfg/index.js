@@ -12,8 +12,12 @@ import {
   Fade,
   Box,
   TextField,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
 } from "@mui/material";
-
+import { MEDIA_STREAM } from "../../constants";
 import { gameActions } from "../../services/redux/store/actions";
 import {
   gameSelectors,
@@ -22,7 +26,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import useStyles from "./_style";
-import { IMAGES } from "../../contants";
+import { IMAGES } from "../../constants";
 import { listenForNewLobby } from "../../services/socketio/listeners/game";
 
 const style = {
@@ -31,7 +35,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  height: 400,
+
   bgcolor: "background.paper",
 
   boxShadow: 24,
@@ -45,7 +49,13 @@ const Lfg = () => {
   const { game_id } = router.query;
   const auth = useSelector(authSelectors.selectToken);
   const currentGame = useSelector(gameSelectors.selectCurrentGame);
-  const [description, setDescription] = React.useState("");
+  const [values, setValues] = React.useState({
+    description: "",
+    platform: "Any",
+    region: null,
+  });
+
+  const descriptionLengthExceeds = values.description.length > 200;
 
   const getLfgLobbies = () => {
     if (game_id) dispatch(gameActions.getLfgLobbies(game_id));
@@ -53,10 +63,15 @@ const Lfg = () => {
   const addLfgLobby = async (e) => {
     e.preventDefault();
 
-    if (description !== "")
-      await dispatch(gameActions.addLfgLobby(description));
+    if (values.description !== "" && !descriptionLengthExceeds)
+      await dispatch(gameActions.addLfgLobby(values));
 
     handleClose();
+  };
+
+  const joinLobby = async (lid) => {
+    await dispatch(gameActions.joinLobby(lid));
+    router.push("/lobby");
   };
 
   const [open, setOpen] = React.useState(false);
@@ -67,7 +82,23 @@ const Lfg = () => {
   const handleClose = () => setOpen(false);
 
   const handleChange = (e) => {
-    setDescription(e.target.value);
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handlePlatform = (platform) => {
+    switch (platform) {
+      case "playstation": {
+        return IMAGES.playstation;
+      }
+      case "xbox": {
+        return IMAGES.xbox;
+      }
+      default:
+        return IMAGES.pc;
+    }
   };
 
   React.useEffect(() => {
@@ -105,7 +136,6 @@ const Lfg = () => {
                     Look For Group
                   </Typography>
                 </Grid>
-
                 <Grid item>
                   <TextField
                     className={classes.description}
@@ -114,11 +144,63 @@ const Lfg = () => {
                     required
                     label="What are you looking for?"
                     multiline
-                    rows={12}
                     onChange={handleChange}
                   />
                 </Grid>
 
+                {descriptionLengthExceeds ? (
+                  <Grid item>
+                    <Typography color="error">
+                      Description cannot exceed 200 characters{" "}
+                    </Typography>
+                  </Grid>
+                ) : null}
+
+                <Grid item>
+                  <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Platform
+                      </InputLabel>
+                      <Select
+                        name="platform"
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={values.platform}
+                        label="Platform"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={"xbox"}>xbox</MenuItem>
+                        <MenuItem value={"playstation"}>playstation</MenuItem>
+                        <MenuItem value={"pc"}>pc</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Region
+                      </InputLabel>
+                      <Select
+                        name="region"
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={values.region}
+                        label="Region"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={"Any"}>Any</MenuItem>
+                        <MenuItem value={"NA"}>NA</MenuItem>
+                        <MenuItem value={"SA"}>SA</MenuItem>
+                        <MenuItem value={"EU"}>EU</MenuItem>
+                        <MenuItem value={"ASIA"}>ASIA</MenuItem>
+                        <MenuItem value={"AUS"}>AUS</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Grid>
                 <Grid item container justifyContent="flex-end" spacing={2}>
                   <Grid item>
                     <Button
@@ -141,21 +223,23 @@ const Lfg = () => {
         </Fade>
       </Modal>
 
-      <Grid spacing={2} container direction="column">
-        <Grid container item alignItems="center" spacing={1} xs>
-          <Button onClick={handleOpen} variant="outlined">
-            Create
-          </Button>
+      <Grid spacing={4} container direction="column">
+        <Grid container item justifyContent="center">
+          <Grid item className={classes.lfgCard}>
+            <Button onClick={handleOpen} variant="outlined">
+              Create
+            </Button>
+          </Grid>
         </Grid>
         {currentGame?.lobbies?.map((lobby) => {
           return (
-            <Grid key={lobby.lid} item xs>
-              <Card>
+            <Grid item key={lobby.lid} container justifyContent="center">
+              <Card className={classes.lfgCard}>
                 <CardContent>
                   <Grid container direction="column" spacing={2}>
                     <Grid container item spacing={2}>
                       <Grid item>
-                        <Avatar>P</Avatar>
+                        <Avatar src={MEDIA_STREAM + lobby.avatar_url} />
                       </Grid>
 
                       <Grid
@@ -165,7 +249,15 @@ const Lfg = () => {
                         direction="column"
                         justifyContent="center"
                       >
-                        <Typography variant="caption">Username</Typography>
+                        <Typography variant="caption">
+                          {lobby.user_name}
+                        </Typography>
+                      </Grid>
+
+                      <Grid item>
+                        <Button onClick={() => joinLobby(lobby.lid)}>
+                          Join
+                        </Button>
                       </Grid>
                     </Grid>
 
@@ -180,21 +272,34 @@ const Lfg = () => {
                         {lobby.description}
                       </Typography>
                     </Grid>
-                    <Grid container justifyContent="flex-end" marginTop="10px">
-                      <Grid item container alignItems="center" xs={1}>
-                        <img className={classes.platforms} src={IMAGES.xbox} />
+                    <Grid
+                      container
+                      marginTop="10px"
+                      direction="row"
+                      spacing={4}
+                    >
+                      <Grid
+                        xs={2}
+                        item
+                        container
+                        alignItems="center"
+                        justifyContent="center"
+                      >
+                        <Typography color="primary" variant="caption">
+                          Region: {lobby.region}
+                        </Typography>
                       </Grid>
-                      <Grid item container alignItems="center" xs={1}>
+                      <Grid
+                        item
+                        container
+                        alignItems="center"
+                        xs={10}
+                        justifyContent="flex-end"
+                      >
                         <img
                           className={classes.platforms}
-                          src={IMAGES.playstation}
+                          src={handlePlatform(lobby.platform)}
                         />
-                      </Grid>
-                      <Grid item container alignItems="center" xs={1}>
-                        <img className={classes.platforms} src={IMAGES.pc} />
-                      </Grid>
-                      <Grid item xs={1} container alignItems="center">
-                        <Button variant="contained">Join</Button>
                       </Grid>
                     </Grid>
                   </Grid>

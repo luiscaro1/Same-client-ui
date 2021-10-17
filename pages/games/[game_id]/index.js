@@ -10,7 +10,7 @@ import TabPanel from "../../../components/TabPanel";
 import Lfg from "../../../components/Lfg";
 import Feed from "../../../components/Feed";
 
-import { IMAGES } from "../../../contants";
+import { IMAGES } from "../../../constants";
 
 import Grid from "@mui/material/Grid";
 
@@ -46,9 +46,6 @@ const GameFeed = () => {
       <Grid container justifyContent="center">
         <img src={IMAGES.apex} />
       </Grid>
-      {/* <Typography color="primary" variant="h3">
-        {currentGame?.data?.name}
-      </Typography> */}
 
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs

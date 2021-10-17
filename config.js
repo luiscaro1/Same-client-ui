@@ -16,6 +16,7 @@ const config =
           create_lfg_lobby_route: "/lfg/create",
           get_feed_posts_route: "/feed/",
           add_post_route: "/feed/post",
+          join_lobby_route: "/lfg/join",
         },
       };
 

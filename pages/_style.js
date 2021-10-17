@@ -1,7 +1,7 @@
 import { makeStyles } from "@mui/styles";
 import { height } from "@mui/system";
 import { grey } from "@mui/material/colors";
-import { COLORS } from "../contants";
+import { COLORS } from "../constants";
 
 const useStyles = makeStyles({
   root: {

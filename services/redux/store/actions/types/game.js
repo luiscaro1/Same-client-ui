@@ -5,3 +5,4 @@ export const GET_LFG_LOBBIES = "GET_LFG_LOBBIES";
 export const ADD_LOBBY = "ADD_LOBBY";
 export const GET_FEED_POSTS = "GET_FEED_POSTS";
 export const ADD_POST = "ADD_POST";
+export const JOIN_LOBBY = "JOIN_LOBBY";

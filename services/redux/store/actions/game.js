@@ -12,6 +12,7 @@ const {
   ADD_LOBBY,
   GET_FEED_POSTS,
   ADD_POST,
+  JOIN_LOBBY,
 } = gameTypes;
 
 export const getAllGames = () => async (dispatch) => {
@@ -66,7 +67,7 @@ export const getLfgLobbies = (id) => async (dispatch) => {
   }
 };
 
-export const addLfgLobby = (description) => async (dispatch, getState) => {
+export const addLfgLobby = (lobby) => async (dispatch, getState) => {
   const state = getState();
 
   const { auth, game } = state;
@@ -74,7 +75,7 @@ export const addLfgLobby = (description) => async (dispatch, getState) => {
   if (auth.token && game.currentGame) {
     try {
       await axios.post(game_api.base_url + game_api.create_lfg_lobby_route, {
-        description,
+        ...lobby,
         gid: game.currentGame.data.gid,
         uid: auth.token.uid,
       });
@@ -114,3 +115,23 @@ export const addFeedPost =
       }
     } else dispatch({ type: GAME_ERROR, payload: "Missing user or game data" });
   };
+
+export const joinLobby = (lid) => async (dispatch, getState) => {
+  const state = getState();
+
+  const { auth, game } = state;
+
+  if (auth.token && game.currentGame) {
+    try {
+      await axios.post(game_api.base_url + game_api.join_lobby_route, {
+        lid,
+        gid: game.currentGame.data.gid,
+        uid: auth.token.uid,
+      });
+
+      dispatch({ type: JOIN_LOBBY });
+    } catch (err) {
+      dispatch({ type: GAME_ERROR, payload: err });
+    }
+  } else dispatch({ type: GAME_ERROR, payload: "Missing user or game data" });
+};

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card } from "@mui/material";
 import { useRouter } from "next/router";
-import { IMAGES } from "../contants";
+import { IMAGES } from "../constants";
 import { Typography } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import GroupIcon from "@mui/icons-material/Group";

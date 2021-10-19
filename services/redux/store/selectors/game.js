@@ -13,3 +13,11 @@ export const selectCurrentGame = createSelector(
   selectGame,
   (game) => game.currentGame
 );
+export const selectUserLobbies = createSelector(
+  selectGame,
+  (game) => game.userLobbies
+);
+export const selectCurrentLobby = createSelector(
+  selectGame,
+  (game) => game.currentLobby
+);

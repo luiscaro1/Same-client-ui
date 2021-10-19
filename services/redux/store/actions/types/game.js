@@ -6,3 +6,5 @@ export const ADD_LOBBY = "ADD_LOBBY";
 export const GET_FEED_POSTS = "GET_FEED_POSTS";
 export const ADD_POST = "ADD_POST";
 export const JOIN_LOBBY = "JOIN_LOBBY";
+export const GET_USER_LFG_LOBBIES = "GET_USER_LFG_LOBBIES";
+export const VIEW_LOBBY_PAGE = "VIEW_LOBBY_PAGE";

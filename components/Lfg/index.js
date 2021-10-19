@@ -6,8 +6,6 @@ import {
   Typography,
   Modal,
   Button,
-  CardContent,
-  Card,
   Backdrop,
   Fade,
   Box,
@@ -17,17 +15,18 @@ import {
   FormControl,
   Select,
 } from "@mui/material";
-import { MEDIA_STREAM } from "../../constants";
+
 import { gameActions } from "../../services/redux/store/actions";
 import {
   gameSelectors,
   authSelectors,
 } from "../../services/redux/store/selectors";
 import { useSelector, useDispatch } from "react-redux";
-import Avatar from "@mui/material/Avatar";
+
 import useStyles from "./_style";
-import { IMAGES } from "../../constants";
+
 import { listenForNewLobby } from "../../services/socketio/listeners/game";
+import LfgContainer from "./LfgContainer";
 
 const style = {
   position: "absolute",
@@ -53,6 +52,8 @@ const Lfg = () => {
     description: "",
     platform: "Any",
     region: null,
+    mic: true,
+    rank: null,
   });
 
   const descriptionLengthExceeds = values.description.length > 200;
@@ -69,11 +70,6 @@ const Lfg = () => {
     handleClose();
   };
 
-  const joinLobby = async (lid) => {
-    await dispatch(gameActions.joinLobby(lid));
-    router.push("/lobby");
-  };
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     if (!auth) router.push("/login");
@@ -86,19 +82,6 @@ const Lfg = () => {
       ...values,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const handlePlatform = (platform) => {
-    switch (platform) {
-      case "playstation": {
-        return IMAGES.playstation;
-      }
-      case "xbox": {
-        return IMAGES.xbox;
-      }
-      default:
-        return IMAGES.pc;
-    }
   };
 
   React.useEffect(() => {
@@ -180,6 +163,50 @@ const Lfg = () => {
                 <Grid item>
                   <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Mic</InputLabel>
+                      <Select
+                        name="mic"
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={values.mic}
+                        label="Mic"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={true}>Yes</MenuItem>
+                        <MenuItem value={false}>No</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Rank
+                      </InputLabel>
+                      <Select
+                        disabled={currentGame?.data?.rank !== null}
+                        name="rank"
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={values.rank}
+                        label="Rank"
+                        onChange={handleChange}
+                      >
+                        {currentGame?.data?.ranks?.map((rank) => {
+                          return (
+                            <MenuItem key={rank} value={rank}>
+                              {rank}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
                         Region
                       </InputLabel>
@@ -232,81 +259,7 @@ const Lfg = () => {
           </Grid>
         </Grid>
         {currentGame?.lobbies?.map((lobby) => {
-          return (
-            <Grid item key={lobby.lid} container justifyContent="center">
-              <Card className={classes.lfgCard}>
-                <CardContent>
-                  <Grid container direction="column" spacing={2}>
-                    <Grid container item spacing={2}>
-                      <Grid item>
-                        <Avatar src={MEDIA_STREAM + lobby.avatar_url} />
-                      </Grid>
-
-                      <Grid
-                        item
-                        xs
-                        container
-                        direction="column"
-                        justifyContent="center"
-                      >
-                        <Typography variant="caption">
-                          {lobby.user_name}
-                        </Typography>
-                      </Grid>
-
-                      <Grid item>
-                        <Button onClick={() => joinLobby(lobby.lid)}>
-                          Join
-                        </Button>
-                      </Grid>
-                    </Grid>
-
-                    <Grid
-                      item
-                      container
-                      xs
-                      direction="column"
-                      justifyContent="center"
-                    >
-                      <Typography variant="body2">
-                        {lobby.description}
-                      </Typography>
-                    </Grid>
-                    <Grid
-                      container
-                      marginTop="10px"
-                      direction="row"
-                      spacing={4}
-                    >
-                      <Grid
-                        xs={2}
-                        item
-                        container
-                        alignItems="center"
-                        justifyContent="center"
-                      >
-                        <Typography color="primary" variant="caption">
-                          Region: {lobby.region}
-                        </Typography>
-                      </Grid>
-                      <Grid
-                        item
-                        container
-                        alignItems="center"
-                        xs={10}
-                        justifyContent="flex-end"
-                      >
-                        <img
-                          className={classes.platforms}
-                          src={handlePlatform(lobby.platform)}
-                        />
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-              </Card>
-            </Grid>
-          );
+          return <LfgContainer lobby={lobby} key={lobby.lid} />;
         })}
       </Grid>
     </span>

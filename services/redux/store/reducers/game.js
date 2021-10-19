@@ -6,6 +6,8 @@ const {
   VIEW_GAME_PAGE,
   GET_LFG_LOBBIES,
   GET_FEED_POSTS,
+  GET_USER_LFG_LOBBIES,
+  VIEW_LOBBY_PAGE,
 } = gameTypes;
 
 const initialState = {
@@ -16,7 +18,11 @@ const initialState = {
   },
   games: null,
   error: null,
+  userLobbies: null,
   loading: true,
+  currentLobby: {
+    data: null,
+  },
 };
 
 const gameReducer = (state = initialState, action) => {
@@ -61,6 +67,23 @@ const gameReducer = (state = initialState, action) => {
         currentGame: {
           ...state.currentGame,
           posts: action.payload,
+        },
+      };
+    }
+
+    case GET_USER_LFG_LOBBIES: {
+      return {
+        ...state,
+        userLobbies: action.payload,
+      };
+    }
+
+    case VIEW_LOBBY_PAGE: {
+      return {
+        ...state,
+        currentLobby: {
+          ...state.currentLobby,
+          data: action.payload,
         },
       };
     }

@@ -4,23 +4,21 @@ import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 import { TextField } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authSelectors } from "../../services/redux/store/selectors";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
-import { IMAGES } from "../../contants";
-
+import { IMAGES } from "../../constants";
 
 // react component
 const Login = () => {
   // applies styling to components
   const classes = useStyles();
-  const router = useRouter()
+  const router = useRouter();
   // function to dispatch events
   const dispatch = useDispatch();
 
-  const auth = useSelector(authSelectors.selectToken)
-  
+  const auth = useSelector(authSelectors.selectToken);
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
@@ -43,9 +41,9 @@ const Login = () => {
     dispatch(authActions.login(values));
   };
 
-  React.useEffect(()=>{
-    if(auth) router.push('/')
-  },[auth])
+  React.useEffect(() => {
+    if (auth) router.push("/");
+  }, [auth]);
 
   return (
     <Grid className={classes.root} height="100vh" container direction="row">

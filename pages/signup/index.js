@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "./_style";
-import { IMAGES } from "../../contants";
+import { IMAGES } from "../../constants";
 import { authSelectors } from "../../services/redux/store/selectors";
 
 // react component

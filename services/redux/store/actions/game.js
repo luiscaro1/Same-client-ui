@@ -13,6 +13,8 @@ const {
   GET_FEED_POSTS,
   ADD_POST,
   JOIN_LOBBY,
+  GET_USER_LFG_LOBBIES,
+  VIEW_LOBBY_PAGE,
 } = gameTypes;
 
 export const getAllGames = () => async (dispatch) => {
@@ -62,6 +64,18 @@ export const getLfgLobbies = (id) => async (dispatch) => {
     );
 
     dispatch({ type: GET_LFG_LOBBIES, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};
+
+export const getUserLfgLobbies = (id) => async (dispatch, getState) => {
+  try {
+    const res = await axios.get(
+      game_api.base_url + game_api.get_user_lfg_lobbies_route + id
+    );
+
+    dispatch({ type: GET_USER_LFG_LOBBIES, payload: res.data });
   } catch (err) {
     dispatch({ type: GAME_ERROR, payload: err });
   }
@@ -134,4 +148,20 @@ export const joinLobby = (lid) => async (dispatch, getState) => {
       dispatch({ type: GAME_ERROR, payload: err });
     }
   } else dispatch({ type: GAME_ERROR, payload: "Missing user or game data" });
+};
+
+export const getCurrentLobby = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      game_api.base_url + game_api.get_lfg_lobbies_by_id_route + id
+    );
+
+    dispatch({ type: VIEW_LOBBY_PAGE, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};
+
+export const setCurrentLobby = (lobby) => async (dispatch) => {
+  dispatch({ type: VIEW_LOBBY_PAGE, payload: lobby });
 };

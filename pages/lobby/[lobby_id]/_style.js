@@ -1,9 +1,9 @@
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  lfgCard: {
-    maxWidth: 800,
-    width: "100%",
+  section: {
+    paddingBottom: 10,
+    borderBottom: "3px solid grey",
   },
 });
 

@@ -1,9 +1,9 @@
 import { makeStyles } from "@mui/styles";
-import { COLORS } from "../../contants";
+import { COLORS } from "../../constants";
 
 const useStyles = makeStyles({
   formColumn: {
-    backgroundColor:COLORS.lightGrey
+    backgroundColor: COLORS.lightGrey,
   },
   logo: {
     marginTop: 30,

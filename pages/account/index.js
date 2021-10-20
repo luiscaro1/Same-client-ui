@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
-import { CardHeader, CardMedia, Collapse, CssBaseline } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../services/redux/store/actions";
-import useStyles from "./_style";
+
+import useStyles from "../../pageStyles/account";
 import Typography from "@mui/material/Typography";
 import {
   Avatar,
@@ -145,7 +145,7 @@ const AccountSettings = () => {
                     Bio
                   </Typography>
                   <Typography className={classes.bio} variant="h6">
-                    Hey I'm the user and I am looking for someone to play with!
+                    Hey new user here and I am looking for someone to play with!
                   </Typography>
                 </Grid>
                 <Grid className={classes.friendsbox} item xs={2}>

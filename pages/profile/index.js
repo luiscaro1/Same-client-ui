@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useSelector } from "react-redux";
-import useStyles from "./_style";
+import useStyles from "../../pageStyles/profile";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
 
 import { authSelectors } from "../../services/redux/store/selectors";

@@ -1,5 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import { COLORS } from "../../../constants";
+import { COLORS } from "../constants";
 
 const useStyles = makeStyles({
   lobby: {

@@ -19,7 +19,7 @@ const LobbiesTab = () => {
   return (
     <Grid className={classes.lfgList} spacing={3} container direction="column">
       {lobbies?.map((lobby) => (
-        <LfgContainer disabled={true} lobby={lobby} />
+        <LfgContainer key={lobby.lid} disabled={true} lobby={lobby} />
       ))}
     </Grid>
   );

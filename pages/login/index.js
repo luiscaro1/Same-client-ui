@@ -7,7 +7,7 @@ import FormGroup from "@mui/material/FormGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelectors } from "../../services/redux/store/selectors";
 import { authActions } from "../../services/redux/store/actions";
-import useStyles from "./_style";
+import useStyles from "../../pageStyles/login";
 import { IMAGES } from "../../constants";
 
 // react component

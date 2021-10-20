@@ -4,4 +4,21 @@ WORKDIR /app
 
 EXPOSE $PORT
 
+
+# ENV CHAT_URL https://same-chat-api.herokuapp.com
+
+# ENV GAME_URL https://same-game-api.herokuapp.com
+
+# ENV AUTH_URL http://localhost:5000
+
+# ENV MEDIA https://same-media-api.herokuapp.com/stream/
+
+ENV CHAT_URL http://localhost:5001
+
+ENV GAME_URL http://localhost:5004
+
+ENV AUTH_URL http://localhost:5000
+
+ENV MEDIA http://localhost:5002/stream/
+
 CMD npm run dev

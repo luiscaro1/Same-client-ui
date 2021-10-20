@@ -18,4 +18,4 @@ export const IMAGES = {
   apex: "/apex.jpg",
 };
 
-export const MEDIA_STREAM = "http://localhost:5002/stream/";
+export const MEDIA_STREAM = process.env.MEDIA;

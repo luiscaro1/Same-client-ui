@@ -23,6 +23,7 @@ import { MEDIA_STREAM } from "../../../constants";
 import { joinLobby } from "../../../services/socketio/actions/lobby";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import useStyles from "../../../pageStyles/lobby";
 
 const dummy_data = [
   {
@@ -35,8 +36,6 @@ const dummy_data = [
     user_name: "skiaXD",
   },
 ];
-
-import useStyles from "./_style";
 
 const Lobby = () => {
   const router = useRouter();

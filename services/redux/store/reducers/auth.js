@@ -7,7 +7,7 @@ const initialState = {
   error: null,
 };
 
-const { LOGIN_FAILED, LOGIN_SUCCESSFUL } = authTypes;
+const { AUTH_ERROR, LOGIN_SUCCESSFUL } = authTypes;
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
@@ -19,7 +19,7 @@ export default function authReducer(state = initialState, action) {
         loading: false,
       };
 
-    case LOGIN_FAILED:
+    case AUTH_ERROR:
       return {
         ...state,
         token: null,

@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
-import useStyles from "./_style";
+import useStyles from "../../pageStyles/signup";
 import { IMAGES } from "../../constants";
 import { authSelectors } from "../../services/redux/store/selectors";
 

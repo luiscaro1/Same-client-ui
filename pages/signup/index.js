@@ -49,7 +49,7 @@ const Login = () => {
   const handleSumbit = (e) => {
     e.preventDefault();
 
-    dispatch(authActions.login(values));
+    dispatch(authActions.signup(values));
   };
 
   React.useEffect(() => {

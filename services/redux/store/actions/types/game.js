@@ -8,3 +8,5 @@ export const ADD_POST = "ADD_POST";
 export const JOIN_LOBBY = "JOIN_LOBBY";
 export const GET_USER_LFG_LOBBIES = "GET_USER_LFG_LOBBIES";
 export const VIEW_LOBBY_PAGE = "VIEW_LOBBY_PAGE";
+export const GET_LOBBY_MESSAGES = "GET_LOBBY_MESSAGES";
+export const SEND_MESSAGE = "SEND_MESSAGE";

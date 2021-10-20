@@ -20,6 +20,12 @@ const config =
           add_post_route: "/feed/post",
           join_lobby_route: "/lfg/join",
         },
+
+        chat_api: {
+          base_url: "http://localhost:5001",
+          get_lobby_messages_route: "/inbox/messages",
+          send_message_route: "/inbox/message",
+        },
       };
 
 export default config;

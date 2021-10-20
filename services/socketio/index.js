@@ -1,7 +1,6 @@
 import { io } from "socket.io-client";
 
-const createSocket = (URL) => {
-  return io(URL);
-};
+const lobbySocket = io("http://localhost:5001");
+const gameSocket = io("http://localhost:5004");
 
-export default createSocket;
+export { lobbySocket, gameSocket };

@@ -2,7 +2,7 @@ import axios from "axios";
 import { gameTypes } from "./types";
 import config from "../../../../config";
 
-const { game_api } = config;
+const { game_api, chat_api } = config;
 
 const {
   GET_ALL_GAMES,
@@ -15,6 +15,8 @@ const {
   JOIN_LOBBY,
   GET_USER_LFG_LOBBIES,
   VIEW_LOBBY_PAGE,
+  GET_LOBBY_MESSAGES,
+  SEND_MESSAGE,
 } = gameTypes;
 
 export const getAllGames = () => async (dispatch) => {
@@ -164,4 +166,65 @@ export const getCurrentLobby = (id) => async (dispatch) => {
 
 export const setCurrentLobby = (lobby) => async (dispatch) => {
   dispatch({ type: VIEW_LOBBY_PAGE, payload: lobby });
+};
+
+export const getLobbyMessages = (options) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      chat_api.base_url + chat_api.get_lobby_messages_route,
+      options
+    );
+
+    dispatch({ type: GET_LOBBY_MESSAGES, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};
+
+export const sendMessage =
+  ({ type, content, lid }) =>
+  async (dispatch, getState) => {
+    const state = getState();
+    const { auth } = state;
+    const fd = new FormData();
+
+    var multipleMessages = null;
+
+    if (type === "FILES") {
+      fd.append("files", content);
+
+      multipleMessages = [];
+      content.forEach((file) => {
+        multipleMessages.push({
+          type,
+          content: URL.createObjectURL(file),
+          lid,
+        });
+      });
+    } else {
+      fd.append("content", content);
+    }
+    fd.append("lid", lid);
+    fd.append("type", type);
+    fd.append("uid", auth?.token?.uid);
+    try {
+      await axios.post(chat_api.base_url + chat_api.send_message_route, fd);
+
+      dispatch({
+        type: SEND_MESSAGE,
+        payload: multipleMessages || {
+          uid: auth?.token?.uid,
+          lid,
+          content,
+          type,
+          ...auth.token,
+        },
+      });
+    } catch (err) {
+      dispatch({ type: GAME_ERROR, payload: err });
+    }
+  };
+
+export const receiveMessage = (message) => (dispatch) => {
+  dispatch({ type: SEND_MESSAGE, payload: message });
 };

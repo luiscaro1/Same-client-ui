@@ -18,4 +18,4 @@ export const IMAGES = {
   apex: "/apex.jpg",
 };
 
-export const MEDIA_STREAM = process.env.MEDIA;
+export const MEDIA_STREAM = process.env.NEXT_PUBLIC_MEDIA;

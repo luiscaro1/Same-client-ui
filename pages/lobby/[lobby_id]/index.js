@@ -80,7 +80,7 @@ const Lobby = () => {
   };
 
   const getCurrentLobbyMessages = async () => {
-    if (lobby_id && !currentLobby?.data) {
+    if (lobby_id && !currentLobby?.data?.messages) {
       await dispatch(
         gameActions.getLobbyMessages({
           lid: lobby_id,

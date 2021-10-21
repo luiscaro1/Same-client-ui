@@ -21,6 +21,7 @@ const Games = () => {
 
   const viewGamePage = (game) => {
     dispatch(gameActions.setCurrentGame(game));
+
     router.push("/games/" + game.gid);
   };
 

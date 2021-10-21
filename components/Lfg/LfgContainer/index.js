@@ -21,6 +21,7 @@ const LfgContainer = ({ lobby, disabled }) => {
 
   const joinLobby = async (lid) => {
     await dispatch(gameActions.joinLobby(lid));
+    dispatch(gameActions.setCurrentLobby(lobby));
     router.push("/lobby/" + lid);
   };
   const handlePlatform = (platform) => {

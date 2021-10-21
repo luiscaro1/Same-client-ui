@@ -1,12 +1,14 @@
+console.log(process.env.NEXT_PUBLIC_GAME_URL);
+
 const config = {
   auth_api: {
-    base_url: process.env.AUTH_URL,
+    base_url: process.env.NEXT_PUBLIC_AUTH_URL,
     login_route: "/Same/login",
     signup_route: "/Same/accounts",
     verify_auth: "/Same/accounts/getCookieOwner",
   },
   game_api: {
-    base_url: process.env.GAME_URL,
+    base_url: process.env.NEXT_PUBLIC_GAME_URL,
     get_all_games_route: "/game/all",
     get_game_by_id_route: "/game/",
     get_lfg_lobbies_route: "/lfg/",
@@ -19,7 +21,7 @@ const config = {
   },
 
   chat_api: {
-    base_url: process.env.CHAT_URL,
+    base_url: process.env.NEXT_PUBLIC_CHAT_URL,
     get_lobby_messages_route: "/inbox/messages",
     send_message_route: "/inbox/message",
   },

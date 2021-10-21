@@ -13,12 +13,5 @@ EXPOSE $PORT
 
 # ENV MEDIA https://same-media-api.herokuapp.com/stream/
 
-ENV CHAT_URL http://localhost:5001
-
-ENV GAME_URL http://localhost:5004
-
-ENV AUTH_URL http://localhost:5000
-
-ENV MEDIA http://localhost:5002/stream/
 
 CMD npm run dev

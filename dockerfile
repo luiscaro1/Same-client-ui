@@ -17,15 +17,6 @@ RUN npm run  build && npm install --production --ignore-scripts --prefer-offline
 FROM node:alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-
-ENV CHAT_URL https://same-chat-api.herokuapp.com
-
-ENV GAME_URL https://same-game-api.herokuapp.com
-
-ENV AUTH_URL http://localhost:5000
-
-ENV MEDIA https://same-media-api.herokuapp.com/stream/
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001

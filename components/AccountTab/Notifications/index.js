@@ -1,5 +1,5 @@
 import React from "react";
-import {Grid,Box,Typography,Button,FormGroup, TextField,Slider} from "@mui/material";
+import {Grid,Box,Typography,Button,FormGroup, TextField,Switch} from "@mui/material";
 import useStyles from "./_style";
 
 import { useSelector } from "react-redux";
@@ -13,9 +13,9 @@ const NotificationsTab = () => {
   console.log(auth);
 
   //need to add the onclick event 
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const [checked, setChecked] = React.useState(true);
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
   };
   //submiting changes 
   const handleSumbit = (e) => {
@@ -30,11 +30,11 @@ const NotificationsTab = () => {
         <Grid item xs={8} direction="row">
             <Typography color="secondary" variant="h5"> Mute</Typography>
                 <Box sx={{ width: 300 }}>
-                    <Slider
-                        className={classes.slidingButton}
-                        aria-label="Mute"
-                        defaultValue={false}
-                        onClick={()=>handleChange(true)}
+                    <Switch
+                        // className={classes.slidingButton}
+                        checked={checked}
+                        onChange={handleChange}
+                        inputProps={{'aria-label':'controlled'}}
                         //need to change it so it does it on click
                       />
                 </Box>

@@ -8,7 +8,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useSelector } from "react-redux";
 import useStyles from "../../pageStyles/profile";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
@@ -69,7 +69,7 @@ const AccountSettings = () => {
                 </Grid>
                 <Grid item>
                   <Button variant="contained">
-                    <PersonAddAlt1Icon />
+                    <SettingsIcon />
                   </Button>
                 </Grid>
               </Grid>

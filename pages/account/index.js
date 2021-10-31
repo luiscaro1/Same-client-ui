@@ -67,11 +67,11 @@ const AccountSettings = () => {
                     {auth?.user_name}
                   </Typography>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   <Button variant="contained">
                     <SettingsIcon />
                   </Button>
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid item container wrap spacing={4}>
                 <Grid item xs={3}>

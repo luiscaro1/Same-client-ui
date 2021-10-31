@@ -13,7 +13,7 @@ const NotificationsTab = () => {
   console.log(auth);
 
   //need to add the onclick event 
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };

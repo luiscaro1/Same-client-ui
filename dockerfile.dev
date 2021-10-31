@@ -1,6 +1,10 @@
-FROM node:alpine
+FROM node:14.17.6-buster-slim
 
 WORKDIR /app
+
+COPY . /app/
+
+RUN npm i
 
 EXPOSE $PORT
 

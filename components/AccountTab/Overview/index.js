@@ -22,7 +22,7 @@ const OverviewTab = () => {
     <Grid className={classes.overviewList} spacing={4} container direction="column">
      <Typography color="secondary" variant="h5"> Username: {auth?.user_name} </Typography>
         <Typography color="secondary" variant="h5">
-            Email: myuser@gmail.com
+            Email: {auth?.email}
         </Typography>
         <Typography color="secondary" variant="h5">
             Blocked Users 0

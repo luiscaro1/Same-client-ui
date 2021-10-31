@@ -3,10 +3,11 @@ import {
   Grid,
   Toolbar,
   Avatar,
-  Card,
   CardContent,
   Typography,
   Button,
+  IconButton,
+
 } from "@mui/material";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import { IMAGES, MEDIA_STREAM } from "../../constants";
 
 import { authSelectors } from "../../services/redux/store/selectors";
 import ProfileTab from "../../components/ProfileTab";
+import BlockReportMenu from "../../components/BlockReportMenu";
 
 const Profile = () => {
   const classes = useStyles();
@@ -62,6 +64,9 @@ const Profile = () => {
                     <PersonAddAlt1Icon />
                   </Button>
                 </Grid>
+                  <Grid item>
+                    <BlockReportMenu />
+                  </Grid>
               </Grid>
               <Grid item container wrap spacing={4}>
                 <Grid item xs={3}>

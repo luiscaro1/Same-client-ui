@@ -54,7 +54,7 @@ const AccountSettings = () => {
   // applies styling to components
   const classes = useStyles();
 
-  const [value,setValue]=React.useState('one');
+  const [value,setValue]=React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -118,16 +118,16 @@ const AccountSettings = () => {
                 variant="scrollable"
                 TabIndicatorProps={{style:{backgroundColor:COLORS.lightGreen}}}
                 >
-                  <Tab label="Account overview" {...a11yProps(0)}>
+                  <Tab label="Account overview" className={classes.tabTextColor} {...a11yProps(0)}>
                 
                   </Tab>
-                  <Tab label="Edit Profile" {...a11yProps(1)}>
+                  <Tab label="Edit Profile"  className={classes.tabTextColor} {...a11yProps(1)}>
 
                   </Tab>
-                  <Tab label="Change Password" {...a11yProps(2)}>
+                  <Tab label="Change Password" className={classes.tabTextColor} {...a11yProps(2)}>
 
                   </Tab>
-                  <Tab label="Notification settings" {...a11yProps(3)}>
+                  <Tab label="Notification settings" className={classes.tabTextColor} {...a11yProps(3)}>
 
                   </Tab>
                   
@@ -146,10 +146,10 @@ const AccountSettings = () => {
                 <TabPanel value={value} index={1}>
                 <Grid className={classes.overviewgrid} container direction="column">
                     <Grid item className={classes.textgrid} sx={8}>
-                      <TextField label="Username"className={classes.text} variant="filled"></TextField>
-                      <TextField label="Email" className={classes.emailtext} variant="filled"></TextField>
-                      <TextField label="Bio"className={classes.biotext} variant="filled" multiline rowsmax={Infinity}> </TextField>
-                    <TextField label="Platform" className={classes.platformtext} variant="filled"> </TextField>
+                      <TextField label="Username"className={classes.text} variant="outlined"></TextField>
+                      <TextField label="Email" className={classes.emailtext} variant="outlined"></TextField>
+                      <TextField label="Bio"className={classes.biotext} variant="outlined" multiline rowsmax={Infinity}> </TextField>
+                    <TextField label="Platform" className={classes.platformtext} variant="outlined"> </TextField>
                     <Button 
                       variant="contained"
                       type="submit"

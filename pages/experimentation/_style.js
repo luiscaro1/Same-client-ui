@@ -1,28 +1,41 @@
+import { grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
+import { height, maxHeight } from "@mui/system";
 import { COLORS } from "../../contants";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor:"white",
+    backgroundColor:"red",
     color: "black",
     fontWeight: "bold",
-    maxWidth:"100%",
+    Width:"100vh",
     height:"100vh"
   },
 
   logobar:{
     backgroundColor:COLORS.lightGreen,
-    width:"100%"
+    width:"100%",
+    height:"10%"
   },
   
   logo: {
     width: 100,
   },
-  //everything on the left side of the screen
   blackbox:{
-    alignItems:"left",
+    alignItems:"center",
+    maxWidth: "40%",
     width:400,
-    maxHeight: 700
+    maxHeight: 690,
+    backgroundColor: "black",
+    height:"95%"
+  },
+  whitebox:{
+    alignItems:"left",
+    //maxWidth: 800,
+    maxHeight: 690,
+    backgroundColor: "white",
+    height:"95%",
+     width:"60%",
   },
   leftbox:{
     backgroundColor:"black",
@@ -62,7 +75,11 @@ const useStyles = makeStyles({
     
     width: 5,
     height: 35,
+    // width: 5,
+    // height: 26,
     marginLeft:20
+    
+    // marginBottom: 150,
   },
 
   biobox:{
@@ -89,29 +106,31 @@ const useStyles = makeStyles({
     // margin:"0px 0px 10px 30px",
     color:COLORS.lightGreen,
   },
-
-  //everything on the right side of the screen
   messageButton:{
+    maxHeight:30,
+    maxWidth:50,
     color: "black",
     backgroundColor: COLORS.lightGreen,
 
     "&:hover": {
       backgroundColor: COLORS.darkGreen,
     },
-    margin:"100px 0px 0px 1300px",
+    //margin:"100px 0px 0px 1300px",
   }, 
   message:{
+    fontSize:12,
     fontWeight:"bold"
   },
 
   inforight:{ // esto es lo que esta causando lo de los margenes I think
     alignItems:"center",
     position:"absolute",
-    textAlign:"center"
+    textAlign:"center",
+    backgroundColor: "white"
   },
    
   threepoints:{
-    margin:"0px 0px 0px 1100px"
+    //margin:"105px 0px 0px 20px"
   },
   info:{
     margin:"350px 0px 0px 0px"
@@ -123,116 +142,68 @@ buttongrid:{
 
 tabgrid:{
   marginRight: 50,
-  
 },
 
 tabs:{
-  margin:"200px 0px 0px 420px",
-  // marginRight: 370,
- 
+  marginRight: 370,
   "& .Mui-selected": {
     color: "black",
     fontFamily:"Roboto",
     fontSize:"1rem"
    }
-
 },
 
- overviewgrid:{
-   fontWeight:"bold",
-   alignItems:"left",
-   justifyContent:"flex-left",
-   height:400,
-   width:500
-
+ExptabGrid:{
+  height: 500,
+  width:600,
  },
 
- textgrid:{
-  margin:"160px 0px 0px 0px",
-  alignItems:"left",
-  justifyContent:"left",
-  color: "black",
+ PostGrid:{
+   backgroundColor: COLORS.darkGrey,
+  height: 500,
+  width:600,
  },
 
- text:{
-   fontWeight:"bold",
-   color: "black",
-   fontSize:"1.3rem",
-   justifyContent:"left",
-   alignItems:"left",
-   margin:"0px 75px 0px 0px"
- },
- text2:{
-  fontWeight:"bold",
-  fontSize:"1.3rem",
-  margin:"30px 0px 0px 0px"
- },
- block:{
-  fontWeight:"bold",
-  fontSize:"1.3rem",
-  margin:"30px 95px 0px 0px"
+ ExptabGridScroll:{
+  flexGrow: 1,
+  overflow: "auto",
  },
 
- delete:{
-  fontWeight:"bold",
-  fontSize:"1.3rem",
-  margin:"30px 50px 0px 0px",
-  color: "black",
-    backgroundColor: COLORS.lightGreen,
-
-    "&:hover": {
-      backgroundColor: COLORS.darkGreen,
-    },
-
+ postCard:{
+   marginLeft: 30,
+   marginTop: 5,
+   marginBottom:5,
+  backgroundColor: "white",
+  //maxHeight: 500,
+  maxWidth: 500,
+  content: "center",
  },
 
- emailtext:{
-  margin:"30px 70px 0px 0px",
- },
- biotext:{
-  margin:"30px 70px 0px 0px",
-  
- },
- platformtext:{
-   alignItems:"left",
-  margin:"30px 135px 10px 67.5px",
- },
-
- saveButton:{
-  margin:"60px 50px 40px 0px",
-  color: "black",
-    backgroundColor: COLORS.lightGreen,
-
-    "&:hover": {
-      backgroundColor: COLORS.darkGreen,
-    },
+ gameAvatars:{
+  height: 80,
+  width:80,
+  margin: "10px 10px 10px 10px",
 
  },
-
- notificationgrid:{
-  margin:"160px 0px 0px 0px",
-  alignItems:"left",
-  justifyContent:"left",
+ postAvatar:{
+  height: 100,
+  width: 100,
  },
 
- mute:{
-  fontWeight:"bold",
-  fontSize:"1.3rem",
-  justifyContent:"left",
-  alignItems:"left",
-  margin:"20px 75px 0px 0px"
+ cardMediaPost:{
+  //maxHeight: 350,
+  maxWidth: 300,
+  marginLeft: 100,
+  marginTop: 10,
+ },
+ cardPostComment:{
+   color: COLORS.darkGrey,
+   fontSize: "1rem"
+ },
+ cardPostHeader:{
+   color:"black",
  },
 
- slidingButton:{
-    height:20,
-    width:40,
-    color:COLORS.darkGreen,
-    margin:"0px 0px 160px 30px"
- },
-
- tabTextColor:{
-  color:"black",
-},
 
 });
 

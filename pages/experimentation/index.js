@@ -49,7 +49,7 @@ TabPanel.propTypes = {
 
 // react component
 
-const UserProfile = () => {
+const experimentation = () => {
   // applies styling to components
   const classes = useStyles();
 
@@ -70,7 +70,147 @@ const UserProfile = () => {
   return (
     <Grid className={classes.root} container direction="row">
       <CssBaseline>
-        {/* <Grid className={classes.middle} styles={{backgroundColor:"white"}} container direction="column"> */}
+        <Grid xs={12} className={classes.logobar}direction="row">
+            <Toolbar>
+                    <img className={classes.logo} src={IMAGES.logo}/> 
+            </Toolbar>
+        </Grid>
+        <Grid xs={4} item className={classes.blackbox}  direction="row-reverse">
+            <Grid xs={2} item container direction="column">
+
+            </Grid>
+        </Grid>
+        <Grid xs={8} item className={classes.whitebox} container direction="column">
+            <Grid item container direction="column">
+                <Grid xs={2}  className={classes.buttongrid} container direction="row" marginLeft={"82%"} marginTop={5}>
+                    <Button className={classes.messageButton}>
+                    <Typography className={classes.message}> Message</Typography>
+                    </Button>
+                    <MoreVertIcon className={classes.threepoints}></MoreVertIcon>
+                </Grid> 
+            </Grid>
+            <Grid xs={6} item container direction="column">
+                <Grid xs={4} item>
+                    <Tabs className={classes.tabs}
+                        value={value}
+                        onChange={handleChange}
+                        TabIndicatorProps={{style:{backgroundColor:COLORS.lightGreen}}}
+                        >
+                        <Tab label="Games" className={classes.cardPostHeader} {...a11yProps(0)}></Tab>
+                        <Tab label="Friends" className={classes.cardPostHeader} {...a11yProps(1)}> </Tab>
+                        <Tab label="Posts"  className={classes.cardPostHeader}{...a11yProps(2)}></Tab>
+                        
+                    </Tabs>
+                    <TabPanel value={value} index={0}>
+                        <Grid container direction="row" className = {classes.ExptabGrid}>  
+                            <Avatar alt="Apex Legend" src={"ApexLegend.jpg"} className = {classes.gameAvatars}/>
+                            <Avatar alt="Genshin Impact" src={"genshin.jpg"} className = {classes.gameAvatars}/>
+                            <Avatar alt="League of Legends" src= {"leagueOfLegends.png"} className = {classes.gameAvatars}/>
+                        </Grid>
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        <Grid container direction="row" className = {classes.ExptabGrid}>  
+                            <Avatar alt="Luis" src={"anger.png"} className = {classes.gameAvatars}/>
+                            <Avatar alt="Naomy" src={"sadness.png"} className = {classes.gameAvatars}/>
+                            <Avatar alt="Gabriel" src= {"disgust.png"} className = {classes.gameAvatars}/>
+                            <Avatar alt="Jovan" src= {"fear.png"} className = {classes.gameAvatars}/>
+                        </Grid>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  <Grid container direction="column" className = {classes.PostGrid}>  
+                    <Grid item xs={4} className = {classes.ExptabGridScroll}>
+                        <Card className = {classes.postCard}>
+                                <CardHeader
+                                avatar={
+                                    <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                                    </Avatar>
+                                }
+                                title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                                subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
+                                />
+                            <CardMedia className={classes.cardMediaPost}
+                            component="img"
+                            image="disgust.png"
+                            alt="imageId"
+                            />
+                            <CardContent>
+                            <Typography className={classes.cardPostComment}>
+                                comment of the user
+                            </Typography>
+                            </CardContent>
+                        </Card> 
+                        <Card className = {classes.postCard}>
+                            <CardHeader
+                            avatar={
+                                <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                                </Avatar>
+                            }
+                            title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                            subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
+                            />
+                            <CardMedia className={classes.cardMediaPost}
+                            component="img"
+                            image="anger.png"
+                            alt="imageId"
+                            />
+                            <CardContent>
+                            <Typography className={classes.cardPostComment}>
+                                comment of the user
+                            </Typography>
+                            </CardContent>
+                        </Card> 
+                        <Card className = {classes.postCard}>
+                            <CardHeader
+                            avatar={
+                                <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                                </Avatar>
+                            }
+                            title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                            subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
+                            />
+                            <CardMedia className={classes.cardMediaPost}
+                            component="img"
+                            image="sadness.png"
+                            alt="imageId"
+                            />
+                            <CardContent>
+                            <Typography className={classes.cardPostComment}>
+                                comment of the user
+                            </Typography>
+                            </CardContent>
+                        </Card> 
+                        <Card className = {classes.postCard}>
+                            <CardHeader
+                            avatar={
+                                <Avatar src={"eula.jpg"} className = {classes.postAvatars}>
+                                </Avatar>
+                            }
+                            title={<Typography className={classes.cardPostHeader}>Title of the post</Typography>}
+                            subheader={<Typography className={classes.cardPostHeader}>timestamp</Typography>}
+                            />
+                            <CardMedia className={classes.cardMediaPost}
+                            component="img"
+                            image="fear.png"
+                            alt="imageId"
+                            />
+                            <CardContent>
+                            <Typography className={classes.cardPostComment}>
+                                comment of the user
+                            </Typography>
+                            </CardContent>
+                        </Card> 
+                    </Grid>
+                  </Grid>
+                </TabPanel>
+
+                </Grid>
+            </Grid>
+        </Grid> 
+
+        
+
+          
+        {/* <Grid className={classes.middle} styles={{backgroundColor:"white"}} container direction="column"> 
         <Grid className={classes.logobar}>
           <Toolbar>
               <img className={classes.logo} src={IMAGES.logo} />
@@ -111,13 +251,13 @@ const UserProfile = () => {
               </CardContent>
             </Box> 
         </Grid>
-        <Grid className={classes.inforight} container direction="column">
-          <Grid className={classes.buttongrid} container direction="row">
+        <Grid xs={8}className={classes.inforight} container direction="column">
+          {/* <Grid className={classes.buttongrid} container direction="row">
             <Button className={classes.messageButton}>
               <Typography className={classes.message}> Message</Typography>
             </Button>
             <MoreVertIcon className={classes.threepoints}></MoreVertIcon>
-          </Grid>
+          </Grid> 
           <Grid className={classes.tabgrid} item >
             <Box sx={{width:"100%"}}>
               <Tabs className={classes.tabs}
@@ -154,7 +294,7 @@ const UserProfile = () => {
                 <TabPanel value={value} index={2}>
                   <Grid container direction="column" className = {classes.PostGrid}>  
                     <Grid item xs={1} className = {classes.ExptabGridScroll}>
-                      {/* needs to be finished esta en proceso*/}
+                      {/* needs to be finished esta en proceso
                       <Card className = {classes.postCard}>
                         <CardHeader
                           avatar={
@@ -240,10 +380,10 @@ const UserProfile = () => {
                 </TabPanel>
             </Box>
           </Grid>
-        </Grid>
+                        </Grid>*/}
       </CssBaseline>
     </Grid>
   );
 };
 
-export default UserProfile;
+export default experimentation;

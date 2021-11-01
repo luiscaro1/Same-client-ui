@@ -8,14 +8,4 @@ RUN npm i
 
 EXPOSE $PORT
 
-
-# ENV CHAT_URL https://same-chat-api.herokuapp.com
-
-# ENV GAME_URL https://same-game-api.herokuapp.com
-
-# ENV AUTH_URL http://localhost:5000
-
-# ENV MEDIA https://same-media-api.herokuapp.com/stream/
-
-
 CMD npm run dev

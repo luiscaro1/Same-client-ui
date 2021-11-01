@@ -1,4 +1,4 @@
-console.log(process.env.NEXT_PUBLIC_GAME_URL);
+
 
 const config = {
   auth_api: {

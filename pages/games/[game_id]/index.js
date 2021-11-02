@@ -37,9 +37,18 @@ const GameFeed = () => {
       dispatch(gameActions.getGameById(game_id));
   };
 
+  const clearCurrentLobby = () => {
+    dispatch(gameActions.setCurrentLobby(null));
+    dispatch(gameActions.setLobbyMessages(null));
+  };
+
   React.useEffect(() => {
     getGameData();
   }, [game_id]);
+
+  React.useEffect(() => {
+    clearCurrentLobby();
+  }, []);
 
   return (
     <Box sx={{ width: "100%" }}>

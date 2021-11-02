@@ -11,7 +11,7 @@ import { gameActions } from "../../services/redux/store/actions";
 import { authSelectors } from "../../services/redux/store/selectors";
 import NotificationsTab from "./Notifications";
 
-const AccountTab = () => {
+const SettingsTab = () => {
   //const classes = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector(authSelectors.selectToken);
@@ -58,4 +58,4 @@ const AccountTab = () => {
   );
 };
 
-export default AccountTab;
+export default SettingsTab;

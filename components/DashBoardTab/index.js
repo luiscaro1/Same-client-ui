@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { gameActions } from "../../services/redux/store/actions";
 import { authSelectors } from "../../services/redux/store/selectors";
 
-const ProfileTab = () => {
+const DashBoardTab = () => {
   //const classes = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector(authSelectors.selectToken);
@@ -57,4 +57,4 @@ const ProfileTab = () => {
   );
 };
 
-export default ProfileTab;
+export default DashBoardTab;

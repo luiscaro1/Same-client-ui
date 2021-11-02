@@ -11,14 +11,14 @@ import {
 } from "@mui/material";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useSelector } from "react-redux";
-import useStyles from "../../pageStyles/profile";
+import useStyles from "../../pageStyles/dashboard";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
 
 import { authSelectors } from "../../services/redux/store/selectors";
-import ProfileTab from "../../components/ProfileTab";
+import DashBoardTab from "../../components/DashBoardTab";
 import BlockReportMenu from "../../components/BlockReportMenu";
 
-const Profile = () => {
+const DashBoard = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   console.log(auth);
@@ -115,7 +115,7 @@ const Profile = () => {
         <Grid item container xs>
           <Grid className={classes.card}>
             <CardContent>
-              <ProfileTab />
+              <DashBoardTab />
             </CardContent>
           </Grid>
         </Grid>
@@ -124,4 +124,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default DashBoard;

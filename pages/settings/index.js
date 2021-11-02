@@ -6,16 +6,17 @@ import {
   Card,
   CardContent,
   Typography,
-  Button,
+  Button
 } from "@mui/material";
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useSelector } from "react-redux";
-import useStyles from "../../pageStyles/profile";
+import useStyles from "../../pageStyles/settings";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
 import { authSelectors } from "../../services/redux/store/selectors";
-import AccountTab from "../../components/AccountTab";
+import SettingsTab from "../../components/SettingsTab";
+import Link from "next/link";
 
-const AccountSettings = () => {
+const Settings = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   console.log(auth);
@@ -23,6 +24,12 @@ const AccountSettings = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const [click,setClick]=React.useState(false);
+  const [button,setButton]=React.useState(true);
+
+  const handleClick=()=> setClick(!click);
+  const closeMenu=()=>setClick(false);
 
   const a11yProps = (index) => {
     return {
@@ -52,7 +59,7 @@ const AccountSettings = () => {
               {
                 //TODO: Remove hard-coded image
               }
-              <Grid container item xs={8} justifyContent="center">
+               <Grid container item xs={8} justifyContent="center">
                 <Grid item>
                   <Avatar
                     className={classes.profilePic}
@@ -60,7 +67,7 @@ const AccountSettings = () => {
                   />
                 </Grid>
               </Grid>
-
+              
               <Grid item container justifyContent="center" xs={8} spacing={2}>
                 <Grid item>
                   <Typography color="secondary" variant="h5">
@@ -120,7 +127,7 @@ const AccountSettings = () => {
         <Grid item container xs>
           <Grid className={classes.card}>
             <CardContent>
-              <AccountTab />
+              <SettingsTab />
             </CardContent>
           </Grid>
         </Grid>
@@ -129,4 +136,4 @@ const AccountSettings = () => {
   );
 };
 
-export default AccountSettings;
+export default Settings;

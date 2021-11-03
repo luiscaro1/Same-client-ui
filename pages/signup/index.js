@@ -27,7 +27,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const auth = useSelector(authSelectors.selectToken);
-
+  const error = useSelector(authSelectors.selectAuthError);
   // hold the values of the text fields
   const [values, setValues] = React.useState({
     user_name: "",

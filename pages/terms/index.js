@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import useStyles from "../../pageStyles/terms";
 import { IMAGES } from "../../constants";
 
-
 const Terms = () => {
 
     const classes = useStyles();
@@ -50,5 +49,4 @@ const Terms = () => {
         </Grid>
     );
 };
-
 export default Terms;

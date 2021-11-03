@@ -7,10 +7,17 @@ const initialState = {
   error: null,
 };
 
-const { AUTH_ERROR, LOGIN_SUCCESSFUL } = authTypes;
+const { AUTH_ERROR, LOGIN_SUCCESSFUL, SIGNUP_SUCCESSFUL } = authTypes;
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
+    case SIGNUP_SUCCESSFUL:
+      return {
+        ...state,
+        token: action.payload,
+        error: null,
+        loading: false,
+      };
     case LOGIN_SUCCESSFUL:
       return {
         ...state,

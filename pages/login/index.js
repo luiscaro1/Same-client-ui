@@ -1,6 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import { Grid, CardContent, Box, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
+import {
+  Grid,
+  CardContent,
+  Box,
+  Typography,
+  Alert,
+  Button,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import { TextField } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
@@ -9,6 +16,7 @@ import { authSelectors } from "../../services/redux/store/selectors";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "../../pageStyles/login";
 import { IMAGES } from "../../constants";
+import Link from "next/link";
 
 // react component
 const Login = () => {
@@ -19,6 +27,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const auth = useSelector(authSelectors.selectToken);
+  const error = useSelector(authSelectors.selectAuthError);
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
@@ -42,79 +51,102 @@ const Login = () => {
   };
 
   React.useEffect(() => {
-    if (auth) router.push("/");
+    if (auth) router.push("/dashboard");
   }, [auth]);
 
+  React.useEffect(() => {
+    if (error)
+      setValues({
+        ...values,
+        error,
+      });
+  }, [error]);
+
   return (
-    <Grid className={classes.root} height="100vh" container direction="row">
-      <Grid className={classes.imageBackground} item xs={8}>
-        <img className={classes.logo} src={IMAGES.logo} />
-        <img
-          className={classes.loginBackground}
-          src={IMAGES.loginBackground}
-          alt="login background"
-        />
-      </Grid>
-      <Grid className={classes.formColumn} item xs={4}>
-        <Box className={classes.formBox}>
-          <CardContent>
-            <form onSubmit={handleSumbit}>
-              <FormGroup>
-                <Grid container direction="column">
-                  <Grid item container justifyContent="center">
-                    <Typography color="primary" variant="h6">
-                      Login
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    item
-                    className={classes.formItem}
-                    container
-                    justifyContent="center"
-                  >
-                    <TextField
-                      className={classes.inputs}
-                      name="user_name"
-                      required
-                      label="username"
-                      onChange={handleChange}
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    className={classes.formItem}
-                    container
-                    justifyContent="center"
-                  >
-                    <TextField
-                      name="password"
-                      type="password"
-                      required
-                      label="password"
-                      onChange={handleChange}
-                    />
-                  </Grid>
-                  <Grid
-                    item
-                    className={classes.formItem}
-                    container
-                    justifyContent="center"
-                  >
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      className={classes.actionButton}
+    <>
+      {values.error ? (
+        <Alert severity="error" color="error">
+          {values.error?.message}
+        </Alert>
+      ) : null}
+      <Grid className={classes.root} height="100vh" container direction="row">
+        <Grid className={classes.imageBackground} item xs={8}>
+          <img className={classes.logo} src={IMAGES.logo} />
+          <img
+            className={classes.loginBackground}
+            src={IMAGES.loginBackground}
+            alt="login background"
+          />
+        </Grid>
+        <Grid className={classes.formColumn} item xs={4}>
+          <Box className={classes.formBox}>
+            <CardContent>
+              <form onSubmit={handleSumbit}>
+                <FormGroup>
+                  <Grid container direction="column">
+                    <Grid item container justifyContent="center">
+                      <Typography color="primary" variant="h6">
+                        Login
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      className={classes.formItem}
+                      container
+                      justifyContent="center"
                     >
-                      Login
-                    </Button>
+                      <TextField
+                        className={classes.inputs}
+                        name="user_name"
+                        required
+                        label="username"
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      className={classes.formItem}
+                      container
+                      justifyContent="center"
+                    >
+                      <TextField
+                        name="password"
+                        type="password"
+                        required
+                        label="password"
+                        onChange={handleChange}
+                      />
+                    </Grid>
+
+                    <Grid item container justifyContent="center">
+                      <Grid item>
+                        <Link href="/signup">
+                          <a style={{ textDecoration: "none" }}>
+                            <Typography color="orange" variant="caption">
+                              Don't have an account?
+                            </Typography>
+                          </a>
+                        </Link>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      item
+                      className={classes.formItem}
+                      container
+                      justifyContent="center"
+                    >
+                      <Button variant="contained" type="submit">
+                        Login
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </FormGroup>
-            </form>
-          </CardContent>
-        </Box>
+                </FormGroup>
+              </form>
+            </CardContent>
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

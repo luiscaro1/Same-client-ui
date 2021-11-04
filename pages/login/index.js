@@ -9,6 +9,7 @@ import { authSelectors } from "../../services/redux/store/selectors";
 import { authActions } from "../../services/redux/store/actions";
 import useStyles from "../../pageStyles/login";
 import { IMAGES } from "../../constants";
+import Link from "next/link";
 
 // react component
 const Login = () => {
@@ -107,6 +108,15 @@ const Login = () => {
                     >
                       Login
                     </Button>
+                  </Grid>
+                  <Grid item container justifyContent="center" marginTop="20px">
+                    <Link href="/signup">
+                      <a>
+                        <Typography variant="caption">
+                          Don't have an account? 
+                        </Typography>
+                      </a>
+                    </Link>
                   </Grid>
                 </Grid>
               </FormGroup>

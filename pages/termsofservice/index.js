@@ -1,12 +1,14 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import useStyles from "../../pageStyles/terms";
+import useStyles from "../../pageStyles/termsofservice";
 import { IMAGES } from "../../constants";
+import { useRouter } from "next/router";
 
 const Terms = () => {
 
     const classes = useStyles();
+    const router = useRouter();
 
     return (
         <Grid height="100vh" container direction="row">
@@ -39,9 +41,10 @@ const Terms = () => {
                         container
                         justifyContent="center">
                         <Button
+                            onClick={() => router.push("/signup")}
                             variant="contained"
                             className={classes.actionButton}>
-                            Back to Sign Up
+                            Back
                         </Button>
                     </Grid>
                 </Grid>

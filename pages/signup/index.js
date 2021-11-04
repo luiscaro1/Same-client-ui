@@ -18,7 +18,7 @@ import { IMAGES } from "../../constants";
 import { authSelectors } from "../../services/redux/store/selectors";
 
 // react component
-const Login = () => {
+const SignUP = () => {
   // applies styling to components
   const classes = useStyles();
   const router = useRouter();
@@ -187,12 +187,21 @@ const Login = () => {
                       </Grid>
                     </Grid>
                   </Grid>
-
-                  <Grid item container justifyContent="center" marginTop="20px">
-                    <Link href="/termsofservice">
+                  <Grid item container justifyContent="center" marginTop="5px">
+                    <Link href="/login">
                       <a>
                         <Typography variant="caption">
-                          Terms Of Service
+                          Already have an account? 
+                        </Typography>
+                      </a>
+                    </Link>
+                  </Grid>
+                  <Grid item container justifyContent="center" marginTop="20px" >
+                      <Typography style={{color:"white"}} variant="caption">By signing up you agree to Same's </Typography>
+                    <Link href="/termsofservice">
+                      <a>
+                        <Typography variant="caption" marginLeft="10px">
+                            Terms Of Service
                         </Typography>
                       </a>
                     </Link>
@@ -207,4 +216,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUP;

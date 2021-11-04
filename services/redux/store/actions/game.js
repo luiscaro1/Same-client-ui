@@ -180,6 +180,9 @@ export const getLobbyMessages = (options) => async (dispatch) => {
     dispatch({ type: GAME_ERROR, payload: err });
   }
 };
+export const setLobbyMessages = (messages) => async (dispatch) => {
+  dispatch({ type: GET_LOBBY_MESSAGES, payload: messages });
+};
 
 export const sendMessage =
   ({ type, content, lid }) =>

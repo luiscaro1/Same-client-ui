@@ -7,6 +7,7 @@ import {
   Avatar,
   TextField,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import {
@@ -119,215 +120,226 @@ const Lobby = () => {
     listenForMessage((msg) => dispatch(gameActions.receiveMessage(msg)));
   }, []);
 
-  return (
-    <Grid container height="100%" className={classes.lobby}>
-      <Grid container item height="100%">
-        <Grid item xs={4} maxWidth={400} minWidth={300} height="100%">
-          <Card className={classes.lobbyCard}>
-            <CardContent className={classes.lobbyCard}>
-              <Grid height="100%" container direction="column" spacing={2}>
-                <Grid item>
-                  <Typography color="primary">
-                    Hosted by {currentLobby?.data?.user_name}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography
-                    className={classes.section}
-                    color="primary"
-                    variant="body2"
-                  >
-                    Voice
-                  </Typography>
-                </Grid>
-                <Grid item container spacing={2}>
-                  {dummy_data.map((player) => (
-                    <Grid key={player.user_name} item container spacing={2}>
-                      <Grid item>
-                        <Avatar
-                          src={
-                            MEDIA_STREAM +
-                            "ad81b66ffd94844153ad9342c4b70cc6.jpg"
-                          }
-                        />
+  if (currentLobby?.loadingLobby) {
+    return (
+      <Grid container height="100%" justifyContent="center" alignItems="center">
+        <CircularProgress color="primary" />
+      </Grid>
+    );
+  } else
+    return (
+      <Grid container height="100%" className={classes.lobby}>
+        <Grid container item height="100%">
+          <Grid item xs={4} maxWidth={400} minWidth={300} height="100%">
+            <Card className={classes.lobbyCard}>
+              <CardContent className={classes.lobbyCard}>
+                <Grid height="100%" container direction="column" spacing={2}>
+                  <Grid item>
+                    <Typography color="primary">
+                      Hosted by {currentLobby?.data?.user_name}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography
+                      className={classes.section}
+                      color="primary"
+                      variant="body2"
+                    >
+                      Voice
+                    </Typography>
+                  </Grid>
+                  <Grid item container spacing={2}>
+                    {dummy_data.map((player) => (
+                      <Grid key={player.user_name} item container spacing={2}>
+                        <Grid item>
+                          <Avatar
+                            src={
+                              MEDIA_STREAM +
+                              "ad81b66ffd94844153ad9342c4b70cc6.jpg"
+                            }
+                          />
+                        </Grid>
+                        <Grid
+                          item
+                          height="100%"
+                          container
+                          xs
+                          direction="column"
+                          justifyContent="center"
+                        >
+                          <Grid item>
+                            <Typography variant="body1">
+                              {player.user_name}
+                            </Typography>
+                          </Grid>
+                        </Grid>
                       </Grid>
+                    ))}
+                  </Grid>
+
+                  <Grid
+                    item
+                    height="100%"
+                    xs={9}
+                    container
+                    direction="column"
+                    justifyContent="flex-end"
+                  >
+                    <Grid container spacing={2}>
+                      <Grid item>
+                        <Typography variant="h6" color="secondary">
+                          {auth?.user_name}
+                        </Typography>
+                      </Grid>
+
                       <Grid
                         item
-                        height="100%"
                         container
-                        xs
                         direction="column"
+                        xs
                         justifyContent="center"
                       >
                         <Grid item>
-                          <Typography variant="body1">
-                            {player.user_name}
-                          </Typography>
+                          {mute ? (
+                            <VolumeOffIcon onClick={unmuteMic} />
+                          ) : (
+                            <VolumeUpIcon onClick={muteMic} />
+                          )}
                         </Grid>
-                      </Grid>
-                    </Grid>
-                  ))}
-                </Grid>
-
-                <Grid
-                  item
-                  height="100%"
-                  xs={9}
-                  container
-                  direction="column"
-                  justifyContent="flex-end"
-                >
-                  <Grid container spacing={2}>
-                    <Grid item>
-                      <Typography variant="h6" color="secondary">
-                        {auth?.user_name}
-                      </Typography>
-                    </Grid>
-
-                    <Grid
-                      item
-                      container
-                      direction="column"
-                      xs
-                      justifyContent="center"
-                    >
-                      <Grid item>
-                        {mute ? (
-                          <VolumeOffIcon onClick={unmuteMic} />
-                        ) : (
-                          <VolumeUpIcon onClick={muteMic} />
-                        )}
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid
-          container
-          direction="column"
-          item
-          xs
-          height="100%"
-          justifyContent="flex-end"
-        >
+              </CardContent>
+            </Card>
+          </Grid>
           <Grid
-            className={classes.chatMessageBox}
-            item
             container
             direction="column"
+            item
             xs
-            ref={messageBoxRef}
+            height="100%"
+            justifyContent="flex-end"
           >
-            {currentLobby?.messages?.map((message) => {
-              return (
-                <Grid
-                  key={message.mid}
-                  item
-                  container
-                  justifyContent={
-                    auth?.uid === message.uid ? "flex-end" : "flex-start"
-                  }
-                >
-                  <Grid item xs={6}>
-                    <CardContent>
-                      <Grid container direction="column" spacing={1}>
-                        {auth?.uid === message.uid ? (
+            <Grid
+              className={classes.chatMessageBox}
+              item
+              container
+              direction="column"
+              xs
+              ref={messageBoxRef}
+            >
+              {currentLobby?.messages?.map((message) => {
+                return (
+                  <Grid
+                    key={message.mid}
+                    item
+                    container
+                    justifyContent={
+                      auth?.uid === message.uid ? "flex-end" : "flex-start"
+                    }
+                  >
+                    <Grid item xs={6}>
+                      <CardContent>
+                        <Grid container direction="column" spacing={1}>
+                          {auth?.uid === message.uid ? (
+                            <Grid item container spacing={2}>
+                              <Grid
+                                xs
+                                container
+                                item
+                                direction="column"
+                                justifyContent="center"
+                              >
+                                <Grid item container justifyContent="flex-end">
+                                  <Typography color="primary" variant="caption">
+                                    {message.user_name}
+                                  </Typography>
+                                </Grid>
+                              </Grid>
+                              <Grid item>
+                                <Avatar
+                                  src={MEDIA_STREAM + message.avatar_url}
+                                />
+                              </Grid>
+                            </Grid>
+                          ) : (
+                            <Grid item container spacing={2} xs>
+                              <Grid item>
+                                <Avatar
+                                  src={MEDIA_STREAM + message.avatar_url}
+                                />
+                              </Grid>
+                              <Grid
+                                xs
+                                container
+                                item
+                                direction="column"
+                                justifyContent="center"
+                              >
+                                <Grid item>
+                                  <Typography color="primary" variant="caption">
+                                    {message.user_name}
+                                  </Typography>
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          )}
+
                           <Grid item container spacing={2}>
                             <Grid
-                              xs
-                              container
                               item
+                              container
+                              xs
                               direction="column"
                               justifyContent="center"
                             >
-                              <Grid item container justifyContent="flex-end">
-                                <Typography color="primary" variant="caption">
-                                  {message.user_name}
-                                </Typography>
+                              <Grid
+                                item
+                                container
+                                justifyContent={
+                                  auth?.uid === message.uid
+                                    ? "flex-end"
+                                    : "flex-start"
+                                }
+                              >
+                                {handleContent(message)}
                               </Grid>
-                            </Grid>
-                            <Grid item>
-                              <Avatar src={MEDIA_STREAM + message.avatar_url} />
-                            </Grid>
-                          </Grid>
-                        ) : (
-                          <Grid item container spacing={2} xs>
-                            <Grid item>
-                              <Avatar src={MEDIA_STREAM + message.avatar_url} />
-                            </Grid>
-                            <Grid
-                              xs
-                              container
-                              item
-                              direction="column"
-                              justifyContent="center"
-                            >
-                              <Grid item>
-                                <Typography color="primary" variant="caption">
-                                  {message.user_name}
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        )}
-
-                        <Grid item container spacing={2}>
-                          <Grid
-                            item
-                            container
-                            xs
-                            direction="column"
-                            justifyContent="center"
-                          >
-                            <Grid
-                              item
-                              container
-                              justifyContent={
-                                auth?.uid === message.uid
-                                  ? "flex-end"
-                                  : "flex-start"
-                              }
-                            >
-                              {handleContent(message)}
                             </Grid>
                           </Grid>
                         </Grid>
-                      </Grid>
-                    </CardContent>
+                      </CardContent>
+                    </Grid>
                   </Grid>
-                </Grid>
-              );
-            })}
-          </Grid>
-          <form onSubmit={handleSubmit}>
-            <Grid item container>
-              <Grid item xs>
-                <TextField
-                  className={classes.chatBox}
-                  name="TEXT"
-                  type="text"
-                  required
-                  multiline
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item container direction="column" xs={1}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  className={classes.sendButton}
-                >
-                  Send
-                </Button>
-              </Grid>
+                );
+              })}
             </Grid>
-          </form>
-        </Grid>
+            <form onSubmit={handleSubmit}>
+              <Grid item container>
+                <Grid item xs>
+                  <TextField
+                    className={classes.chatBox}
+                    name="TEXT"
+                    type="text"
+                    required
+                    multiline
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item container direction="column" xs={1}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    className={classes.sendButton}
+                  >
+                    Send
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Grid>
 
-        {/* <Grid item xs={2} minWidth={200} maxWidth={250}>
+          {/* <Grid item xs={2} minWidth={200} maxWidth={250}>
           <Card className={classes.lobbyChats}>
             <CardContent>
               <Grid container spacing={2}>
@@ -368,9 +380,9 @@ const Lobby = () => {
             </CardContent>
           </Card>
         </Grid> */}
+        </Grid>
       </Grid>
-    </Grid>
-  );
+    );
 };
 
 export default Lobby;

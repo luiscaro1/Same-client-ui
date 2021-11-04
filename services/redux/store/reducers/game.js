@@ -18,12 +18,17 @@ const initialState = {
     data: null,
     lobbies: null,
     posts: null,
+    loadingLobbies: true,
+    loadingPosts: true,
   },
   games: null,
   error: null,
   userLobbies: null,
   loading: true,
+
   currentLobby: {
+    loadingMessages: true,
+    loadingLobby: true,
     data: null,
     messages: [],
   },
@@ -59,6 +64,7 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         currentGame: {
+          loadingLobbies: false,
           ...state.currentGame,
           lobbies: action.payload,
         },
@@ -69,6 +75,7 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         currentGame: {
+          loadingPosts: false,
           ...state.currentGame,
           posts: action.payload,
         },
@@ -87,6 +94,7 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         currentLobby: {
           ...state.currentLobby,
+          loadingLobby: false,
           data: action.payload,
         },
       };
@@ -97,6 +105,7 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         currentLobby: {
           ...state.currentLobby,
+          loadingMessages: false,
           messages: action.payload,
         },
       };

@@ -30,18 +30,26 @@ const useStyles = makeStyles({
     },
 
     formItem: {
-        margin: "10px 0px 10px 0px",
+        margin: "50px 0px 10px 0px",
     },
 
     ratingInfo: {
         color: "white",
-        margin: "50px auto 2% auto",
+        margin: "0 auto 2% auto",
         textAlign: "center",
         width: "70%"
     },
 
+    ratingTitle: {
+        color: "white",
+        margin: "0px auto 10px auto",
+        textAlign: "center",
+        fontSize: "12pt"
+    },
+
     feedbackRating: {
-        fontSize: 60
+        fontSize: 60,
+        marginBottom: 50
     },
 
     submitButton: {
@@ -61,7 +69,7 @@ const useStyles = makeStyles({
 
     feedbackEmail: {
         width: "50%",
-        marginTop: 60
+        marginTop: 60,
     },
 
     feedbackCategory: {
@@ -69,11 +77,16 @@ const useStyles = makeStyles({
         marginTop: 50
     },
 
+    categoryTitle: {
+        color: "white",
+        margin: "50px auto 10px auto",
+        textAlign: "center",
+        fontSize: "16pt"
+    },
+
     feedbackBody: {
-
         width: "50%",
-        margin: 50
-
+        margin: "0 auto 20px auto"
     }
 });
 

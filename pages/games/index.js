@@ -7,7 +7,7 @@ import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { gameActions } from "../../services/redux/store/actions";
 import { gameSelectors } from "../../services/redux/store/selectors";
-import useStyles from "../_style";
+import useStyles from "../../pageStyles/game";
 
 const Games = () => {
   const router = useRouter();
@@ -21,6 +21,7 @@ const Games = () => {
 
   const viewGamePage = (game) => {
     dispatch(gameActions.setCurrentGame(game));
+
     router.push("/games/" + game.gid);
   };
 
@@ -31,9 +32,9 @@ const Games = () => {
   return (
     <List className={classes.list}>
       {(games || []).map((game) => (
-        <ListItem  key={game.name}>
-          <ListItemButton  onClick={() => viewGamePage(game)}>
-         <Typography color="primary">{game.name}</Typography>
+        <ListItem key={game.name}>
+          <ListItemButton onClick={() => viewGamePage(game)}>
+            <Typography color="primary">{game.name}</Typography>
           </ListItemButton>
         </ListItem>
       ))}

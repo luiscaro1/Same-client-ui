@@ -1,7 +1,6 @@
 import { io } from "socket.io-client";
 
-const createSocket = (URL) => {
-  return io(URL);
-};
+const lobbySocket = io(process.env.NEXT_PUBLIC_CHAT_URL);
+const gameSocket = io(process.env.NEXT_PUBLIC_GAME_URL);
 
-export default createSocket;
+export { lobbySocket, gameSocket };

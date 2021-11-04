@@ -2,7 +2,7 @@ import axios from "axios";
 import { gameTypes } from "./types";
 import config from "../../../../config";
 
-const { game_api } = config;
+const { game_api, chat_api } = config;
 
 const {
   GET_ALL_GAMES,
@@ -12,6 +12,11 @@ const {
   ADD_LOBBY,
   GET_FEED_POSTS,
   ADD_POST,
+  JOIN_LOBBY,
+  GET_USER_LFG_LOBBIES,
+  VIEW_LOBBY_PAGE,
+  GET_LOBBY_MESSAGES,
+  SEND_MESSAGE,
 } = gameTypes;
 
 export const getAllGames = () => async (dispatch) => {
@@ -66,7 +71,19 @@ export const getLfgLobbies = (id) => async (dispatch) => {
   }
 };
 
-export const addLfgLobby = (description) => async (dispatch, getState) => {
+export const getUserLfgLobbies = (id) => async (dispatch, getState) => {
+  try {
+    const res = await axios.get(
+      game_api.base_url + game_api.get_user_lfg_lobbies_route + id
+    );
+
+    dispatch({ type: GET_USER_LFG_LOBBIES, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};
+
+export const addLfgLobby = (lobby) => async (dispatch, getState) => {
   const state = getState();
 
   const { auth, game } = state;
@@ -74,7 +91,7 @@ export const addLfgLobby = (description) => async (dispatch, getState) => {
   if (auth.token && game.currentGame) {
     try {
       await axios.post(game_api.base_url + game_api.create_lfg_lobby_route, {
-        description,
+        ...lobby,
         gid: game.currentGame.data.gid,
         uid: auth.token.uid,
       });
@@ -114,3 +131,100 @@ export const addFeedPost =
       }
     } else dispatch({ type: GAME_ERROR, payload: "Missing user or game data" });
   };
+
+export const joinLobby = (lid) => async (dispatch, getState) => {
+  const state = getState();
+
+  const { auth, game } = state;
+
+  if (auth.token && game.currentGame) {
+    try {
+      await axios.post(game_api.base_url + game_api.join_lobby_route, {
+        lid,
+        gid: game.currentGame.data.gid,
+        uid: auth.token.uid,
+      });
+
+      dispatch({ type: JOIN_LOBBY });
+    } catch (err) {
+      dispatch({ type: GAME_ERROR, payload: err });
+    }
+  } else dispatch({ type: GAME_ERROR, payload: "Missing user or game data" });
+};
+
+export const getCurrentLobby = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      game_api.base_url + game_api.get_lfg_lobbies_by_id_route + id
+    );
+
+    dispatch({ type: VIEW_LOBBY_PAGE, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};
+
+export const setCurrentLobby = (lobby) => async (dispatch) => {
+  dispatch({ type: VIEW_LOBBY_PAGE, payload: lobby });
+};
+
+export const getLobbyMessages = (options) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      chat_api.base_url + chat_api.get_lobby_messages_route,
+      options
+    );
+
+    dispatch({ type: GET_LOBBY_MESSAGES, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};
+
+export const sendMessage =
+  ({ type, content, lid }) =>
+  async (dispatch, getState) => {
+    const state = getState();
+    const { auth } = state;
+    const fd = new FormData();
+
+    var multipleMessages = null;
+
+    if (type === "FILES") {
+      fd.append("files", content);
+
+      multipleMessages = [];
+      content.forEach((file) => {
+        multipleMessages.push({
+          type,
+          content: URL.createObjectURL(file),
+          lid,
+        });
+      });
+    } else {
+      fd.append("content", content);
+    }
+    fd.append("lid", lid);
+    fd.append("type", type);
+    fd.append("uid", auth?.token?.uid);
+    try {
+      await axios.post(chat_api.base_url + chat_api.send_message_route, fd);
+
+      dispatch({
+        type: SEND_MESSAGE,
+        payload: multipleMessages || {
+          uid: auth?.token?.uid,
+          lid,
+          content,
+          type,
+          ...auth.token,
+        },
+      });
+    } catch (err) {
+      dispatch({ type: GAME_ERROR, payload: err });
+    }
+  };
+
+export const receiveMessage = (message) => (dispatch) => {
+  dispatch({ type: SEND_MESSAGE, payload: message });
+};

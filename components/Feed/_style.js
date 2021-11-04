@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import { COLORS } from "../../constants";
 
 const useStyles = makeStyles({
   actionButtons: {
@@ -17,6 +18,14 @@ const useStyles = makeStyles({
     cursor: "pointer",
     width: 95,
     height: 36,
+  },
+  postCard: {
+    maxWidth: 800,
+    width: "100%",
+  },
+  postImage: {
+    border: "1px solid",
+    borderColor: COLORS.lightestGray,
   },
 });
 

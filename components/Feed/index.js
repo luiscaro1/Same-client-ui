@@ -22,7 +22,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import useStyles from "./_style";
-import { IMAGES } from "../../contants";
+import { IMAGES } from "../../constants";
 import { listenForNewLobby } from "../../services/socketio/listeners/game";
 
 const style = {
@@ -186,12 +186,9 @@ const Feed = () => {
           </Button>
         </Grid>
         {currentGame?.posts?.map((post) => {
-          console.log(
-            "http://localhost:5002/stream/" + post.attachments[0].filename
-          );
           return (
-            <Grid key={post.pid} item xs>
-              <Card>
+            <Grid item key={post.pid} container justifyContent="center">
+              <Card className={classes.postCard}>
                 <CardContent>
                   <Grid container direction="column" spacing={2}>
                     <Grid container item spacing={2}>
@@ -220,14 +217,21 @@ const Feed = () => {
                       <Typography variant="body2">{post.text}</Typography>
                     </Grid>
 
-                    <Grid item>
-                      <img
-                        style={{ width: "100%" }}
-                        src={
-                          "http://localhost:5002/stream/" +
-                          post.attachments[0].filename
-                        }
-                      />
+                    <Grid
+                      item
+                      container
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Grid item className={classes.postImage}>
+                        <img
+                          style={{ width: "100%" }}
+                          src={
+                            "http://localhost:5002/stream/" +
+                            post.attachments[0].filename
+                          }
+                        />
+                      </Grid>
                     </Grid>
                   </Grid>
                 </CardContent>

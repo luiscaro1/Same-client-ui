@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card } from "@mui/material";
 import { useRouter } from "next/router";
-import { IMAGES } from "../contants";
+import { IMAGES } from "../constants";
 import { Typography } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import GroupIcon from "@mui/icons-material/Group";
@@ -9,7 +9,7 @@ import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import StoreIcon from "@mui/icons-material/Store";
 import HeadsetIcon from "@mui/icons-material/Headset";
 import Toolbar from "@mui/material/Toolbar";
-import useStyles from "./_style";
+import useStyles from "../pageStyles/home";
 import { Grid } from "@mui/material";
 
 const Home = () => {

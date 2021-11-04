@@ -13,8 +13,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../services/redux/store/actions";
-import useStyles from "./_style";
-import { IMAGES } from "../../contants";
+import useStyles from "../../pageStyles/signup";
+import { IMAGES } from "../../constants";
 import { authSelectors } from "../../services/redux/store/selectors";
 
 // react component
@@ -49,7 +49,7 @@ const Login = () => {
   const handleSumbit = (e) => {
     e.preventDefault();
 
-    dispatch(authActions.login(values));
+    dispatch(authActions.signup(values));
   };
 
   React.useEffect(() => {

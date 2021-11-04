@@ -1,7 +1,6 @@
 import { authTypes } from "./types";
 import axios from "axios";
 import config from "../../../../config";
-import path from "path";
 
 const { LOGIN_SUCCESSFUL, AUTH_ERROR, SIGNUP_SUCCESSFUL } = authTypes;
 

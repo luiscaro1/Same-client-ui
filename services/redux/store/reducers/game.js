@@ -1,3 +1,4 @@
+import { sendMessage } from "../actions/game";
 import { gameTypes } from "../actions/types";
 
 const {
@@ -6,6 +7,10 @@ const {
   VIEW_GAME_PAGE,
   GET_LFG_LOBBIES,
   GET_FEED_POSTS,
+  GET_USER_LFG_LOBBIES,
+  VIEW_LOBBY_PAGE,
+  GET_LOBBY_MESSAGES,
+  SEND_MESSAGE,
 } = gameTypes;
 
 const initialState = {
@@ -16,7 +21,12 @@ const initialState = {
   },
   games: null,
   error: null,
+  userLobbies: null,
   loading: true,
+  currentLobby: {
+    data: null,
+    messages: [],
+  },
 };
 
 const gameReducer = (state = initialState, action) => {
@@ -61,6 +71,45 @@ const gameReducer = (state = initialState, action) => {
         currentGame: {
           ...state.currentGame,
           posts: action.payload,
+        },
+      };
+    }
+
+    case GET_USER_LFG_LOBBIES: {
+      return {
+        ...state,
+        userLobbies: action.payload,
+      };
+    }
+
+    case VIEW_LOBBY_PAGE: {
+      return {
+        ...state,
+        currentLobby: {
+          ...state.currentLobby,
+          data: action.payload,
+        },
+      };
+    }
+
+    case GET_LOBBY_MESSAGES: {
+      return {
+        ...state,
+        currentLobby: {
+          ...state.currentLobby,
+          messages: action.payload,
+        },
+      };
+    }
+    case SEND_MESSAGE: {
+      return {
+        ...state,
+        currentLobby: {
+          ...state.currentLobby,
+          messages:
+            action.payload.constructor === Array
+              ? state.currentLobby.messages.concat(action.payload)
+              : state.currentLobby.messages.concat([action.payload]),
         },
       };
     }

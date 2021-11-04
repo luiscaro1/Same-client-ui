@@ -1,9 +1,11 @@
 import { makeStyles } from "@mui/styles";
-import { COLORS } from "../../contants";
+import { COLORS } from "../constants";
 
 const useStyles = makeStyles({
   formColumn: {
+
     backgroundColor:COLORS.lightGrey
+
   },
   logo: {
     marginTop: 30,
@@ -17,7 +19,6 @@ const useStyles = makeStyles({
   },
 
   loginBackground: {
-    marginTop: 20,
     width: "100%",
   },
   imageBackground: {
@@ -43,6 +44,7 @@ const useStyles = makeStyles({
     color: "white",
     margin: "0px 20px 0px 20px",
   },
+  inputs: {},
 });
 
 export default useStyles;

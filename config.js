@@ -1,5 +1,3 @@
-
-
 const config = {
   auth_api: {
     base_url: process.env.NEXT_PUBLIC_AUTH_URL,
@@ -18,12 +16,18 @@ const config = {
     get_feed_posts_route: "/feed/",
     add_post_route: "/feed/post",
     join_lobby_route: "/lfg/join",
+    get_members_by_lobby_route: "/lfg/members/",
   },
 
   chat_api: {
     base_url: process.env.NEXT_PUBLIC_CHAT_URL,
     get_lobby_messages_route: "/inbox/messages",
     send_message_route: "/inbox/message",
+  },
+
+  voice_api: {
+    base_url: process.env.NEXT_PUBLIC_VOICE_URL,
+    get_users_in_voice_chat: "/voice/state/",
   },
 };
 

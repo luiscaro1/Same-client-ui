@@ -7,6 +7,7 @@ import {
   Avatar,
   TextField,
   Button,
+  IconButton,
   CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/router";
@@ -22,21 +23,18 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { MEDIA_STREAM } from "../../../constants";
 import { joinLobby } from "../../../services/socketio/actions/lobby";
+import {
+  joinVoiceLobby,
+  leaveVoiceLobby,
+} from "../../../services/socketio/actions/voice";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import useStyles from "../../../pageStyles/lobby";
-
-const dummy_data = [
-  {
-    user_name: "naomymorales",
-  },
-  {
-    user_name: "jjmp127",
-  },
-  {
-    user_name: "skiaXD",
-  },
-];
+import {
+  listenToOnVoiceConnection,
+  listenToVoiceLobbyUpdates,
+} from "../../../services/socketio/listeners/voice";
 
 const Lobby = () => {
   const router = useRouter();
@@ -92,9 +90,27 @@ const Lobby = () => {
     }
   };
 
+  const getCurrentLobbyMembers = () => {
+    if (lobby_id) dispatch(gameActions.getMembersInLobby(lobby_id));
+  };
+  const getUsersInVoiceChat = () => {
+    if (lobby_id) {
+      console.log("here");
+      dispatch(gameActions.getUsersInVoiceChat(lobby_id));
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (auth) dispatch(gameActions.sendMessage(message));
+  };
+
+  const joinVL = () => {
+    if (auth && lobby_id) joinVoiceLobby({ uid: auth?.uid, lid: lobby_id });
+  };
+
+  const leaveVL = () => {
+    if (auth && lobby_id) leaveVoiceLobby({ uid: auth?.uid, lid: lobby_id });
   };
 
   const unmuteMic = () => {
@@ -108,10 +124,13 @@ const Lobby = () => {
   React.useEffect(() => {
     getCurrentLobby();
     getCurrentLobbyMessages();
+    getCurrentLobbyMembers();
+    getUsersInVoiceChat();
   }, [lobby_id]);
 
   React.useEffect(() => {
     listenToOnChatConnection();
+    listenToOnVoiceConnection();
 
     messageBoxRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
@@ -119,6 +138,10 @@ const Lobby = () => {
   React.useEffect(() => {
     listenForMessage((msg) => dispatch(gameActions.receiveMessage(msg)));
   }, []);
+
+  React.useEffect(() => {
+    if (lobby_id) listenToVoiceLobbyUpdates(() => getUsersInVoiceChat());
+  }, [lobby_id]);
 
   if (currentLobby?.loadingLobby) {
     return (
@@ -139,42 +162,53 @@ const Lobby = () => {
                       Hosted by {currentLobby?.data?.user_name}
                     </Typography>
                   </Grid>
-                  <Grid item>
-                    <Typography
-                      className={classes.section}
-                      color="primary"
-                      variant="body2"
-                    >
-                      Voice
-                    </Typography>
+
+                  <Grid item container>
+                    <Grid item xs className={classes.section}>
+                      <Typography color="primary" variant="body2">
+                        Voice
+                      </Typography>
+                    </Grid>
+
+                    <Grid item className={classes.section}>
+                      {!Object.keys(currentLobby?.voicechat).includes(
+                        auth?.uid
+                      ) ? (
+                        <Button
+                          onClick={joinVL}
+                          size="small"
+                          variant="contained"
+                        >
+                          Join
+                        </Button>
+                      ) : null}
+                    </Grid>
                   </Grid>
                   <Grid item container spacing={2}>
-                    {dummy_data.map((player) => (
-                      <Grid key={player.user_name} item container spacing={2}>
-                        <Grid item>
-                          <Avatar
-                            src={
-                              MEDIA_STREAM +
-                              "ad81b66ffd94844153ad9342c4b70cc6.jpg"
-                            }
-                          />
-                        </Grid>
-                        <Grid
-                          item
-                          height="100%"
-                          container
-                          xs
-                          direction="column"
-                          justifyContent="center"
-                        >
+                    {Object.keys(currentLobby?.voicechat)?.map((uid) => {
+                      const p = currentLobby?.members?.[uid];
+                      return (
+                        <Grid key={uid} item container spacing={2}>
                           <Grid item>
-                            <Typography variant="body1">
-                              {player.user_name}
-                            </Typography>
+                            <Avatar src={MEDIA_STREAM + p?.avatar_url} />
+                          </Grid>
+                          <Grid
+                            item
+                            height="100%"
+                            container
+                            xs
+                            direction="column"
+                            justifyContent="center"
+                          >
+                            <Grid item>
+                              <Typography variant="body1">
+                                {p?.user_name}
+                              </Typography>
+                            </Grid>
                           </Grid>
                         </Grid>
-                      </Grid>
-                    ))}
+                      );
+                    })}
                   </Grid>
 
                   <Grid
@@ -206,6 +240,19 @@ const Lobby = () => {
                             <VolumeUpIcon onClick={muteMic} />
                           )}
                         </Grid>
+                      </Grid>
+                      <Grid item>
+                        {Object.keys(currentLobby?.voicechat).includes(
+                          auth?.uid
+                        ) ? (
+                          <IconButton
+                            onClick={leaveVL}
+                            size="small"
+                            variant="contained"
+                          >
+                            <ExitToAppIcon sx={{ color: "red" }} />
+                          </IconButton>
+                        ) : null}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -339,47 +386,62 @@ const Lobby = () => {
             </form>
           </Grid>
 
-          {/* <Grid item xs={2} minWidth={200} maxWidth={250}>
-          <Card className={classes.lobbyChats}>
-            <CardContent>
-              <Grid container spacing={2}>
-                <Grid item xs>
-                  <Typography
-                    className={classes.section}
-                    color="primary"
-                    variant="body2"
-                  >
-                    Online
-                  </Typography>
-                </Grid>
-                {dummy_data.map((player) => (
-                  <Grid key={player.user_name} item container spacing={2}>
-                    <Grid item>
-                      <Avatar
-                        src={
-                          MEDIA_STREAM + "ad81b66ffd94844153ad9342c4b70cc6.jpg"
-                        }
-                      />
-                    </Grid>
-                    <Grid
-                      item
-                      container
-                      xs
-                      direction="column"
-                      justifyContent="center"
+          <Grid item xs={2} height={"100%"} minWidth={200} maxWidth={250}>
+            <Card className={classes.members}>
+              <CardContent>
+                <Grid container spacing={2}>
+                  <Grid item xs>
+                    <Typography
+                      className={classes.section}
+                      color="primary"
+                      variant="body2"
                     >
+                      Members
+                    </Typography>
+                  </Grid>
+                  {Object.values(currentLobby?.members || {})?.map((player) => (
+                    <Grid key={player.user_name} item container spacing={2}>
                       <Grid item>
-                        <Typography variant="body1">
-                          {player.user_name}
-                        </Typography>
+                        <Avatar src={MEDIA_STREAM + player.avatar_url} />
+                      </Grid>
+                      <Grid
+                        item
+                        container
+                        xs
+                        direction="column"
+                        justifyContent="center"
+                      >
+                        <Grid item>
+                          <Typography variant="body1">
+                            {player.user_name}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+
+                      <Grid
+                        xs={2}
+                        container
+                        item
+                        direction="column"
+                        justifyContent="center"
+                      >
+                        <Grid
+                          item
+                          className={classes.status}
+                          style={{
+                            backgroundColor:
+                              auth?.uid === player.uid || player.online
+                                ? "green"
+                                : "red",
+                          }}
+                        ></Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                ))}
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid> */}
+                  ))}
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
       </Grid>
     );

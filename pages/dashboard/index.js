@@ -7,7 +7,6 @@ import {
   Typography,
   Button,
   IconButton,
-
 } from "@mui/material";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useSelector } from "react-redux";
@@ -22,19 +21,25 @@ const DashBoard = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   console.log(auth);
-  
+
   return (
     <Grid container direction="column">
       <Grid item container>
-        <Grid className={classes.section} item>
-          <Toolbar>
-            <img className={classes.logo} src={IMAGES.logo} />
-          <NavMenu className={classes.bar}/>
+        <Grid className={classes.section} width="100%" item>
+          <Toolbar width="100%">
+            <Grid container width="100%">
+              <Grid item xs>
+                <img className={classes.logo} src={IMAGES.logo} />
+              </Grid>
+              <Grid item>
+                <NavMenu className={classes.bar} />
+              </Grid>
+            </Grid>
           </Toolbar>
         </Grid>
       </Grid>
 
-      <Grid item container xs>
+      <Grid item container className={classes.dashboardContent} xs>
         <Grid className={classes.info} item xs={4} container>
           <CardContent>
             <Grid
@@ -66,9 +71,9 @@ const DashBoard = () => {
                     <PersonAddAlt1Icon />
                   </Button>
                 </Grid>
-                  <Grid item>
-                    <BlockReportMenu />
-                  </Grid>
+                <Grid item>
+                  <BlockReportMenu />
+                </Grid>
               </Grid>
               <Grid item container wrap spacing={4}>
                 <Grid item xs={3}>

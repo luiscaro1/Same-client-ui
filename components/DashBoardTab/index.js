@@ -8,6 +8,7 @@ import { gameActions } from "../../services/redux/store/actions";
 import { authSelectors } from "../../services/redux/store/selectors";
 
 const DashBoardTab = () => {
+  const classes = useStyles();
   //const classes = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector(authSelectors.selectToken);
@@ -35,6 +36,7 @@ const DashBoardTab = () => {
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
+          className={classes.tabs}
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"

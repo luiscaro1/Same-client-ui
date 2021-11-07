@@ -26,6 +26,7 @@ import { joinLobby } from "../../../services/socketio/actions/lobby";
 import {
   joinVoiceLobby,
   leaveVoiceLobby,
+  sendAudioString,
 } from "../../../services/socketio/actions/voice";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
@@ -34,6 +35,7 @@ import useStyles from "../../../pageStyles/lobby";
 import {
   listenToOnVoiceConnection,
   listenToVoiceLobbyUpdates,
+  listenToVoiceData,
 } from "../../../services/socketio/listeners/voice";
 
 const Lobby = () => {
@@ -48,6 +50,11 @@ const Lobby = () => {
     content: "",
     type: "TEXT",
   });
+
+  const userInVoiceChat = Object.keys(currentLobby?.voicechat).includes(
+    auth?.uid
+  );
+
   const messageBoxRef = React.useRef();
 
   const handleChange = (e) => {
@@ -95,7 +102,6 @@ const Lobby = () => {
   };
   const getUsersInVoiceChat = () => {
     if (lobby_id) {
-      console.log("here");
       dispatch(gameActions.getUsersInVoiceChat(lobby_id));
     }
   };
@@ -106,11 +112,61 @@ const Lobby = () => {
   };
 
   const joinVL = () => {
-    if (auth && lobby_id) joinVoiceLobby({ uid: auth?.uid, lid: lobby_id });
+    if (auth && lobby_id) {
+      joinVoiceLobby({ uid: auth?.uid, lid: lobby_id });
+      if (lobby_id && auth) sendVoiceData(1000);
+    }
   };
 
   const leaveVL = () => {
     if (auth && lobby_id) leaveVoiceLobby({ uid: auth?.uid, lid: lobby_id });
+  };
+
+  const sendVoiceData = (time) => {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      var madiaRecorder = new MediaRecorder(stream);
+      madiaRecorder.start();
+
+      var audioChunks = [];
+
+      madiaRecorder.addEventListener("dataavailable", function (event) {
+        audioChunks.push(event.data);
+      });
+
+      madiaRecorder.addEventListener("stop", function () {
+        var audioBlob = new Blob(audioChunks);
+
+        audioChunks = [];
+
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL(audioBlob);
+        fileReader.onloadend = function () {
+          // if (!state.microphone) return;
+
+          var base64String = fileReader.result;
+          console.log(mute);
+
+          // if (!mute)
+          sendAudioString({
+            lid: lobby_id,
+            userState: { uid: auth?.uid, muted: mute },
+            data: base64String,
+          });
+        };
+
+        madiaRecorder.start();
+
+        setTimeout(function () {
+          madiaRecorder.stop();
+        }, time);
+      });
+
+      setTimeout(function () {
+        madiaRecorder.stop();
+      }, time);
+    });
+
+    listenToVoiceData();
   };
 
   const unmuteMic = () => {
@@ -140,7 +196,9 @@ const Lobby = () => {
   }, []);
 
   React.useEffect(() => {
-    if (lobby_id) listenToVoiceLobbyUpdates(() => getUsersInVoiceChat());
+    if (lobby_id) {
+      listenToVoiceLobbyUpdates(() => getUsersInVoiceChat());
+    }
   }, [lobby_id]);
 
   if (currentLobby?.loadingLobby) {
@@ -242,9 +300,7 @@ const Lobby = () => {
                         </Grid>
                       </Grid>
                       <Grid item>
-                        {Object.keys(currentLobby?.voicechat).includes(
-                          auth?.uid
-                        ) ? (
+                        {userInVoiceChat ? (
                           <IconButton
                             onClick={leaveVL}
                             size="small"

@@ -12,3 +12,10 @@ export const listenToVoiceLobbyUpdates = (cb) => {
     return cb();
   });
 };
+
+export const listenToVoiceData = () => {
+  socket.on("VOICE", (data) => {
+    var audio = new Audio(data);
+    audio.play();
+  });
+};

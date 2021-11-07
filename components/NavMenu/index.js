@@ -79,7 +79,7 @@ const NavMenu = () => {
             <ListItemIcon>
                 <SettingsIcon fontSize="small" />
           </ListItemIcon>{options[3]}</MenuItem>
-        <MenuItem key={options[4]} selected={options === 'Pyxis'}  onClick={() => router.push("/feedback")}>
+        <MenuItem key={options[4]} selected={options === 'Pyxis'}  onClick={() => router.push("/feedback2")}>
         <ListItemIcon>
                 <FeedbackIcon fontSize="small" />
           </ListItemIcon>{options[4]}</MenuItem>

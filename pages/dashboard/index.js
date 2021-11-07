@@ -13,21 +13,23 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { useSelector } from "react-redux";
 import useStyles from "../../pageStyles/dashboard";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
-
 import { authSelectors } from "../../services/redux/store/selectors";
 import DashBoardTab from "../../components/DashBoardTab";
 import BlockReportMenu from "../../components/BlockReportMenu";
+import NavMenu from "../../components/NavMenu";
 
 const DashBoard = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   console.log(auth);
+  
   return (
     <Grid container direction="column">
       <Grid item container>
         <Grid className={classes.section} item>
           <Toolbar>
             <img className={classes.logo} src={IMAGES.logo} />
+          <NavMenu className={classes.bar}/>
           </Toolbar>
         </Grid>
       </Grid>

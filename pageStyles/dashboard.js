@@ -3,9 +3,13 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   logo: {
     width: 100,
+    flex:1
   },
   section: {
     margin: "20px 0px 40px 0px",
+  },
+  bar:{
+    marginLeft:'auto'
   },
 
   info: {
@@ -27,6 +31,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "center",
   },
+  
 });
 
 export default useStyles;

@@ -4,12 +4,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import useStyles from "./_style";
-
-const options = [
-  'Unfriend',
-  'Block',
-  'Report',
-];
+import ListItemIcon from '@mui/material/ListItemIcon';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import BlockIcon from '@mui/icons-material/Block';
+import ReportIcon from '@mui/icons-material/Report';
+import { useRouter } from "next/router";
 
 const ITEM_HEIGHT = 100;
 
@@ -23,6 +22,13 @@ export default function BlockReportMenu() {
     setAnchorEl(null);
   };
   const classes=useStyles();
+  const router = useRouter();
+
+  const options = [
+    'Unfriend',
+    'Block',
+    'Report',
+  ];
 
   return (
     <div>
@@ -51,11 +57,18 @@ export default function BlockReportMenu() {
           },
         }}
       >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
-          </MenuItem>
-        ))}
+        <MenuItem key={options[0]} selected={options === 'Pyxis'} onClick={handleClose}>
+        <ListItemIcon>
+                <PersonRemoveIcon fontSize="small" />
+          </ListItemIcon>{options[0]}</MenuItem>
+        <MenuItem key={options[1]} selected={options === 'Pyxis'} onClick={handleClose}>
+        <ListItemIcon>
+                <BlockIcon fontSize="small" />
+          </ListItemIcon>{options[1]}</MenuItem>
+        <MenuItem key={options[2]} selected={options === 'Pyxis'} onClick={() => router.push("/report")}>
+        <ListItemIcon>
+                <ReportIcon fontSize="small" />
+          </ListItemIcon>{options[2]}</MenuItem>
       </Menu>
     </div>
   );

@@ -41,49 +41,49 @@ const Report = () => {
                         </Grid>
                         <Grid item xs={8}>
                             <Typography color="primary" variant="body2" 
-                            justifyContent="right" marginLeft="20%">
-                                Stalking<Checkbox/>
+                            justifyContent="right" marginLeft="10%">
+                                <Checkbox/>Stalking
                             </Typography>
                            
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="20%"
-                                >Spaming inappropriate or illegal content<Checkbox/>
+                                marginLeft="10%"
+                                ><Checkbox/>Spaming inappropriate or illegal content
                                 </Typography>
 
                             <Typography color="primary" variant="body2" 
-                            justifyContent="right"marginLeft="20%" >
-                                Offensive Language <Checkbox />
+                            justifyContent="right"marginLeft="10%" >
+                                <Checkbox />Offensive Language 
                             </Typography>
 
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="20%"
-                                >Sexual Harassment <Checkbox /></Typography>
+                                marginLeft="10%"
+                                ><Checkbox />Sexual Harassment </Typography>
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="20%"
-                                >Discrimination (includes homophobia, racism, sexism) <Checkbox /></Typography>
+                                marginLeft="10%"
+                                ><Checkbox />Discrimination (homophobia, racism, etc.) </Typography>
                         
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="20%"
-                                >Spreading viruses and malicious software<Checkbox /></Typography>
+                                marginLeft="10%"
+                                ><Checkbox />Spreading viruses and malicious software</Typography>
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="20%"
-                                >Violation of IP rights( includes stolen content or stealing account credentials) <Checkbox /></Typography>
+                                marginLeft="10%"
+                                ><Checkbox />Violation of IP rights(includes stolen content) </Typography>
 
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="20%"
-                                >Pretending to be an admin Same developer<Checkbox /></Typography>
+                                marginLeft="10%"
+                                ><Checkbox />Pretending to be an admin Same developer</Typography>
                         </Grid>
                 
                         <Grid

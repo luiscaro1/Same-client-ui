@@ -38,6 +38,9 @@ import {
   listenToVoiceData,
 } from "../../../services/socketio/listeners/voice";
 
+var m = true;
+var uivc = false;
+
 const Lobby = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -54,6 +57,13 @@ const Lobby = () => {
   const userInVoiceChat = Object.keys(currentLobby?.voicechat).includes(
     auth?.uid
   );
+
+  React.useEffect(() => {
+    if (userInVoiceChat) {
+      joinVL();
+      uivc = true;
+    } else false;
+  }, [userInVoiceChat, auth, lobby_id]);
 
   const messageBoxRef = React.useRef();
 
@@ -120,6 +130,7 @@ const Lobby = () => {
 
   const leaveVL = () => {
     if (auth && lobby_id) leaveVoiceLobby({ uid: auth?.uid, lid: lobby_id });
+    uivc = false;
   };
 
   const sendVoiceData = (time) => {
@@ -144,14 +155,13 @@ const Lobby = () => {
           // if (!state.microphone) return;
 
           var base64String = fileReader.result;
-          console.log(mute);
 
-          // if (!mute)
-          sendAudioString({
-            lid: lobby_id,
-            userState: { uid: auth?.uid, muted: mute },
-            data: base64String,
-          });
+          if (!m && uivc)
+            sendAudioString({
+              lid: lobby_id,
+              userState: { uid: auth?.uid, muted: m },
+              data: base64String,
+            });
         };
 
         madiaRecorder.start();
@@ -170,10 +180,12 @@ const Lobby = () => {
   };
 
   const unmuteMic = () => {
+    m = false;
     setMute(false);
   };
 
   const muteMic = () => {
+    m = true;
     setMute(true);
   };
 

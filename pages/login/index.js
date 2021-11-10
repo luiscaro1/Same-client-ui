@@ -51,7 +51,7 @@ const Login = () => {
   };
 
   React.useEffect(() => {
-    if (auth) router.push("/dashboard");
+    // if (auth) router.push("/dashboard");
   }, [auth]);
 
   React.useEffect(() => {

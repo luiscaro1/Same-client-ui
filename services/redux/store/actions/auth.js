@@ -6,29 +6,38 @@ const { LOGIN_SUCCESSFUL, AUTH_ERROR, SIGNUP_SUCCESSFUL } = authTypes;
 
 const { auth_api } = config;
 
-export const login = (credentials) => async (dispatch) => {
+export const login = ({user_name,password}) => async (dispatch) => {
   //TODO: copy and paste the login url
-
+console.log({user_name,password})
   try {
-    const res = await axios.post(
-      auth_api.base_url + auth_api.login_route,
-      credentials,
+    const res = await fetch(   auth_api.base_url + auth_api.login_route,
       {
-        withCredentials: true,
+        method: 'POST',
+        body: JSON.stringify({user_name,password}),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
       }
     );
    
+   const data = await res.json()
 
     //succesful
     dispatch({
       type: LOGIN_SUCCESSFUL,
-      payload: res.data,
+      payload: data,
     });
+
+    if(data.message){
+      dispatch({
+      type: AUTH_ERROR,
+      payload: err
+    });
+    }
   } catch (err) {
    
     dispatch({
       type: AUTH_ERROR,
-      payload: err.response.data,
+      payload: err
     });
   }
 };

@@ -21,18 +21,20 @@ console.log({user_name,password})
    
    const data = await res.json()
 
+
+   if(data.message){
+      dispatch({
+      type: AUTH_ERROR,
+      payload: data.messages
+    });
+    }else
     //succesful
     dispatch({
       type: LOGIN_SUCCESSFUL,
       payload: data,
     });
 
-    if(data.message){
-      dispatch({
-      type: AUTH_ERROR,
-      payload: err
-    });
-    }
+ 
   } catch (err) {
    
     dispatch({

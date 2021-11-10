@@ -17,6 +17,7 @@ export const login = (credentials) => async (dispatch) => {
         withCredentials: true,
       }
     );
+   
 
     //succesful
     dispatch({
@@ -24,9 +25,10 @@ export const login = (credentials) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+   
     dispatch({
       type: AUTH_ERROR,
-      payload: err,
+      payload: err.response.data,
     });
   }
 };
@@ -47,7 +49,7 @@ export const signup = (credentials) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
-      payload: err,
+      payload: err.response.data,
     });
   }
 };
@@ -66,7 +68,7 @@ export const verifyAuth = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
-      payload: err,
+       payload: err.response.data,
     });
   }
 };

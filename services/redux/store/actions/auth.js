@@ -25,7 +25,7 @@ console.log({user_name,password})
    if(data.message){
       dispatch({
       type: AUTH_ERROR,
-      payload: data.messages
+      payload: data.message
     });
     }else
     //succesful

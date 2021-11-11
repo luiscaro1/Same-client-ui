@@ -17,7 +17,6 @@ export const login = (credentials) => async (dispatch) => {
         withCredentials: true,
       }
     );
-   
 
     //succesful
     dispatch({
@@ -25,7 +24,6 @@ export const login = (credentials) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
-   
     dispatch({
       type: AUTH_ERROR,
       payload: err.response.data,
@@ -39,7 +37,7 @@ export const signup = (credentials) => async (dispatch) => {
     const res = await axios.post(
       auth_api.base_url + auth_api.signup_route,
       credentials,
-       {
+      {
         withCredentials: true,
       }
     );
@@ -71,7 +69,7 @@ export const verifyAuth = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
-       payload: err.response.data,
+      payload: err.response.data,
     });
   }
 };

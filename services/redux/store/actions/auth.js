@@ -38,7 +38,10 @@ export const signup = (credentials) => async (dispatch) => {
   try {
     const res = await axios.post(
       auth_api.base_url + auth_api.signup_route,
-      credentials
+      credentials,
+       {
+        withCredentials: true,
+      }
     );
 
     //succesful

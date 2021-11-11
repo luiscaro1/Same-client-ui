@@ -1,9 +1,9 @@
 const config = {
   auth_api: {
     base_url: process.env.NEXT_PUBLIC_AUTH_URL,
-    login_route: "/auth/login",
-    signup_route: "/auth/signup",
-    verify_auth: "/auth/verify",
+    login_route: "/Same/login",
+    signup_route: "/Same/signup",
+    verify_auth: "/Same/accounts/getCookieOwner",
   },
   game_api: {
     base_url: process.env.NEXT_PUBLIC_GAME_URL,

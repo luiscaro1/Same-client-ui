@@ -66,7 +66,7 @@ const SignUP = () => {
           alt="login background"
         />
       </Grid>
-      <Grid className={classes.formColumn} item xs={4}>
+      <Grid className={classes.formColumn} item>
         <Box className={classes.formBox}>
           <CardContent>
             <form onSubmit={handleSumbit}>

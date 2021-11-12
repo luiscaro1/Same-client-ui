@@ -44,10 +44,12 @@ export const signup = (credentials) => async (dispatch) => {
       }
     );
 
+    if (res.data?.token) cookieCutter.set("same", res.data.token);
+
     //succesful
     dispatch({
       type: SIGNUP_SUCCESSFUL,
-      payload: res.data,
+      payload: res.data?.accountInfo,
     });
   } catch (err) {
     dispatch({

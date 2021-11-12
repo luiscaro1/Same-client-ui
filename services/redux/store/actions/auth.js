@@ -19,16 +19,7 @@ export const login = (credentials) => async (dispatch) => {
       }
     );
 
-    console.log(res.data);
-
-    if (res.data?.token)
-      cookieCutter.set("same", res.data.token, {
-        sameSite: "none",
-        secure: true,
-        httpOnly: true,
-        maxAge: 60 * 60 * 24 * 3,
-        //succesful
-      });
+    if (res.data?.token) cookieCutter.set("same", res.data.token);
 
     dispatch({
       type: LOGIN_SUCCESSFUL,
@@ -67,10 +58,17 @@ export const signup = (credentials) => async (dispatch) => {
 };
 
 export const verifyAuth = () => async (dispatch) => {
+  const cookie = cookieCutter.get("same");
+
+  // console.log(cookie);
   try {
-    const res = await axios.get(auth_api.base_url + auth_api.verify_auth, {
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      auth_api.base_url + auth_api.verify_auth,
+      { cookie },
+      {
+        withCredentials: true,
+      }
+    );
 
     //succesful
     dispatch({

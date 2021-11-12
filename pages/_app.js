@@ -13,7 +13,6 @@ import store from "../services/redux";
 import { authActions } from "../services/redux/store/actions";
 
 function MyApp({ Component, pageProps }) {
-
   const dispatch = useDispatch();
 
   const theme = createTheme({

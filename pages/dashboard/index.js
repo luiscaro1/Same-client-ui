@@ -18,7 +18,7 @@ import ProfileTab from "../../components/ProfileTab";
 const Profile = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
-  console.log(auth);
+
   return (
     <Grid container direction="column">
       <Grid item container>

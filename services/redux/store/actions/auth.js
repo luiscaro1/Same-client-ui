@@ -1,6 +1,7 @@
 import { authTypes } from "./types";
 import axios from "axios";
 import config from "../../../../config";
+import cookieCutter from "cookie-cutter";
 
 const { LOGIN_SUCCESSFUL, AUTH_ERROR, SIGNUP_SUCCESSFUL } = authTypes;
 
@@ -18,15 +19,25 @@ export const login = (credentials) => async (dispatch) => {
       }
     );
 
-    //succesful
+    console.log(res.data);
+
+    if (res.data?.token)
+      cookieCutter.set("same", res.data.token, {
+        sameSite: "none",
+        secure: true,
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 3,
+        //succesful
+      });
+
     dispatch({
       type: LOGIN_SUCCESSFUL,
-      payload: res.data,
+      payload: res.data?.accountInfo,
     });
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
-      payload: err.response.data,
+      payload: err,
     });
   }
 };

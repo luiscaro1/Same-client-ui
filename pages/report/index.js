@@ -49,7 +49,7 @@ const Report = () => {
                                 color="primary" 
                                 justifyContent="right" 
                                 marginLeft="10%"
-                                ><Checkbox/>Spaming inappropriate or illegal content
+                                ><Checkbox/>Spamming inappropriate or illegal content
                                 </Typography>
 
                             <Typography color="primary" variant="body2" 

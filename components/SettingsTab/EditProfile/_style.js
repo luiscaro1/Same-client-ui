@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme)=>({
       width:200,
       margin:10
   },
+  //adding responsive
   biobox:{
     height:"100%",
     width:300,

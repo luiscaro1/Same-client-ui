@@ -6,9 +6,9 @@ import {
   Card,
   CardContent,
   Typography,
-  Button
+  Button,
 } from "@mui/material";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
 import { useSelector } from "react-redux";
 import useStyles from "../../pageStyles/settings";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
@@ -26,11 +26,11 @@ const Settings = () => {
     setValue(newValue);
   };
 
-  const [click,setClick]=React.useState(false);
-  const [button,setButton]=React.useState(true);
+  const [click, setClick] = React.useState(false);
+  const [button, setButton] = React.useState(true);
 
-  const handleClick=()=> setClick(!click);
-  const closeMenu=()=>setClick(false);
+  const handleClick = () => setClick(!click);
+  const closeMenu = () => setClick(false);
 
   const a11yProps = (index) => {
     return {
@@ -40,20 +40,20 @@ const Settings = () => {
   };
   return (
     <Grid container direction="column">
-    <Grid item container>
-      <Grid className={classes.section} width="100%" item>
-        <Toolbar width="100%">
-          <Grid container width="100%">
-            <Grid item xs>
-              <img className={classes.logo} src={IMAGES.logo} />
+      <Grid item container>
+        <Grid className={classes.section} width="100%" item>
+          <Toolbar width="100%">
+            <Grid container width="100%">
+              <Grid item xs>
+                <img className={classes.logo} src={IMAGES.logo} />
+              </Grid>
+              <Grid item>
+                <NavMenu className={classes.bar} />
+              </Grid>
             </Grid>
-            <Grid item>
-              <NavMenu className={classes.bar} />
-            </Grid>
-          </Grid>
-        </Toolbar>
+          </Toolbar>
+        </Grid>
       </Grid>
-    </Grid>
 
       <Grid item container className={classes.settingsContent} xs>
         <Grid className={classes.info} item xs={4} container>
@@ -67,7 +67,7 @@ const Settings = () => {
               {
                 //TODO: Remove hard-coded image
               }
-               <Grid container item xs={8} justifyContent="center">
+              <Grid container item xs={8} justifyContent="center">
                 <Grid item>
                   <Avatar
                     className={classes.profilePic}
@@ -75,7 +75,7 @@ const Settings = () => {
                   />
                 </Grid>
               </Grid>
-              
+
               <Grid item container justifyContent="center" xs={8} spacing={2}>
                 <Grid item>
                   <Typography color="secondary" variant="h5">
@@ -138,6 +138,18 @@ const Settings = () => {
               <SettingsTab />
             </CardContent>
           </Grid>
+        </Grid>
+      </Grid>
+      <Grid item container justifyContent="flex-end">
+        <Grid item>
+          <Button
+            variant="outlined"
+            color="error"
+            className={classes.delete}
+            type="submit"
+          >
+            Delete Account
+          </Button>
         </Grid>
       </Grid>
     </Grid>

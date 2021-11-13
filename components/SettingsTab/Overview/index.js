@@ -5,7 +5,8 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Typography,Button
+  Typography,
+  Button,
 } from "@mui/material";
 import useStyles from "./_style";
 // import LfgContainer from "../../Lfg/LfgContainer";
@@ -16,24 +17,25 @@ const OverviewTab = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   console.log(auth);
-//   const lobbies = useSelector(gameSelectors.selectUserLobbies);
+  //   const lobbies = useSelector(gameSelectors.selectUserLobbies);
 
   return (
-    <Grid className={classes.overviewList} spacing={4} container direction="column">
-     <Typography color="secondary" variant="h6"> Username: {auth?.user_name} </Typography>
-        <Typography color="secondary" variant="h6">
-            Email: {auth?.email}
-        </Typography>
-        <Typography color="secondary" variant="h6">
-            Blocked Users 0
-        </Typography>
-        <Button
-            className={classes.delete}
-            variant="contained"
-            type="submit"
-        >
-        Delete Account
-        </Button>
+    <Grid
+      className={classes.overviewList}
+      spacing={4}
+      container
+      direction="column"
+    >
+      <Typography color="secondary" variant="h6">
+        {" "}
+        Username: {auth?.user_name}{" "}
+      </Typography>
+      <Typography color="secondary" variant="h6">
+        Email: {auth?.email}
+      </Typography>
+      <Typography color="secondary" variant="h6">
+        Blocked Users 0
+      </Typography>
     </Grid>
   );
 };

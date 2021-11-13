@@ -15,7 +15,15 @@ const useStyles = makeStyles({
   delete:{
       height:50,
       width:100,
-      margin:"10% 0% 0% 30%"
+      margin:"40% 0% 0% 30%",
+      // alignItems:"center",
+      position:"center",
+      backgroundColor:"red",
+        "&:hover": {
+            backgroundColor:"#b2102f"
+            ,
+        },
+
   },
 });
 

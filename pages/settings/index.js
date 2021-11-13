@@ -15,6 +15,7 @@ import { IMAGES, MEDIA_STREAM } from "../../constants";
 import { authSelectors } from "../../services/redux/store/selectors";
 import SettingsTab from "../../components/SettingsTab";
 import Link from "next/link";
+import NavMenu from "../../components/NavMenu";
 
 const Settings = () => {
   const classes = useStyles();
@@ -39,15 +40,22 @@ const Settings = () => {
   };
   return (
     <Grid container direction="column">
-      <Grid item container>
-        <Grid className={classes.section} item>
-          <Toolbar>
-            <img className={classes.logo} src={IMAGES.logo} />
-          </Toolbar>
-        </Grid>
+    <Grid item container>
+      <Grid className={classes.section} width="100%" item>
+        <Toolbar width="100%">
+          <Grid container width="100%">
+            <Grid item xs>
+              <img className={classes.logo} src={IMAGES.logo} />
+            </Grid>
+            <Grid item>
+              <NavMenu className={classes.bar} />
+            </Grid>
+          </Grid>
+        </Toolbar>
       </Grid>
+    </Grid>
 
-      <Grid item container xs>
+      <Grid item container className={classes.settingsContent} xs>
         <Grid className={classes.info} item xs={4} container>
           <CardContent>
             <Grid

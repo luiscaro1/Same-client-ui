@@ -1,15 +1,22 @@
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   logo: {
     width: 100,
   },
   section: {
     margin: "20px 0px 40px 0px",
   },
-
+  settingsContent: {
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+    },
+  },
   info: {
     maxWidth: 400,
+    [theme.breakpoints.down("md")]: {
+      margin: "0 auto",
+    },
   },
   card: {
     width: "100%",
@@ -27,6 +34,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "center",
   },
-});
+}));
 
 export default useStyles;

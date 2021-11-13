@@ -38,6 +38,7 @@ const NotificationsTab = () => {
                         //need to change it so it does it on click
                       />
                 </Box>
+                <Typography color="secondary" variant="h6">Service coming soon!!!</Typography>
         </Grid>
         <Button
             className={classes.save}

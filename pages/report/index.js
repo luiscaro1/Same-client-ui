@@ -18,7 +18,7 @@ const Report = () => {
 
     return (
         <Grid height="100vh" container direction="row" className={classes.root} >
-            <Grid className={classes.formColumn} item xs={8} >
+            <Grid className={classes.formColumn} item xs={12} >
                 <Grid className={classes.reportForm} container direction="column">
                     <Grid className={classes.imageBackground} item>
                         <img className={classes.logo} src={IMAGES.logo} />
@@ -41,48 +41,48 @@ const Report = () => {
                         </Grid>
                         <Grid item xs={8}>
                             <Typography color="primary" variant="body2" 
-                            justifyContent="right" marginLeft="10%">
+                            justifyContent="right" marginLeft="5%">
                                 <Checkbox/>Stalking
                             </Typography>
                            
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="10%"
-                                ><Checkbox/>Spamming inappropriate or illegal content
+                                marginLeft="5%"
+                                ><Checkbox/>Spamming inappropriate content
                                 </Typography>
 
                             <Typography color="primary" variant="body2" 
-                            justifyContent="right"marginLeft="10%" >
+                            justifyContent="right"marginLeft="5%" >
                                 <Checkbox />Offensive Language 
                             </Typography>
 
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="10%"
+                                marginLeft="5%"
                                 ><Checkbox />Sexual Harassment </Typography>
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="10%"
-                                ><Checkbox />Discrimination (homophobia, racism, etc.) </Typography>
+                                marginLeft="5%"
+                                ><Checkbox />Discrimination</Typography>
                         
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="10%"
-                                ><Checkbox />Spreading viruses and malicious software</Typography>
+                                marginLeft="5%"
+                                ><Checkbox />Spreading viruses/malicious software</Typography>
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="10%"
+                                marginLeft="5%"
                                 ><Checkbox />Violation of IP rights(includes stolen content) </Typography>
 
                             <Typography variant="body2"
                                 color="primary" 
                                 justifyContent="right" 
-                                marginLeft="10%"
+                                marginLeft="5%"
                                 ><Checkbox />Pretending to be an admin Same developer</Typography>
                         </Grid>
                 

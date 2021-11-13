@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
   profileCard: {
     maxWidth: 800,
     width: "100%",
@@ -26,14 +26,18 @@ const useStyles = makeStyles({
   },
   biobox:{
     height:"100%",
-    width:500,
-    margin:10
+    width:300,
+    margin:10,
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      width: "80%",
+    },
   },
   save:{
     height:50,
     width:100,
     margin:"10% 0% 0% 30%"
   },
-});
+}));
 
 export default useStyles;

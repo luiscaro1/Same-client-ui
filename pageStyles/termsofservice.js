@@ -2,12 +2,16 @@ import { makeStyles } from "@mui/styles";
 import { textAlign } from "@mui/system";
 import { COLORS } from "../constants";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
     formColumn: {
 
         backgroundColor: COLORS.lightGrey,
         margin: "0 auto 0 auto",
-        width: "40%"
+        
+        [theme.breakpoints.down("xs")]: {
+            display: "flex",
+            width: "40%",
+          },
     },
     termsInfo: {
         color: "white",
@@ -22,7 +26,12 @@ const useStyles = makeStyles({
 
     termsTitle: {
         marginTop: "5vh",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        [theme.breakpoints.down("xs")]: {
+            display: "flex",
+            variant:"h6",
+            textAlign:"center"
+          },
     },
 
     imageBackground: {
@@ -47,6 +56,6 @@ const useStyles = makeStyles({
         width: 175,
         height: 50,
     },
-});
+}));
 
 export default useStyles;

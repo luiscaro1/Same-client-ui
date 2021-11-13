@@ -1,12 +1,17 @@
 import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 
     formColumn: {
         backgroundColor: COLORS.lightGrey,
         margin: "10% 10% 0 10%",
-        width: "70%"
+        width: "70%",
+        [theme.breakpoints.down("sm")]: {
+            flexGrow:1,
+            fontSize:8,
+           
+          },
     },
 
     reportForm: {
@@ -40,6 +45,6 @@ const useStyles = makeStyles({
     },
 
 
-});
+}));
 
 export default useStyles;

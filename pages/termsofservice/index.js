@@ -21,7 +21,7 @@ const Terms = () => {
                         item
                         container
                         justifyContent="center">
-                        <Typography className={classes.termsTitle} color="primary" variant="h3">
+                        <Typography className={classes.termsTitle} color="primary" variant="h4">
                             Terms of Service
                         </Typography>
                     </Grid>

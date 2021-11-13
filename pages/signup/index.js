@@ -68,7 +68,7 @@ const SignUP = () => {
       </Grid>
       <Grid className={classes.formColumn} item xs={4}>
         <Box className={classes.formBox}>
-          <CardContent>
+          <CardContent className={classes.card}>
             <form onSubmit={handleSumbit}>
               <FormGroup>
                 <Grid item container justifyContent="center">

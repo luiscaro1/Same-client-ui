@@ -20,11 +20,11 @@ const OverviewTab = () => {
 
   return (
     <Grid className={classes.overviewList} spacing={4} container direction="column">
-     <Typography color="secondary" variant="h5"> Username: {auth?.user_name} </Typography>
-        <Typography color="secondary" variant="h5">
+     <Typography color="secondary" variant="h6"> Username: {auth?.user_name} </Typography>
+        <Typography color="secondary" variant="h6">
             Email: {auth?.email}
         </Typography>
-        <Typography color="secondary" variant="h5">
+        <Typography color="secondary" variant="h6">
             Blocked Users 0
         </Typography>
         <Button

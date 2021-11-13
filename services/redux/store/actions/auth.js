@@ -1,6 +1,7 @@
 import { authTypes } from "./types";
 import axios from "axios";
 import config from "../../../../config";
+import cookieCutter from "cookie-cutter";
 
 const { LOGIN_SUCCESSFUL, AUTH_ERROR, SIGNUP_SUCCESSFUL } = authTypes;
 
@@ -18,10 +19,11 @@ export const login = (credentials) => async (dispatch) => {
       }
     );
 
-    //succesful
+    if (res.data?.token) cookieCutter.set("same", res.data.token);
+
     dispatch({
       type: LOGIN_SUCCESSFUL,
-      payload: res.data,
+      payload: res.data?.accountInfo,
     });
   } catch (err) {
     dispatch({
@@ -36,27 +38,39 @@ export const signup = (credentials) => async (dispatch) => {
   try {
     const res = await axios.post(
       auth_api.base_url + auth_api.signup_route,
-      credentials
+      credentials,
+      {
+        withCredentials: true,
+      }
     );
+
+    if (res.data?.token) cookieCutter.set("same", res.data.token);
 
     //succesful
     dispatch({
       type: SIGNUP_SUCCESSFUL,
-      payload: res.data,
+      payload: res.data?.accountInfo,
     });
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
-      payload: err,
+      payload: err.response.data,
     });
   }
 };
 
 export const verifyAuth = () => async (dispatch) => {
+  const cookie = cookieCutter.get("same");
+
+  // console.log(cookie);
   try {
-    const res = await axios.get(auth_api.base_url + auth_api.verify_auth, {
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      auth_api.base_url + auth_api.verify_auth,
+      { cookie },
+      {
+        withCredentials: true,
+      }
+    );
 
     //succesful
     dispatch({
@@ -66,7 +80,7 @@ export const verifyAuth = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
-      payload: err,
+      payload: err.response.data,
     });
   }
 };

@@ -36,6 +36,7 @@ const LfgContainer = ({ lobby, disabled }) => {
         return IMAGES.pc;
     }
   };
+
   return (
     <Grid item key={lobby.lid} container justifyContent="center">
       <Card className={classes.lfgCard}>

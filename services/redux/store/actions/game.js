@@ -2,7 +2,7 @@ import axios from "axios";
 import { gameTypes } from "./types";
 import config from "../../../../config";
 
-const { game_api, chat_api } = config;
+const { game_api, chat_api, voice_api } = config;
 
 const {
   GET_ALL_GAMES,
@@ -17,6 +17,8 @@ const {
   VIEW_LOBBY_PAGE,
   GET_LOBBY_MESSAGES,
   SEND_MESSAGE,
+  GET_MEMBERS,
+  GET_USERS_IN_VOICE_CHAT,
 } = gameTypes;
 
 export const getAllGames = () => async (dispatch) => {
@@ -180,6 +182,9 @@ export const getLobbyMessages = (options) => async (dispatch) => {
     dispatch({ type: GAME_ERROR, payload: err });
   }
 };
+export const setLobbyMessages = (messages) => async (dispatch) => {
+  dispatch({ type: GET_LOBBY_MESSAGES, payload: messages });
+};
 
 export const sendMessage =
   ({ type, content, lid }) =>
@@ -227,4 +232,31 @@ export const sendMessage =
 
 export const receiveMessage = (message) => (dispatch) => {
   dispatch({ type: SEND_MESSAGE, payload: message });
+};
+
+export const getMembersInLobby = (lid) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      game_api.base_url + game_api.get_members_by_lobby_route + lid
+    );
+
+    dispatch({
+      type: GET_MEMBERS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};
+
+export const getUsersInVoiceChat = (lid) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      voice_api.base_url + voice_api.get_users_in_voice_chat + lid
+    );
+    console.log(voice_api.base_url + voice_api.get_users_in_voice_chat + lid);
+    dispatch({ type: GET_USERS_IN_VOICE_CHAT, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
 };

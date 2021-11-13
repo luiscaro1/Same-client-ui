@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   chatMessageBox: {
     flexWrap: "nowrap",
     overflow: "scroll",
+    overflowY: "hidden",
     overflowX: "hidden",
   },
   sendButton: {
@@ -28,6 +29,15 @@ const useStyles = makeStyles({
   chatImage: {
     maxWidth: 600,
     width: "100%",
+  },
+
+  status: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+  },
+  members: {
+    height: "100%",
   },
 });
 

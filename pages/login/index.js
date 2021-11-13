@@ -1,6 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import { Grid, CardContent, Box, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
+import {
+  Grid,
+  CardContent,
+  Box,
+  Typography,
+  Alert,
+  Button,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import { TextField } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
@@ -20,6 +27,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const auth = useSelector(authSelectors.selectToken);
+  const error = useSelector(authSelectors.selectAuthError);
 
   // hold the values of the text fields
   const [values, setValues] = React.useState({
@@ -43,10 +51,26 @@ const Login = () => {
   };
 
   React.useEffect(() => {
-    if (auth) router.push("/");
+    if (auth) router.push("/dashboard");
   }, [auth]);
 
+  React.useEffect(() => {
+    if (error)
+      setValues({
+        ...values,
+        error,
+      });
+  }, [error]);
+
   return (
+
+    
+     <>
+      {values.error ? (
+        <Alert severity="error" color="error">
+          {values.error?.message}
+        </Alert>
+      ) : null}
     <Grid className={classes.root} height="100vh" container direction="row">
       <Grid className={classes.imageBackground} item xs={8}>
         <img className={classes.logo} src={IMAGES.logo} />
@@ -105,26 +129,22 @@ const Login = () => {
                       variant="contained"
                       type="submit"
                       className={classes.actionButton}
+
                     >
-                      Login
-                    </Button>
+                      <Button variant="contained" type="submit">
+                        Login
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item container justifyContent="center" marginTop="20px">
-                    <Link href="/signup">
-                      <a>
-                        <Typography variant="caption">
-                          Don't have an account?
-                        </Typography>
-                      </a>
-                    </Link>
-                  </Grid>
-                </Grid>
-              </FormGroup>
-            </form>
-          </CardContent>
-        </Box>
+
+                </FormGroup>
+              </form>
+            </CardContent>
+          </Box>
+        </Grid>
+
       </Grid>
-    </Grid>
+    </>
   );
 };
 

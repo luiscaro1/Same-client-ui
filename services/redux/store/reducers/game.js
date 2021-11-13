@@ -11,6 +11,8 @@ const {
   VIEW_LOBBY_PAGE,
   GET_LOBBY_MESSAGES,
   SEND_MESSAGE,
+  GET_MEMBERS,
+  GET_USERS_IN_VOICE_CHAT,
 } = gameTypes;
 
 const initialState = {
@@ -18,13 +20,21 @@ const initialState = {
     data: null,
     lobbies: null,
     posts: null,
+    loadingLobbies: true,
+    loadingPosts: true,
   },
   games: null,
   error: null,
   userLobbies: null,
   loading: true,
+
+  // when members go online attach a new paramater to the user (online) and use it to disply a green dot
   currentLobby: {
+    loadingMessages: true,
+    loadingLobby: true,
     data: null,
+    members: null,
+    voicechat: [],
     messages: [],
   },
 };
@@ -59,6 +69,7 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         currentGame: {
+          loadingLobbies: false,
           ...state.currentGame,
           lobbies: action.payload,
         },
@@ -69,6 +80,7 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         currentGame: {
+          loadingPosts: false,
           ...state.currentGame,
           posts: action.payload,
         },
@@ -87,6 +99,7 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         currentLobby: {
           ...state.currentLobby,
+          loadingLobby: false,
           data: action.payload,
         },
       };
@@ -97,6 +110,7 @@ const gameReducer = (state = initialState, action) => {
         ...state,
         currentLobby: {
           ...state.currentLobby,
+          loadingMessages: false,
           messages: action.payload,
         },
       };
@@ -110,6 +124,26 @@ const gameReducer = (state = initialState, action) => {
             action.payload.constructor === Array
               ? state.currentLobby.messages.concat(action.payload)
               : state.currentLobby.messages.concat([action.payload]),
+        },
+      };
+    }
+
+    case GET_MEMBERS: {
+      return {
+        ...state,
+        currentLobby: {
+          ...state.currentLobby,
+          members: action.payload,
+        },
+      };
+    }
+
+    case GET_USERS_IN_VOICE_CHAT: {
+      return {
+        ...state,
+        currentLobby: {
+          ...state.currentLobby,
+          voicechat: action.payload,
         },
       };
     }

@@ -5,13 +5,12 @@ import useStyles from "../../pageStyles/feedback";
 import { COLORS, IMAGES } from "../../constants";
 import { useRouter } from "next/router";
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import GamesIcon from '@mui/icons-material/Games';
 import GamesOutlinedIcon from '@mui/icons-material/GamesOutlined';
 
-const Feedback = () => {
+const Feedback2 = () => {
 
     const classes = useStyles();
     const router = useRouter();
@@ -43,9 +42,36 @@ const Feedback = () => {
                     <FormGroup>
                         <Grid
                             item
+                            container
+                            justifyContent="center">
+                            <TextField
+                                className={classes.feedbackEmail}
+                                label="Email"
+                                placeholder=" " />
+                        </Grid>
+                        <Grid
+                            item
                             container>
-                            <Typography className={classes.ratingInfo} >
-                                How likely are you to recomend our service?
+                            <Typography className={classes.categoryTitle} >
+                                Website Design
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            justifyContent="center">
+                            <TextField
+                                className={classes.feedbackBody}
+                                label="What can we improve in this area?"
+                                placeholder=" "
+                                rows={5}
+                                multiline />
+                        </Grid>
+                        <Grid
+                            item
+                            container>
+                            <Typography className={classes.ratingTitle} >
+                                Rate this service / feature.
                             </Typography>
                         </Grid>
                         <Grid
@@ -62,29 +88,10 @@ const Feedback = () => {
                         </Grid>
                         <Grid
                             item
-                            container
-                            justifyContent="center">
-                            <TextField
-                                className={classes.feedbackEmail}
-                                label="Email"
-                                placeholder=" " />
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            justifyContent="center">
-                            <TextField
-                                className={classes.feedbackCategory}
-                                label="Feedback Category"
-                                select
-                                value={category}
-                                onChange={handleChange}>
-                                <MenuItem value=" "> None </MenuItem>
-                                <MenuItem value="design"> Design </MenuItem>
-                                <MenuItem value="funtionality"> Functionality </MenuItem>
-                                <MenuItem value="games available"> Games Available </MenuItem>
-                                <MenuItem value="incorrect information"> General Information </MenuItem>
-                            </TextField>
+                            container>
+                            <Typography className={classes.categoryTitle} >
+                                Website Functionality
+                            </Typography>
                         </Grid>
                         <Grid
                             item
@@ -92,10 +99,103 @@ const Feedback = () => {
                             justifyContent="center">
                             <TextField
                                 className={classes.feedbackBody}
-                                label="What Can We Improve?"
+                                label="What can we improve in this area?"
                                 placeholder=" "
                                 rows={5}
                                 multiline />
+                        </Grid>
+                        <Grid
+                            item
+                            container>
+                            <Typography className={classes.ratingTitle} >
+                                Rate this service / feature.
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            justifyContent="center">
+                            <StyledRating
+                                name="customized-color"
+                                defaultValue={2}
+                                getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                precision={0.5}
+                                icon={<GamesIcon className={classes.feedbackRating} />}
+                                emptyIcon={<GamesOutlinedIcon className={classes.feedbackRating} />} />
+                        </Grid>
+                        <Grid
+                            item
+                            container>
+                            <Typography className={classes.categoryTitle} >
+                                Games Available
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            justifyContent="center">
+                            <TextField
+                                className={classes.feedbackBody}
+                                label="What can we improve in this area?"
+                                placeholder=" "
+                                rows={5}
+                                multiline />
+                        </Grid>
+                        <Grid
+                            item
+                            container>
+                            <Typography className={classes.ratingTitle} >
+                                Rate this service / feature.
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            justifyContent="center">
+                            <StyledRating
+                                name="customized-color"
+                                defaultValue={2}
+                                getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                precision={0.5}
+                                icon={<GamesIcon className={classes.feedbackRating} />}
+                                emptyIcon={<GamesOutlinedIcon className={classes.feedbackRating} />} />
+                        </Grid>
+                        <Grid
+                            item
+                            container>
+                            <Typography className={classes.categoryTitle} >
+                                General Information
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            justifyContent="center">
+                            <TextField
+                                className={classes.feedbackBody}
+                                label="What can we improve overall?"
+                                placeholder=" "
+                                rows={5}
+                                multiline />
+                        </Grid>
+                        <Grid
+                            item
+                            container>
+                            <Typography className={classes.ratingTitle} >
+                                Rate our website overall.
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            justifyContent="center">
+                            <StyledRating
+                                name="customized-color"
+                                defaultValue={2}
+                                getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                precision={0.5}
+                                icon={<GamesIcon className={classes.feedbackRating} />}
+                                emptyIcon={<GamesOutlinedIcon className={classes.feedbackRating} />} />
                         </Grid>
                         <Grid
                             className={classes.formItem}
@@ -123,4 +223,4 @@ const Feedback = () => {
         </Grid>
     );
 };
-export default Feedback;
+export default Feedback2;

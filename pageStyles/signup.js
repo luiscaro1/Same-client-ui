@@ -2,6 +2,10 @@ import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 
 const useStyles = makeStyles((theme) => ({
+
+  root:{
+    flexWrap:'nowrap'
+  },
   formColumn: {
     backgroundColor: COLORS.lightGrey,
     flexGrow: 1,

@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
         margin: "0 auto 0 auto",
         width: "40%",
         [theme.breakpoints.down("md")]: {
-            flexGrow: 1
-           },
+           flexGrow: 1
+          },
     },
 
     feedbackForm: {
@@ -36,21 +36,28 @@ const useStyles = makeStyles((theme) => ({
     },
 
     formItem: {
-        margin: "10px 0px 10px 0px",
+        margin: "50px 0px 10px 0px",
     },
 
     ratingInfo: {
         color: "white",
-        margin: "50px auto 2% auto",
+        margin: "0 auto 2% auto",
         textAlign: "center",
         width: "70%"
     },
 
+    ratingTitle: {
+        color: "white",
+        margin: "0px auto 10px auto",
+        textAlign: "center",
+        fontSize: "12pt"
+    },
+
     feedbackRating: {
         fontSize: 60,
+        marginBottom: 50,
         [theme.breakpoints.down("md")]: {
             fontSize: 40,
-            marginTop: 20,
             marginBottom: 20
            },
     },
@@ -83,10 +90,6 @@ const useStyles = makeStyles((theme) => ({
     feedbackEmail: {
         width: "50%",
         marginTop: 60,
-        [theme.breakpoints.down("md")]: {
-            marginTop: 30,
-           },
-        
     },
 
     feedbackCategory: {
@@ -94,12 +97,16 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 50
     },
 
+    categoryTitle: {
+        color: "white",
+        margin: "50px auto 10px auto",
+        textAlign: "center",
+        fontSize: "16pt"
+    },
+
     feedbackBody: {
-
         width: "50%",
-        margin: 50
-
-
+        margin: "0 auto 20px auto"
     }
 }));
 

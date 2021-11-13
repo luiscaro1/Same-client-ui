@@ -57,7 +57,7 @@ const SignUP = () => {
   }, [auth]);
 
   return (
-    <Grid className={classes.root} height="100vh" container direction="row">
+    <Grid className={classes.root} height="100vh" container direction="row" >
       <Grid className={classes.imageBackground} item xs={8}>
         <img className={classes.logo} src={IMAGES.logo} />
         <img

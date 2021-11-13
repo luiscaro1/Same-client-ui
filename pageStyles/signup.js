@@ -2,13 +2,11 @@ import { makeStyles } from "@mui/styles";
 import { COLORS } from "../constants";
 
 const useStyles = makeStyles((theme) => ({
-  
   formColumn: {
     backgroundColor: COLORS.lightGrey,
     flexGrow: 1,
     [theme.breakpoints.down("md")]: {
       margin: "0 auto",
-      
     },
   },
   logo: {
@@ -51,10 +49,8 @@ const useStyles = makeStyles((theme) => ({
   imageBackground: {
     backgroundColor: COLORS.darkGrey,
     [theme.breakpoints.down("md")]: {
-      display:"none"
-      
+      display: "none",
     },
-    
   },
   appbar: {
     width: "100%",
@@ -76,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     margin: "0px 20px 0px 20px",
   },
-
 }));
 
 export default useStyles;

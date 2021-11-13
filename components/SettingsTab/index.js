@@ -2,12 +2,16 @@ import React from "react";
 import { Box, Tab, Tabs } from "@mui/material";
 import useStyles from "./_style";
 import TabPanel from "../TabPanel";
-import LobbiesTab from "./Lobbies";
+import OverviewTab from "./Overview";
+import EditProfileTab from "./EditProfile";
+import PasswordTab from "./Password";
+
 import { useDispatch, useSelector } from "react-redux";
 import { gameActions } from "../../services/redux/store/actions";
 import { authSelectors } from "../../services/redux/store/selectors";
+import NotificationsTab from "./Notifications";
 
-const ProfileTab = () => {
+const SettingsTab = () => {
   //const classes = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector(authSelectors.selectToken);
@@ -23,38 +27,35 @@ const ProfileTab = () => {
     };
   };
 
-  const getUserLfgLobbies = () => {
-    if (auth?.uid) dispatch(gameActions.getUserLfgLobbies(auth.uid));
-  };
-
-  React.useEffect(() => {
-    getUserLfgLobbies();
-  }, [auth?.uid]);
-
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
           onChange={handleChange}
+          variant="scrollable"
           aria-label="basic tabs example"
         >
-          <Tab label="Lobbies" {...a11yProps(0)} />
-          <Tab label="Servers" {...a11yProps(1)} />
-          <Tab label="Posts" {...a11yProps(2)} />
+          <Tab label="Account Overview" {...a11yProps(0)} />
+          <Tab label="Edit Profile" {...a11yProps(1)} />
+          <Tab label="Change Password" {...a11yProps(2)} />
+          <Tab label="Notification Settings" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <LobbiesTab />
+        <OverviewTab />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <EditProfileTab/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <PasswordTab/>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <NotificationsTab/>
       </TabPanel>
     </Box>
   );
 };
 
-export default ProfileTab;
+export default SettingsTab;

@@ -3,30 +3,44 @@ import {
   Grid,
   Toolbar,
   Avatar,
+  Card,
   CardContent,
   Typography,
   Button,
-
-  IconButton,
 } from "@mui/material";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { useSelector } from "react-redux";
-import useStyles from "../../pageStyles/dashboard";
+import useStyles from "../../pageStyles/settings";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
 import { authSelectors } from "../../services/redux/store/selectors";
-import DashBoardTab from "../../components/DashBoardTab";
-import BlockReportMenu from "../../components/BlockReportMenu";
+import SettingsTab from "../../components/SettingsTab";
+import Link from "next/link";
 import NavMenu from "../../components/NavMenu";
 
-const DashBoard = () => {
+const Settings = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   console.log(auth);
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
+  const [click, setClick] = React.useState(false);
+  const [button, setButton] = React.useState(true);
+
+  const handleClick = () => setClick(!click);
+  const closeMenu = () => setClick(false);
+
+  const a11yProps = (index) => {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
+  };
   return (
     <Grid container direction="column">
       <Grid item container>
-
         <Grid className={classes.section} width="100%" item>
           <Toolbar width="100%">
             <Grid container width="100%">
@@ -37,14 +51,11 @@ const DashBoard = () => {
                 <NavMenu className={classes.bar} />
               </Grid>
             </Grid>
-
           </Toolbar>
         </Grid>
       </Grid>
 
-
-      <Grid item container className={classes.dashboardContent} xs>
-
+      <Grid item container className={classes.settingsContent} xs>
         <Grid className={classes.info} item xs={4} container>
           <CardContent>
             <Grid
@@ -71,16 +82,11 @@ const DashBoard = () => {
                     {auth?.user_name}
                   </Typography>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   <Button variant="contained">
-                    <PersonAddAlt1Icon />
+                    <SettingsIcon />
                   </Button>
-                </Grid>
-
-                <Grid item>
-                  <BlockReportMenu />
-                </Grid>
-
+                </Grid> */}
               </Grid>
               <Grid item container wrap spacing={4}>
                 <Grid item xs={3}>
@@ -129,17 +135,25 @@ const DashBoard = () => {
         <Grid item container xs>
           <Grid className={classes.card}>
             <CardContent>
-
-              <DashBoardTab />
-
+              <SettingsTab />
             </CardContent>
           </Grid>
+        </Grid>
+      </Grid>
+      <Grid item container justifyContent="flex-end">
+        <Grid item>
+          <Button
+            variant="outlined"
+            color="error"
+            className={classes.delete}
+            type="submit"
+          >
+            Delete Account
+          </Button>
         </Grid>
       </Grid>
     </Grid>
   );
 };
 
-
-export default DashBoard;
-
+export default Settings;

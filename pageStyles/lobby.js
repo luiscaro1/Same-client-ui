@@ -3,7 +3,7 @@ import { COLORS } from "../constants";
 
 const useStyles = makeStyles({
   lobby: {
-    backgroundColor: COLORS.lightGrey,
+    backgroundColor: COLORS.darkGrey,
   },
   section: {
     paddingBottom: 10,
@@ -38,6 +38,15 @@ const useStyles = makeStyles({
   },
   members: {
     height: "100%",
+  },
+  logo: {
+    width: 100,
+    flex: 1,
+  },
+
+  section1: {
+    padding: "20px 0px 10px 0px",
+    backgroundColor: COLORS.lightGrey,
   },
 });
 

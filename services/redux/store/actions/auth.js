@@ -28,7 +28,7 @@ export const login = (credentials) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
-      payload: err,
+      payload: err.response.data,
     });
   }
 };
@@ -78,6 +78,7 @@ export const verifyAuth = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    if (err.response.data === "Unauthorized") return;
     dispatch({
       type: AUTH_ERROR,
       payload: err.response.data,

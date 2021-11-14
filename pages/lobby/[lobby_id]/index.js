@@ -9,8 +9,11 @@ import {
   Button,
   IconButton,
   CircularProgress,
+  Toolbar,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import { IMAGES } from "../../../constants";
+import NavMenu from "../../../components/NavMenu";
 import {
   listenForMessage,
   listenToOnChatConnection,
@@ -118,6 +121,7 @@ const Lobby = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (auth) dispatch(gameActions.sendMessage(message));
   };
 
@@ -221,50 +225,285 @@ const Lobby = () => {
     );
   } else
     return (
-      <Grid container height="100%" className={classes.lobby}>
-        <Grid container item height="100%">
-          <Grid item xs={4} maxWidth={400} minWidth={300} height="100%">
-            <Card className={classes.lobbyCard}>
-              <CardContent className={classes.lobbyCard}>
-                <Grid height="100%" container direction="column" spacing={2}>
-                  <Grid item>
-                    <Typography color="primary">
-                      Hosted by {currentLobby?.data?.user_name}
-                    </Typography>
-                  </Grid>
-
-                  <Grid item container>
-                    <Grid item xs className={classes.section}>
-                      <Typography color="primary" variant="body2">
-                        Voice
+      <>
+        <Grid item container>
+          <Grid className={classes.section1} width="100%" item>
+            <Toolbar width="100%">
+              <Grid container width="100%">
+                <Grid item xs>
+                  <img className={classes.logo} src={IMAGES.logo} />
+                </Grid>
+                <Grid item>
+                  <NavMenu className={classes.bar} />
+                </Grid>
+              </Grid>
+            </Toolbar>
+          </Grid>
+        </Grid>
+        <Grid container height="100%" className={classes.lobby}>
+          <Grid container item height="100%">
+            <Grid item xs={4} maxWidth={400} minWidth={300} height="100%">
+              <Card className={classes.lobbyCard}>
+                <CardContent className={classes.lobbyCard}>
+                  <Grid height="100%" container direction="column" spacing={2}>
+                    <Grid item>
+                      <Typography color="primary">
+                        Hosted by {currentLobby?.data?.user_name}
                       </Typography>
                     </Grid>
 
-                    <Grid item className={classes.section}>
-                      {!Object.keys(currentLobby?.voicechat).includes(
-                        auth?.uid
-                      ) ? (
-                        <Button
-                          onClick={joinVL}
-                          size="small"
-                          variant="contained"
+                    <Grid item container>
+                      <Grid item xs className={classes.section}>
+                        <Typography color="primary" variant="body2">
+                          Voice
+                        </Typography>
+                      </Grid>
+
+                      <Grid item className={classes.section}>
+                        {!Object.keys(currentLobby?.voicechat).includes(
+                          auth?.uid
+                        ) ? (
+                          <Button
+                            onClick={joinVL}
+                            size="small"
+                            variant="contained"
+                          >
+                            Join
+                          </Button>
+                        ) : null}
+                      </Grid>
+                    </Grid>
+                    <Grid item container spacing={2}>
+                      {Object.keys(currentLobby?.voicechat)?.map((uid) => {
+                        const p = currentLobby?.members?.[uid];
+                        return (
+                          <Grid key={uid} item container spacing={2}>
+                            <Grid item>
+                              <Avatar src={MEDIA_STREAM + p?.avatar_url} />
+                            </Grid>
+                            <Grid
+                              item
+                              height="100%"
+                              container
+                              xs
+                              direction="column"
+                              justifyContent="center"
+                            >
+                              <Grid item>
+                                <Typography variant="body1">
+                                  {p?.user_name}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+
+                    <Grid
+                      item
+                      height="100%"
+                      xs={9}
+                      container
+                      direction="column"
+                      justifyContent="flex-end"
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item>
+                          <Typography variant="h6" color="secondary">
+                            {auth?.user_name}
+                          </Typography>
+                        </Grid>
+
+                        <Grid
+                          item
+                          container
+                          direction="column"
+                          xs
+                          justifyContent="center"
                         >
-                          Join
-                        </Button>
-                      ) : null}
+                          <Grid item>
+                            {mute ? (
+                              <VolumeOffIcon onClick={unmuteMic} />
+                            ) : (
+                              <VolumeUpIcon onClick={muteMic} />
+                            )}
+                          </Grid>
+                        </Grid>
+                        <Grid item>
+                          {userInVoiceChat ? (
+                            <IconButton
+                              onClick={leaveVL}
+                              size="small"
+                              variant="contained"
+                            >
+                              <ExitToAppIcon sx={{ color: "red" }} />
+                            </IconButton>
+                          ) : null}
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item container spacing={2}>
-                    {Object.keys(currentLobby?.voicechat)?.map((uid) => {
-                      const p = currentLobby?.members?.[uid];
-                      return (
-                        <Grid key={uid} item container spacing={2}>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid
+              container
+              direction="column"
+              item
+              xs
+              height="100%"
+              justifyContent="flex-end"
+            >
+              <Grid
+                className={classes.chatMessageBox}
+                item
+                container
+                direction="column"
+                xs
+                ref={messageBoxRef}
+              >
+                {currentLobby?.messages?.map((message) => {
+                  return (
+                    <Grid
+                      key={message.mid}
+                      item
+                      container
+                      justifyContent={
+                        auth?.uid === message.uid ? "flex-end" : "flex-start"
+                      }
+                    >
+                      <Grid item xs={6}>
+                        <CardContent>
+                          <Grid container direction="column" spacing={1}>
+                            {auth?.uid === message.uid ? (
+                              <Grid item container spacing={2}>
+                                <Grid
+                                  xs
+                                  container
+                                  item
+                                  direction="column"
+                                  justifyContent="center"
+                                >
+                                  <Grid
+                                    item
+                                    container
+                                    justifyContent="flex-end"
+                                  >
+                                    <Typography
+                                      color="primary"
+                                      variant="caption"
+                                    >
+                                      {message.user_name}
+                                    </Typography>
+                                  </Grid>
+                                </Grid>
+                                <Grid item>
+                                  <Avatar
+                                    src={MEDIA_STREAM + message.avatar_url}
+                                  />
+                                </Grid>
+                              </Grid>
+                            ) : (
+                              <Grid item container spacing={2} xs>
+                                <Grid item>
+                                  <Avatar
+                                    src={MEDIA_STREAM + message.avatar_url}
+                                  />
+                                </Grid>
+                                <Grid
+                                  xs
+                                  container
+                                  item
+                                  direction="column"
+                                  justifyContent="center"
+                                >
+                                  <Grid item>
+                                    <Typography
+                                      color="primary"
+                                      variant="caption"
+                                    >
+                                      {message.user_name}
+                                    </Typography>
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            )}
+
+                            <Grid item container spacing={2}>
+                              <Grid
+                                item
+                                container
+                                xs
+                                direction="column"
+                                justifyContent="center"
+                              >
+                                <Grid
+                                  item
+                                  container
+                                  justifyContent={
+                                    auth?.uid === message.uid
+                                      ? "flex-end"
+                                      : "flex-start"
+                                  }
+                                >
+                                  {handleContent(message)}
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </CardContent>
+                      </Grid>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+              <form onSubmit={handleSubmit}>
+                <Grid item container>
+                  <Grid item xs>
+                    <TextField
+                      className={classes.chatBox}
+                      name="TEXT"
+                      type="text"
+                      required
+                      multiline
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item container direction="column" xs={1}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      className={classes.sendButton}
+                    >
+                      Send
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+
+            <Grid item xs={2} height={"100%"} minWidth={200} maxWidth={250}>
+              <Card className={classes.members}>
+                <CardContent>
+                  <Grid container spacing={2}>
+                    <Grid item xs>
+                      <Typography
+                        className={classes.section}
+                        color="primary"
+                        variant="body2"
+                      >
+                        Members
+                      </Typography>
+                    </Grid>
+                    {Object.values(currentLobby?.members || {})?.map(
+                      (player) => (
+                        <Grid key={player.user_name} item container spacing={2}>
                           <Grid item>
-                            <Avatar src={MEDIA_STREAM + p?.avatar_url} />
+                            <Avatar src={MEDIA_STREAM + player.avatar_url} />
                           </Grid>
                           <Grid
                             item
-                            height="100%"
                             container
                             xs
                             direction="column"
@@ -272,246 +511,39 @@ const Lobby = () => {
                           >
                             <Grid item>
                               <Typography variant="body1">
-                                {p?.user_name}
+                                {player.user_name}
                               </Typography>
                             </Grid>
                           </Grid>
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
 
-                  <Grid
-                    item
-                    height="100%"
-                    xs={9}
-                    container
-                    direction="column"
-                    justifyContent="flex-end"
-                  >
-                    <Grid container spacing={2}>
-                      <Grid item>
-                        <Typography variant="h6" color="secondary">
-                          {auth?.user_name}
-                        </Typography>
-                      </Grid>
-
-                      <Grid
-                        item
-                        container
-                        direction="column"
-                        xs
-                        justifyContent="center"
-                      >
-                        <Grid item>
-                          {mute ? (
-                            <VolumeOffIcon onClick={unmuteMic} />
-                          ) : (
-                            <VolumeUpIcon onClick={muteMic} />
-                          )}
-                        </Grid>
-                      </Grid>
-                      <Grid item>
-                        {userInVoiceChat ? (
-                          <IconButton
-                            onClick={leaveVL}
-                            size="small"
-                            variant="contained"
+                          <Grid
+                            xs={2}
+                            container
+                            item
+                            direction="column"
+                            justifyContent="center"
                           >
-                            <ExitToAppIcon sx={{ color: "red" }} />
-                          </IconButton>
-                        ) : null}
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid
-            container
-            direction="column"
-            item
-            xs
-            height="100%"
-            justifyContent="flex-end"
-          >
-            <Grid
-              className={classes.chatMessageBox}
-              item
-              container
-              direction="column"
-              xs
-              ref={messageBoxRef}
-            >
-              {currentLobby?.messages?.map((message) => {
-                return (
-                  <Grid
-                    key={message.mid}
-                    item
-                    container
-                    justifyContent={
-                      auth?.uid === message.uid ? "flex-end" : "flex-start"
-                    }
-                  >
-                    <Grid item xs={6}>
-                      <CardContent>
-                        <Grid container direction="column" spacing={1}>
-                          {auth?.uid === message.uid ? (
-                            <Grid item container spacing={2}>
-                              <Grid
-                                xs
-                                container
-                                item
-                                direction="column"
-                                justifyContent="center"
-                              >
-                                <Grid item container justifyContent="flex-end">
-                                  <Typography color="primary" variant="caption">
-                                    {message.user_name}
-                                  </Typography>
-                                </Grid>
-                              </Grid>
-                              <Grid item>
-                                <Avatar
-                                  src={MEDIA_STREAM + message.avatar_url}
-                                />
-                              </Grid>
-                            </Grid>
-                          ) : (
-                            <Grid item container spacing={2} xs>
-                              <Grid item>
-                                <Avatar
-                                  src={MEDIA_STREAM + message.avatar_url}
-                                />
-                              </Grid>
-                              <Grid
-                                xs
-                                container
-                                item
-                                direction="column"
-                                justifyContent="center"
-                              >
-                                <Grid item>
-                                  <Typography color="primary" variant="caption">
-                                    {message.user_name}
-                                  </Typography>
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                          )}
-
-                          <Grid item container spacing={2}>
                             <Grid
                               item
-                              container
-                              xs
-                              direction="column"
-                              justifyContent="center"
-                            >
-                              <Grid
-                                item
-                                container
-                                justifyContent={
-                                  auth?.uid === message.uid
-                                    ? "flex-end"
-                                    : "flex-start"
-                                }
-                              >
-                                {handleContent(message)}
-                              </Grid>
-                            </Grid>
+                              className={classes.status}
+                              style={{
+                                backgroundColor:
+                                  auth?.uid === player.uid || player.online
+                                    ? "green"
+                                    : "red",
+                              }}
+                            ></Grid>
                           </Grid>
                         </Grid>
-                      </CardContent>
-                    </Grid>
+                      )
+                    )}
                   </Grid>
-                );
-              })}
+                </CardContent>
+              </Card>
             </Grid>
-            <form onSubmit={handleSubmit}>
-              <Grid item container>
-                <Grid item xs>
-                  <TextField
-                    className={classes.chatBox}
-                    name="TEXT"
-                    type="text"
-                    required
-                    multiline
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item container direction="column" xs={1}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    className={classes.sendButton}
-                  >
-                    Send
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Grid>
-
-          <Grid item xs={2} height={"100%"} minWidth={200} maxWidth={250}>
-            <Card className={classes.members}>
-              <CardContent>
-                <Grid container spacing={2}>
-                  <Grid item xs>
-                    <Typography
-                      className={classes.section}
-                      color="primary"
-                      variant="body2"
-                    >
-                      Members
-                    </Typography>
-                  </Grid>
-                  {Object.values(currentLobby?.members || {})?.map((player) => (
-                    <Grid key={player.user_name} item container spacing={2}>
-                      <Grid item>
-                        <Avatar src={MEDIA_STREAM + player.avatar_url} />
-                      </Grid>
-                      <Grid
-                        item
-                        container
-                        xs
-                        direction="column"
-                        justifyContent="center"
-                      >
-                        <Grid item>
-                          <Typography variant="body1">
-                            {player.user_name}
-                          </Typography>
-                        </Grid>
-                      </Grid>
-
-                      <Grid
-                        xs={2}
-                        container
-                        item
-                        direction="column"
-                        justifyContent="center"
-                      >
-                        <Grid
-                          item
-                          className={classes.status}
-                          style={{
-                            backgroundColor:
-                              auth?.uid === player.uid || player.online
-                                ? "green"
-                                : "red",
-                          }}
-                        ></Grid>
-                      </Grid>
-                    </Grid>
-                  ))}
-                </Grid>
-              </CardContent>
-            </Card>
           </Grid>
         </Grid>
-      </Grid>
+      </>
     );
 };
 

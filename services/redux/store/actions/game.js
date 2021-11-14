@@ -193,6 +193,8 @@ export const sendMessage =
     const { auth } = state;
     const fd = new FormData();
 
+    console.log({ type, content, lid });
+
     var multipleMessages = null;
 
     if (type === "FILES") {

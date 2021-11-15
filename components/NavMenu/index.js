@@ -5,17 +5,24 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import useStyles from "./_style";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 import Logout from "@mui/icons-material/Logout";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import FeedbackIcon from "@mui/icons-material/Feedback";
-import ChatIcon from "@mui/icons-material/Chat";
-import GamesIcon from "@mui/icons-material/Games";
 
+import GamesIcon from "@mui/icons-material/Games";
+import { authActions } from "../../services/redux/store/actions";
 const NavMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const dispatch = useDispatch();
   const open = Boolean(anchorEl);
+
+  const logout = () => {
+    dispatch(authActions.logout());
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -105,7 +112,7 @@ const NavMenu = () => {
         <MenuItem
           key={options[5]}
           selected={options === "Pyxis"}
-          onClick={handleClose}
+          onClick={logout}
         >
           <ListItemIcon>
             <Logout fontSize="small" />

@@ -105,7 +105,9 @@ const GameFeed = () => {
           <Feed />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          <Typography color="primary" variant="h3">
+            Coming Soon!
+          </Typography>
         </TabPanel>
       </Box>
     </>

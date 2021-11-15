@@ -12,6 +12,10 @@ const useStyles = makeStyles({
     width: "100%",
     height: "100%",
   },
+  lfgCard: {
+    maxWidth: 800,
+    width: "100%",
+  },
   input: {
     opacity: 0,
     position: "absolute",

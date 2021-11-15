@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "../../../../config";
 import cookieCutter from "cookie-cutter";
 
-const { LOGIN_SUCCESSFUL, AUTH_ERROR, SIGNUP_SUCCESSFUL } = authTypes;
+const { LOGIN_SUCCESSFUL, AUTH_ERROR, SIGNUP_SUCCESSFUL, LOGOUT } = authTypes;
 
 const { auth_api } = config;
 
@@ -57,6 +57,10 @@ export const signup = (credentials) => async (dispatch) => {
       payload: err.response.data,
     });
   }
+};
+export const logout = () => (dispatch) => {
+  cookieCutter.set("same", null, { expires: new Date(0) });
+  dispatch({ type: LOGOUT });
 };
 
 export const verifyAuth = () => async (dispatch) => {

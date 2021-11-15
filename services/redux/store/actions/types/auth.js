@@ -1,3 +1,4 @@
 export const LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const SIGNUP_SUCCESSFUL = "SIGNUP_SUCCESSFUL";
+export const LOGOUT = "LOGOUT";

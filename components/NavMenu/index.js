@@ -71,16 +71,7 @@ const NavMenu = () => {
           </ListItemIcon>
           {options[0]}
         </MenuItem>
-        <MenuItem
-          key={options[1]}
-          selected={options === "Pyxis"}
-          onClick={() => router.push("/lobby")}
-        >
-          <ListItemIcon>
-            <ChatIcon fontSize="small" />
-          </ListItemIcon>
-          {options[1]}
-        </MenuItem>
+
         <MenuItem
           key={options[2]}
           selected={options === "Pyxis"}

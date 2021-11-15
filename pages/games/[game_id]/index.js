@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useRouter } from "next/router";
-import { Toolbar } from "@mui/material";
+import { Toolbar, Typography } from "@mui/material";
 import NavMenu from "../../../components/NavMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { gameActions } from "../../../services/redux/store/actions";
@@ -57,8 +57,8 @@ const GameFeed = () => {
   return (
     <>
       <Grid item container>
-        <Grid className={classes.section} width="100%" item>
-          <Toolbar width="100%">
+        <Grid className={classes.section} width="100%" height="100%" item>
+          <Toolbar width="100%" height="100%">
             <Grid container width="100%">
               <Grid item xs>
                 <img className={classes.logo} src={IMAGES.logo} />
@@ -72,7 +72,15 @@ const GameFeed = () => {
       </Grid>
       <Box sx={{ width: "100%" }}>
         <Grid container justifyContent="center">
-          <img src={IMAGES.apex} />
+          <img src={currentGame?.banner} style={{ width: "100%" }} />
+        </Grid>
+
+        <Grid container xs justifyContent="center">
+          <Grid item>
+            <Typography variant="h4" color="primary">
+              {currentGame?.data?.name}
+            </Typography>
+          </Grid>
         </Grid>
 
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

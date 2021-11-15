@@ -68,22 +68,22 @@ const LfgContainer = ({ lobby, disabled }) => {
               <Typography variant="body2">{lobby.description}</Typography>
             </Grid>
             <Grid container marginTop="10px" direction="row" spacing={4}>
-              <Grid
-                xs={2}
-                item
-                container
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Typography color="primary" variant="caption">
-                  Region: {lobby.region}
-                </Typography>
+              <Grid xs item container alignItems="center">
+                <Grid item>
+                  <Typography
+                    sx={{ paddingLeft: 2 }}
+                    color="primary"
+                    variant="caption"
+                  >
+                    Region: {lobby.region}
+                  </Typography>
+                </Grid>
               </Grid>
               <Grid
+                xs
                 item
                 container
                 alignItems="center"
-                xs={10}
                 justifyContent="flex-end"
               >
                 <img
@@ -97,11 +97,10 @@ const LfgContainer = ({ lobby, disabled }) => {
       </Card>
     </Grid>
   );
-
-  LfgContainer.propTypes = {
-    lobby: PropTypes.instanceOf(Object).isRequired,
-    disabled: PropTypes.bool.isRequired,
-  };
+};
+LfgContainer.propTypes = {
+  lobby: PropTypes.instanceOf(Object).isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default LfgContainer;

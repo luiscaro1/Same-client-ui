@@ -30,7 +30,6 @@ const Games = () => {
   React.useEffect(() => {
     getGames();
   }, []);
-  console.log(games);
 
   return (
     <>

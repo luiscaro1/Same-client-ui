@@ -13,7 +13,7 @@ import Lfg from "../../../components/Lfg";
 import Feed from "../../../components/Feed";
 import useStyles from "../../../pageStyles/game";
 
-import { IMAGES } from "../../../constants";
+import { IMAGES, MEDIA_STREAM } from "../../../constants";
 
 import Grid from "@mui/material/Grid";
 
@@ -72,7 +72,10 @@ const GameFeed = () => {
       </Grid>
       <Box sx={{ width: "100%" }}>
         <Grid container justifyContent="center">
-          <img src={currentGame?.banner} style={{ width: "100%" }} />
+          <img
+            src={`${MEDIA_STREAM}${currentGame?.data?.banner_url}`}
+            style={{ width: "100%" }}
+          />
         </Grid>
 
         <Grid container xs justifyContent="center">

@@ -18,7 +18,7 @@ import DashBoardTab from "../../components/DashBoardTab";
 import BlockReportMenu from "../../components/BlockReportMenu";
 import NavMenu from "../../components/NavMenu";
 
-const DashBoard = () => {
+const Profile = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   console.log(auth);
@@ -71,15 +71,15 @@ const DashBoard = () => {
                     {auth?.user_name}
                   </Typography>
                 </Grid>
-                {/* <Grid item>
+                <Grid item>
                   <Button variant="contained">
                     <PersonAddAlt1Icon />
                   </Button>
-                </Grid> */}
+                </Grid>
 
-                {/* <Grid item>
+                <Grid item>
                   <BlockReportMenu />
-                </Grid> */}
+                </Grid>
 
               </Grid>
               <Grid item container wrap spacing={4}>
@@ -141,5 +141,5 @@ const DashBoard = () => {
 };
 
 
-export default DashBoard;
+export default Profile;
 

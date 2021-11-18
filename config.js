@@ -4,6 +4,20 @@ const config = {
     login_route: "/auth/login",
     signup_route: "/auth/signup",
     verify_auth: "/auth/verify",
+    add_friend_route:"/friends/addfriend",
+    unfriend_route:"/friends/unfriend",
+    get_all_friends:"/friends/getallfriends",
+    add_feedback_route:"/feedback/addfeedback",
+    get_avg_feedback:"/feedback/getavgfeedbacks", //admin only
+    add_report_route:"/report/add",
+    get_all_reports:"/report/allreports",//admin only
+    delete_account:"/auth/",//:id
+    get_user_by_username:"/auth",//:user_name
+    update_account:"/auth/update",
+    block_route:"/block/blockuser",
+    unblock_route:"/block/unblock",
+    get_all_blocked:"/block/getallblocked",//admin only
+    get_all_blocked_by:"/block/getallblocked/by",//admin only
   },
   game_api: {
     base_url: process.env.NEXT_PUBLIC_GAME_URL,

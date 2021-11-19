@@ -9,6 +9,7 @@ import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import GamesIcon from '@mui/icons-material/Games';
 import GamesOutlinedIcon from '@mui/icons-material/GamesOutlined';
+import NormalKeyboard from "../../components/KeyboardTest";
 
 const Feedback2 = () => {
 
@@ -38,6 +39,7 @@ const Feedback2 = () => {
                         <Typography className={classes.feedbackTitle}>
                             We appreciate your Feedback.
                         </Typography>
+                        
                     </Grid>
                     <FormGroup>
                         <Grid

@@ -11,8 +11,8 @@ const config = {
     get_avg_feedback:"/feedback/getavgfeedbacks", //admin only
     add_report_route:"/report/add",
     get_all_reports:"/report/allreports",//admin only
-    delete_account:"/auth/",//:id
-    get_user_by_username:"/auth",//:user_name
+    delete_account:"/auth/delete/",//:id
+    get_user_by_username:"/auth/user",//:user_name
     update_account:"/auth/update",
     block_route:"/block/blockuser",
     unblock_route:"/block/unblock",

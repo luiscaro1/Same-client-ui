@@ -2,9 +2,10 @@ import axios from "axios";
 import { reportTypes } from "./types";
 import config from "../../../../config";
 
+
 const { auth_api } = config;
 
-const {REPORT_SUCCESSFUL,REPORT_ERROR}=reportTypes;
+const {REPORT_SUCCESSFUL,REPORT_ERROR,SUBMITTED_REPORT}=reportTypes;
 
 //Attempt1 not sure about it
 export const addReport =
@@ -18,6 +19,7 @@ export const addReport =
     if (auth.token) {
 
       try {
+        dispatch({ type: SUBMITTED_REPORT })
         const res=await axios.post(auth_api.base_url + auth_api._route,{
             uid,
             uid2,

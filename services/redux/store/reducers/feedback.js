@@ -1,13 +1,14 @@
 import { feedbackTypes } from "../actions/types";
 
+
 //Attempt 1
-const{auth_api}
+
 
 const initialState = {
     //uid
-    token: auth_api.token,
-    data:null,
-    loading: null,
+    token: null,
+    //data:null,
+    loading: true,
     error: null,
   };
   
@@ -18,7 +19,7 @@ const initialState = {
       case ADD_FEEDBACK_SUCCESSFUL:
         return {
           ...state,
-          data: action.payload,
+          token: action.payload,
           error: null,
           loading: false,
         };
@@ -26,7 +27,7 @@ const initialState = {
       case FEEDBACK_ERROR:
         return {
           ...state,
-          data: null,
+          token: null,
           error: action.payload,
           loading: false,
         };

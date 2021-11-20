@@ -1,24 +1,24 @@
 import { reportTypes } from "../actions/types";
 
 //Attempt 1
-const{auth_api}
+
 
 const initialState = {
     //uid
-    token: auth_api.token,
-    data:null,
-    loading: null,
+    // data:null,
+    reported:false,
+    loading: false,
     error: null,
   };
   
-  const { REPORT_SUCCESSFUL,REPORT_ERROR } = reportTypes;
+  const { REPORT_SUCCESSFUL,REPORT_ERROR,SUBMITTED_REPORT } = reportTypes;
   
   export default function reportReducer(state = initialState, action) {
     switch (action.type) {
       case REPORT_SUCCESSFUL:
         return {
           ...state,
-          data: action.payload,
+          reported:true,
           error: null,
           loading: false,
         };
@@ -26,10 +26,15 @@ const initialState = {
       case REPORT_ERROR:
         return {
           ...state,
-          data: null,
+          reported: false,
           error: action.payload,
           loading: false,
         };
+      case SUBMITTED_REPORT:
+        return {
+          ...state,
+          loading:true,
+        }
   
       default:
         return state;

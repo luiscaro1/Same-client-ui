@@ -1,13 +1,14 @@
 import { blockTypes } from "../actions/types";
+import config from "../../../../config";
 
 //Attempt 1
-const{auth_api}
+
 
 const initialState = {
     //uid
-    token: auth_api.token,
-    data:null,
-    loading: null,
+    token:null,
+    //data:null,
+    loading: true,
     error: null,
   };
   
@@ -18,21 +19,22 @@ const initialState = {
       case GET_ALL_BLOCKED:
           return{
             ...state,
-            data: action.payload,
+            token:action.payload,
+            //data:action.payload,
             error: null,
             loading: false,
           };
       case BLOCK_SUCCESSFUL:
         return {
           ...state,
-          data: action.payload,
+          token: action.payload,
           error: null,
           loading: false,
         };
       case UNBLOCK_SUCCESSFUL:
         return {
           ...state,
-          data: action.payload,
+          token: action.payload,
           error: null,
           loading: false,
         };
@@ -40,7 +42,7 @@ const initialState = {
       case BLOCK_ERROR:
         return {
           ...state,
-          data: null,
+          token: null,
           error: action.payload,
           loading: false,
         };

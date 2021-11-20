@@ -1,9 +1,13 @@
 import React from "react";
-import { FormGroup, Grid, Typography, Checkbox } from "@mui/material";
+import { FormGroup, Grid, Typography, Checkbox,TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import useStyles from "../../pageStyles/report";
 import { IMAGES } from "../../constants";
 import { useRouter } from "next/router";
+import {useSelector,useDispatch} from "react-redux";
+import {reportActions} from "../../services/redux/store/actions";
+import { reportSelectors } from "../../services/redux/store/selectors";
+import { authSelectors } from "../../services/redux/store/selectors";
 
 const Report = () => {
   const classes = useStyles();
@@ -12,7 +16,72 @@ const Report = () => {
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
+  const reported=useSelector(reportSelectors.selectReported);
+  const error= useSelector(reportSelectors.selectError);
+  const loading= useSelector(reportSelectors.selectReportLoading);
+ 
+  const auth = useSelector(authSelectors.selectToken);
 
+  const [values, setValues] = React.useState({
+    user_name:"",
+    stalking:false,
+    spamming:false,
+    offensive:false,
+    harrasment:false,
+    discrimination: false,
+    viruses:false,
+    violationofIp:false,
+    pretending:false,
+    error: null,
+  });
+
+  const handleChecked = (e) => {
+    setValues({
+      ...values,
+      uid: auth?.uid,
+      user_name:e.target.user_name,
+      stalking: e.target.stalking,
+      spamming:e.target.spamming,
+      offensive:e.target.offensive,
+      harrasment:e.target.harrasment,
+      discrimination:e.target.discrimination,
+      viruses:e.target.viruses,
+      violationofIp:e.target.violationofIp,
+      pretending:e.target.pretending,
+      
+    });
+  };
+  const dispatch=useDispatch();
+
+  const report=(e)=>{ 
+    e.preventDefault();
+     //add info that needs to be passed
+    dispatch(reportActions.addReport(values));
+  }
+
+  React.useEffect(() => {
+    if (error)
+      setValues({
+        ...values,
+        error,
+      });
+  }, [error]);
+  // const handleSumbit = (e) => {
+  //   e.preventDefault();
+
+  //   console.log(values);
+  //   if (validateValues(values)) dispatch(authActions.signup(values));
+
+  //   console.log(validateValues(values));
+  // };
+
+  if (loading){
+    return "Loading..."
+  }
+  if(reported){
+    return "Reported"
+    // router.push("/dashboard");
+  }
   return (
     <Grid height="100vh" container direction="row" className={classes.root}>
       <Grid className={classes.formColumn} item xs={12}>
@@ -28,11 +97,18 @@ const Report = () => {
               justifyContent="center"
               textAlign="center"
             >
-              Report a player
+              Report <TextField
+                        sx={{ color: "text.primary"}}
+                        name="user_name"
+                        required
+                        label="Username of the player"
+                        onChange={handleChecked}
+                      />
             </Typography>
           </Grid>
-          <FormGroup>
+          <FormGroup onSubmit={report}>
             <Grid item>
+              
               <Typography color="secondary" variant="subtitle1" margin="5%">
                 <br></br>
                 As accurately as possible, please tell us what happened with
@@ -48,7 +124,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox onChange={handleChecked} />
                 Stalking
               </Typography>
 
@@ -58,7 +134,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox  onChange={handleChecked}/>
                 Spamming inappropriate content
               </Typography>
 
@@ -68,7 +144,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox onChange={handleChecked}/>
                 Offensive Language
               </Typography>
 
@@ -78,7 +154,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox onChange={handleChecked}/>
                 Sexual Harassment{" "}
               </Typography>
               <Typography
@@ -87,7 +163,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox onChange={handleChecked}/>
                 Discrimination
               </Typography>
 
@@ -97,7 +173,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox onChange={handleChecked}/>
                 Spreading viruses/malicious software
               </Typography>
               <Typography
@@ -106,8 +182,8 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
-                Violation of IP rights(includes stolen content){" "}
+                <Checkbox onChange={handleChecked} />
+                Violation of IP rights(includes stolen content)
               </Typography>
 
               <Typography
@@ -116,7 +192,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox  onChange={handleChecked}/>
                 Pretending to be an admin Same developer
               </Typography>
             </Grid>
@@ -137,8 +213,9 @@ const Report = () => {
 
               {/* Needs to be adjusted to actually submit the form */}
               <Button
-                onClick={() => router.push("/")}
+                // onClick={() => router.push("/")}
                 variant="contained"
+                type="submit"
                 className={classes.submitButton}
               >
                 Submit Report

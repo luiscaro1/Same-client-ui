@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import useStyles from "../../pageStyles/dashboard";
+import useStyles from "../../pageStyles/profile";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
 import { authSelectors } from "../../services/redux/store/selectors";
 import DashBoardTab from "../../components/DashBoardTab";

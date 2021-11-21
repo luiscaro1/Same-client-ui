@@ -11,13 +11,13 @@ const {REPORT_SUCCESSFUL,REPORT_ERROR,SUBMITTED_REPORT}=reportTypes;
 //Attempt1 not sure about it
 export const addReport =
   ({ user_name,stalking,spamming,offensive,harrasment,discrimination,
-    viruses,violationofIP, pretending
+    viruses,violationofIp, pretending
 }) =>
   async (dispatch, getState) => {
     const state = getState();
-    const {auth,report} = state;
+    const {auth} = state;
 
-  if (auth.token && report.reported){
+  if (auth.token){
     
       try {
         dispatch({ type: SUBMITTED_REPORT })
@@ -30,7 +30,7 @@ export const addReport =
             harrasment,
             discrimination,
             viruses,
-            violationofIP,
+            violationofIp,
             pretending
 
         });

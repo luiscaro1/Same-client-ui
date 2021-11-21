@@ -1,14 +1,14 @@
 import { createSelector } from "reselect";
 
 //Attempt 1
-// auth, friend substate
-const selectFriend = (state) => state.auth || {};
 
-export const selectToken = createSelector(selectFriend, (auth) => auth.token);
+const selectFriend = (state) => state.friend || {};
 
-export const selectFriendError = createSelector(selectFriend, (auth) => auth.error);
+export const selectFriendship = createSelector(selectFriend, (friend) => friend.friendship);
+
+export const selectFriendError = createSelector(selectFriend, (friend) => friend.error);
 
 export const selectFriendLoading = createSelector(
   selectFriend,
-  (auth) => auth.loading
+  (friend) => friend.loading
 );

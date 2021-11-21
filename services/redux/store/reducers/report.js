@@ -7,7 +7,6 @@ const initialState = {
     //uid
     // data:null,
     reported:false,
-    data:null, //temp
     loading: false,
     error: null,
   };
@@ -20,7 +19,6 @@ const initialState = {
         return {
           ...state,
           reported:true,
-          data:action.payload,
           error: null,
           loading: false,
         };
@@ -29,16 +27,15 @@ const initialState = {
         return {
           ...state,
           reported: false,
-          data:null,
           error: action.payload,
           loading: false,
         };
-      case SUBMITTED_REPORT:
-        return {
-          ...state,
-          loading:true,
-          data:null
-        }
+      // case SUBMITTED_REPORT:
+      //   return {
+      //     ...state,
+      //     loading:true,
+      //     data:null
+      //   }
   
       default:
         return state;

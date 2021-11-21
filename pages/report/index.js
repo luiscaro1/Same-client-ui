@@ -31,30 +31,9 @@ const Report = () => {
     violationofIp:false,
     pretending:false,
     error: null,
+    
   });
 
-  
-
-  // const checkvalues=(vals)=>{
-  //   const {stalking,spamming,offensive,harrasment,discrimination,
-  //     viruses,violationofIp,pretending } = vals;
-  //     if (!stalking && !spamming && !offensive && !harrasment && !discrimination && !viruses &&!violationofIp && !pretending ) {
-  //       setValues({
-  //         ...values,
-  //         error: {
-  //           message: "One must be marked to submit a report",
-  //         },
-  //       });
-  //       return false;
-  //     }
-  //     else{
-  //       setValues({
-  //         ...values
-  //       });
-  //       return true;
-  //     }
-      
-  // }
 
   //For username textfield
   const handleChange = (e) => {
@@ -68,25 +47,18 @@ const Report = () => {
     setValues({
       ...values,
       uid: auth?.uid,
-      stalking:e.target.stalking,
-      spamming:e.target.spamming,
-      offensive:e.target.offensive,
-      harrasment:e.target.harrasment,
-      discrimination:e.target.discrimination,
-      viruses:e.target.viruses,
-      violationofIp:e.target.violationofIp,
-      pretending:e.target.pretending,
-      
+      [e.target.name]: e.target.value,
+       
     });
   };
  
   const report=(e)=>{ 
     e.preventDefault();
     console.log(values);
-    // if(checkvalues(values)) {
-      dispatch(reportActions.addReport(values));
-    // }
-    //console.log(checkvalues(values));//add info that needs to be passed
+    
+    dispatch(reportActions.addReport(values));
+     
+    //add info that needs to be passed
 
   }
 
@@ -103,13 +75,13 @@ const Report = () => {
       });
   }, [error]);
 
-  if (loading){
-    return "Loading..."
-  }
+  // if (loading){
+  //   return "Loading..."
+  // }
  
-  if(reported){
-    return "Submitted"
-  }
+  // if(reported){
+  //   return "Submitted"
+  // }
   return (
     <>
     {/* {values.error ? (
@@ -162,7 +134,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox onChange={handleChecked} />
+                <Checkbox name="stalking" onChange={handleChecked}/>
                 Stalking
               </Typography>
 
@@ -172,7 +144,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox  onChange={handleChecked}/>
+                <Checkbox name="spamming"  onChange={handleChecked}/>
                 Spamming inappropriate content
               </Typography>
 
@@ -182,7 +154,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox onChange={handleChecked}/>
+                <Checkbox name="offensive" onChange={handleChecked}/>
                 Offensive Language
               </Typography>
 
@@ -192,8 +164,8 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox onChange={handleChecked}/>
-                Sexual Harassment{" "}
+                <Checkbox name="harrasment" onChange={handleChecked}/>
+                Sexual Harassment
               </Typography>
               <Typography
                 className={classes.text}
@@ -201,7 +173,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox onChange={handleChecked}/>
+                <Checkbox name="discrimination" onChange={handleChecked}/>
                 Discrimination
               </Typography>
 
@@ -211,7 +183,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox onChange={handleChecked}/>
+                <Checkbox  name="viruses" onChange={handleChecked}/>
                 Spreading viruses/malicious software
               </Typography>
               <Typography
@@ -220,7 +192,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox onChange={handleChecked} />
+                <Checkbox  name="violationofIp" onChange={handleChecked} />
                 Violation of IP rights(includes stolen content)
               </Typography>
 
@@ -230,7 +202,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox  onChange={handleChecked}/>
+                <Checkbox name="pretending" onChange={handleChecked}/>
                 Pretending to be an admin Same developer
               </Typography>
             </Grid>

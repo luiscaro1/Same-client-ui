@@ -6,8 +6,9 @@ import config from "../../../../config";
 
 const initialState = {
     //uid
-    token:null,
-    //data:null,
+    data:null,
+    blocking:false,
+    unblocking:false,
     loading: true,
     error: null,
   };
@@ -19,7 +20,9 @@ const initialState = {
       case GET_ALL_BLOCKED:
           return{
             ...state,
-            token:action.payload,
+            blocking:true,
+            unblocking:false,
+            data:action.payload,
             //data:action.payload,
             error: null,
             loading: false,
@@ -27,13 +30,16 @@ const initialState = {
       case BLOCK_SUCCESSFUL:
         return {
           ...state,
-          token: action.payload,
+          blocking:true,
+          unblocking:false,
           error: null,
           loading: false,
         };
       case UNBLOCK_SUCCESSFUL:
         return {
           ...state,
+          unblocking:true,
+          blocking:false,
           token: action.payload,
           error: null,
           loading: false,
@@ -42,7 +48,9 @@ const initialState = {
       case BLOCK_ERROR:
         return {
           ...state,
-          token: null,
+          blocking:null,
+          unblocking:null,
+          data: null,
           error: action.payload,
           loading: false,
         };

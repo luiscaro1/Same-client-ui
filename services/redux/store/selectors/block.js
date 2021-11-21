@@ -2,13 +2,13 @@ import { createSelector } from "reselect";
 
 //Attempt 1
 // auth substate
-const selectBlock = (state) => state.auth || {};
+const selectBlock = (state) => state.block || {};
 
-export const selectToken = createSelector(selectBlock, (auth) => auth.token);
+export const selectBlocked = createSelector(selectBlock, (block) => auth.blocked);
 
-export const selectBlockError = createSelector(selectBlock, (auth) => auth.error);
+export const selectBlockError = createSelector(selectBlock, (block) => block.error);
 
 export const selectBlockLoading = createSelector(
   selectBlock,
-  (auth) => auth.loading
+  (block) => block.loading
 );

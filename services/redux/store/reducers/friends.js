@@ -5,8 +5,9 @@ import { friendTypes } from "../actions/types";
 
 const initialState = {
     //uid
-    token: null,
-    // data:null,
+    data: null,
+    unfriending:false,
+    friending:false,
     loading: true,
     error: null,
   };
@@ -18,21 +19,25 @@ const initialState = {
       case GET_ALL_FRIENDS:
           return{
             ...state,
-            token: action.payload,
+            data: action.payload,
+            unfriending:false,
+            friending:true,
             error: null,
             loading: false,
           };
       case ADD_FRIEND_SUCCESSFUL:
         return {
           ...state,
-          token: action.payload,
+          friending:true,
+          unfriending:false,
           error: null,
           loading: false,
         };
       case UNFRIEND_SUCCESSFUL:
         return {
           ...state,
-          token: action.payload,
+          unfriending:true,
+          friending:false,
           error: null,
           loading: false,
         };
@@ -40,7 +45,9 @@ const initialState = {
       case FRIEND_ERROR:
         return {
           ...state,
-          token: null,
+          data: null,
+          unfriending:null,
+          friending:null,
           error: action.payload,
           loading: false,
         };

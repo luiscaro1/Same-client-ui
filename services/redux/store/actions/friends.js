@@ -18,7 +18,7 @@ export const getAllFriends = () => async (dispatch) => {
     }
   };
 
-  export const addFriend = (id) => async (dispatch,getState) => {
+  export const addFriend = (uid,uid2) => async (dispatch,getState) => {
     const state = getState();
     const {auth} = state;
 
@@ -27,8 +27,7 @@ export const getAllFriends = () => async (dispatch) => {
             const res=await axios.post(
                 auth_api.base_url+auth_api.add_friend_route,{
                     uid:auth.token.uid,
-                    id,
-                    user_name
+                    uid2,
                 });
             dispatch({
                 type:ADD_FRIEND_SUCCESSFUL,
@@ -48,7 +47,7 @@ export const getAllFriends = () => async (dispatch) => {
 
   };
   //ATTEMPT 1
-  export const unFriend = (id) => async (dispatch,getState) => {
+  export const unFriend = (uid,uid2) => async (dispatch,getState) => {
     const state = getState();
     const {auth} = state;
 
@@ -57,7 +56,7 @@ export const getAllFriends = () => async (dispatch) => {
             const res=await axios.post(
                 auth_api.base_url+auth_api.unfriend_route,{
                     uid:auth.token.uid,
-                    id
+                    uid2
                    
                 });
             dispatch({

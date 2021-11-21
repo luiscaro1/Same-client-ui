@@ -6,8 +6,7 @@ import { feedbackTypes } from "../actions/types";
 
 const initialState = {
     //uid
-    token: null,
-    //data:null,
+    submit_feedback:false,
     loading: true,
     error: null,
   };
@@ -19,7 +18,7 @@ const initialState = {
       case ADD_FEEDBACK_SUCCESSFUL:
         return {
           ...state,
-          token: action.payload,
+          submit_feedback:true,
           error: null,
           loading: false,
         };
@@ -27,7 +26,7 @@ const initialState = {
       case FEEDBACK_ERROR:
         return {
           ...state,
-          token: null,
+          submit_feedback:false,
           error: action.payload,
           loading: false,
         };

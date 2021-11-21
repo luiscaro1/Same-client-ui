@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import useStyles from "./style";
-import EmojiKeyboard from '../EmojiKeyboardTest';
+import EmojiKeyboard from '../EmojiKeyboard';
 import { useRouter } from "next/router";
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 

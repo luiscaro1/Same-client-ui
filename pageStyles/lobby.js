@@ -18,8 +18,6 @@ const useStyles = makeStyles({
   chatMessageBox: {
     flexWrap: "nowrap",
     overflow: "scroll",
-    overflowY: "hidden",
-    overflowX: "hidden",
   },
   sendButton: {
     borderRadius: "0 10px 10px 0px",

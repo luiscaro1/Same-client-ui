@@ -459,8 +459,8 @@ const Lobby = () => {
                 })}
               </Grid>
               <form onSubmit={handleSubmit}>
-                <Grid item container>
-                  <Grid item xs>
+                <Grid item container direction="row">
+                  <Grid item xs={10}>
                     <TextField
                       className={classes.chatBox}
                       name="TEXT"
@@ -470,7 +470,7 @@ const Lobby = () => {
                       onChange={handleChange}
                     />
                   </Grid>
-                  <Grid item container direction="column" xs={1}>
+                  <Grid xs={2} item container direction="column">
                     <Button
                       type="submit"
                       variant="contained"

@@ -6,37 +6,110 @@ import {
   CardContent,
   Typography,
   Button,
-
   IconButton,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import useStyles from "../../pageStyles/profile";
-import { IMAGES, MEDIA_STREAM } from "../../constants";
-import { authSelectors } from "../../services/redux/store/selectors";
-import DashBoardTab from "../../components/DashBoardTab";
-import BlockReportMenu from "../../components/BlockReportMenu";
-import NavMenu from "../../components/NavMenu";
+import useStyles from "../../../pageStyles/profile";
+import { IMAGES, MEDIA_STREAM } from "../../../constants";
+import { authSelectors } from "../../../services/redux/store/selectors";
+import DashBoardTab from "../../../components/DashBoardTab";
+import BlockReportMenu from "../../../components/BlockReportMenu";
+import NavMenu from "../../../components/NavMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { friendActions } from "../../services/redux/store/actions";
+import { friendActions } from "../../../services/redux/store/actions";
+import {authActions} from "../../../services/redux/store/actions";
+import { friendSelectors } from "../../../services/redux/store/selectors";
+
 
 const Profile = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   const error = useSelector(authSelectors.selectAuthError);
+  const other=useSelector(authSelectors.selectOtherUser);
+//friends
+  const friendship=useSelector(friendSelectors.selectFriendship);
+  const friend=useSelector(friendSelectors.selectFriends);
+  const friend_err=useSelector(friendSelectors.selectFriendError);
   const router = useRouter();
+
+  const user_name = router?.query?.user_name;
   // function to dispatch events
   const dispatch = useDispatch();
-  console.log(auth);
+  //console.log(user_name);
+
+  const [info, setInfo] = React.useState({
+    uid: "",
+    user_name: "",
+  });
+
+  // const [values] = React.useState({
+  //   uid:auth?.uid,
+  //   user_name:other?.user_name, 
+  // });
+
+ 
+  const validateUsername = (val) => {
+    if (val!== getUser().user_name) {
+      // setValues({
+      //   ...values,
+      //   error: {
+      //     message: "User_name does not exist!",
+      //   },
+      // });
+      return false;
+    }
+    return true;
+  };
+
+  // const handleChange = (e) => {
+  //   setValues({
+  //     ...values,
+  //     uid: auth?.uid,
+  //     user_name: other?.user_name, 
+  //   });
+  // };
+  const handleChange = (e) => {
+    setInfo({
+      ...info,
+      uid:auth?.uid,
+      user_name:user_name,
+      [e.target.name]: e.target.value,
+    });
+  };
+
 
 //for friend count
-  const getallFriends = () => {
-    dispatch(friendActions.getallFriends());
-  };
+  // const getallFriends = (e) => {
+  //   dispatch(friendActions.getallFriends());
+  // };
 //adding a friend
-  const addFriend=()=>{
-      dispatch(friendActions.addFriend());
-  }
+  const addFriend=(e)=>{
+    e.preventDefault();
+    console.log(values);
+   if(validateUsername(info.user_name)){
+      dispatch(friendActions.addFriend(info));
+    }
+}
+
+  React.useEffect(() => {
+    if (friend) 
+      return "Friendship"
+  }, [friend]);
+
+  React.useEffect(() => {
+      getUser();
+      // router.push("/profile/user_name")
+      return "GOT it"
+    
+  }, [user_name]);
+
+  const getUser = () => {
+    if (user_name) {
+        dispatch(authActions.getbyUsername(user_name));
+    }
+  };
+
 
   return (
     <Grid container direction="column">
@@ -83,14 +156,16 @@ const Profile = () => {
               <Grid item container justifyContent="center" xs={8} spacing={2}>
                 <Grid item>
                   <Typography color="secondary" variant="h5">
-                    {auth?.user_name}
+                    {other?.data?.user_name}
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" onClick={() => addFriend()}
+                  {/* <form onSubmit={addFriend}> */}
+                  <Button variant="contained"  onClick={addFriend}
                   >
-                    <PersonAddAlt1Icon />
+                    <PersonAddAlt1Icon  />
                   </Button>
+                  {/* </form> */}
                 </Grid>
 
                 <Grid item>

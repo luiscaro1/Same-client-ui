@@ -155,14 +155,13 @@ const Feedback2 = () => {
                             container
                             justifyContent="center">
                             <StyledRating
-                                name="customized-color"
+                                name="ratedesign"
                                 defaultValue={2}
-                                getLabelText={(value) => `${value} GamePad${value !== 1 ? 's' : ''}`}
+                                getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
                                 precision={0.5}
                                 onChange={handleChange}
-                                icon={<GamesIcon fontSize="inherit" />}
-                                emptyIcon={<GamesOutlinedIcon fontSize="inherit" />}
-                            />
+                                icon={<GamesIcon className={classes.feedbackRating} />}
+                                emptyIcon={<GamesOutlinedIcon className={classes.feedbackRating} />} />
                         </Grid>
                         <Grid
                             item

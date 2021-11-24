@@ -19,16 +19,15 @@ export const getAllBlocked = () => async (dispatch) => {
         }
     };
     
-export const block = (uid,uid2) => async (dispatch,getState) => {
+export const block = (uid,user_name) => async (dispatch,getState) => {
         const state = getState();
         const {auth} = state;
     
         if(auth.token){
             try{
-                const res=await axios.post(
-                    auth_api.base_url+auth_api.block_route,{
+                const res=await axios.post(auth_api.base_url+auth_api.block_route+uid,{
                         uid:auth.token.uid,
-                        uid2
+                        user_name,
 
                     });
                 dispatch({
@@ -49,16 +48,16 @@ export const block = (uid,uid2) => async (dispatch,getState) => {
     
     };
     
-export const unBlock = (uid,uid2) => async (dispatch,getState) => {
+export const unBlock = (uid,user_name) => async (dispatch,getState) => {
         const state = getState();
         const {auth} = state;
     
         if(auth.token){
             try{
                 const res=await axios.post(
-                    auth_api.base_url+auth_api.unblock_route,{
+                    auth_api.base_url+auth_api.unblock_route+uid,{
                         uid:auth.token.uid,
-                        uid2
+                        user_name,
                        
                     });
                 dispatch({

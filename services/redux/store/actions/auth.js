@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "../../../../config";
 import cookieCutter from "cookie-cutter";
 
-const { LOGIN_SUCCESSFUL, AUTH_ERROR, SIGNUP_SUCCESSFUL } = authTypes;
+const { LOGIN_SUCCESSFUL, AUTH_ERROR, SIGNUP_SUCCESSFUL,GET_BY_USERNAME,DELETE_SUCCESSFUL,UPDATE_SUCESSFUL,USER_ERROR } = authTypes;
 
 const { auth_api } = config;
 
@@ -84,4 +84,56 @@ export const verifyAuth = () => async (dispatch) => {
       payload: err.response.data,
     });
   }
+};
+
+export const getbyUsername=(user_name)=> async(dispatch,getState)=>{
+  const state = getState();
+  const {auth} = state;
+
+  if (auth?.token) {
+    try {
+      const res=await axios.get(auth_api.base_url + auth_api.get_user_by_username + user_name
+        );
+      dispatch({ type: GET_BY_USERNAME, payload:res.data });
+    } catch (err) {
+      dispatch({ type: USER_ERROR, payload: err.response.data });
+    }
+  } else dispatch({ type: USER_ERROR, payload: "User does not exist" });
+};
+
+export const deleteAccount=(uid)=> async(dispatch,getState)=>{
+  const state = getState();
+  const {auth} = state;
+
+  if (auth.token) {
+    try {
+      const res=await axios.delete(auth_api.base_url + auth_api.delete_account+uid,
+        {uid:auth.token.uid}
+        );
+      dispatch({ type: DELETE_SUCCESSFUL, payload:res.data });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR, payload: err.response.data });
+    }
+  } else dispatch({ type: AUTH_ERROR, payload: "Oops try again later" });
+
+};
+
+export const updateAccount=(uid,user_name,password)=> async(dispatch,getState)=>{
+  const state = getState();
+  const {auth} = state;
+
+  if (auth.token) {
+    try {
+      const res=await axios.put(auth_api.base_url + auth_api.delete_account+uid,
+        {uid:auth.token.uid},
+        user_name,
+        password,
+      
+        );
+      dispatch({ type: UPDATE_SUCESSFUL, payload:res.data });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR, payload: err.response.data });
+    }
+  } else dispatch({ type: AUTH_ERROR, payload: "Oops try again later" });
+
 };

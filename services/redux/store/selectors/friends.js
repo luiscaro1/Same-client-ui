@@ -4,8 +4,6 @@ import { createSelector } from "reselect";
 
 const selectFriend = (state) => state.friend || {};
 
-export const selectFriends=createSelector(selectFriend,(friend)=>friend.data);
-
 export const selectFriendship = createSelector(selectFriend, (friend) => friend.friending);
 
 export const selectFriendError = createSelector(selectFriend, (friend) => friend.error);
@@ -15,4 +13,5 @@ export const selectFriendLoading = createSelector(
   (friend) => friend.loading
 );
 
-export const selectNofriend=createSelector(selectFriend,(friend)=>friend.unfriending);
+export const selectNoFriend=createSelector(selectFriend,(friend)=>friend.unfriending);
+export const selectFriendCount=createSelector(selectFriend,(friend)=>friend.data);

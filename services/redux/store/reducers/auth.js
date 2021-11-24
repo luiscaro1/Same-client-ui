@@ -11,6 +11,7 @@ const initialState = {
   other_user:{
     data:null,
     loading:true,
+    user_error:null,
   }
 };
 
@@ -62,9 +63,11 @@ export default function authReducer(state = initialState, action) {
     case USER_ERROR:
       return{
         ...state,
-        error:action.payload,
-        loading:false,
-        
+        other_user:{
+          ...state.other_user,
+          user_error:action.payload,
+          loading:false,
+        }, 
       }
 
     case AUTH_ERROR:

@@ -25,84 +25,53 @@ import { friendSelectors } from "../../../services/redux/store/selectors";
 const Profile = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
-  const error = useSelector(authSelectors.selectAuthError);
   const other=useSelector(authSelectors.selectOtherUser);
+  const user_error=useSelector(authSelectors.selectUserError);
+  const error=useSelector(authSelectors.selectAuthError);
 //friends
   const friendship=useSelector(friendSelectors.selectFriendship);
-  const friend=useSelector(friendSelectors.selectFriends);
-  const friend_err=useSelector(friendSelectors.selectFriendError);
+  const friend_error=useSelector(friendSelectors.selectFriendError);
+  const friend_count=useSelector(friendSelectors.selectFriendCount);
   const router = useRouter();
 
   const user_name = router?.query?.user_name;
   // function to dispatch events
   const dispatch = useDispatch();
-  //console.log(user_name);
+
 
   const [info, setInfo] = React.useState({
-    uid: "",
     user_name: "",
+    error: null,
   });
 
-  // const [values] = React.useState({
-  //   uid:auth?.uid,
-  //   user_name:other?.user_name, 
-  // });
-
- 
-  const validateUsername = (val) => {
-    if (val!== getUser().user_name) {
-      // setValues({
-      //   ...values,
-      //   error: {
-      //     message: "User_name does not exist!",
-      //   },
-      // });
-      return false;
-    }
-    return true;
-  };
-
-  // const handleChange = (e) => {
-  //   setValues({
-  //     ...values,
-  //     uid: auth?.uid,
-  //     user_name: other?.user_name, 
-  //   });
-  // };
-  const handleChange = (e) => {
-    setInfo({
-      ...info,
-      uid:auth?.uid,
-      user_name:user_name,
-      [e.target.name]: e.target.value,
-    });
-  };
 
 
 //for friend count
   // const getallFriends = (e) => {
-  //   dispatch(friendActions.getallFriends());
+  //   e.preventDefault();
+  //   dispatch(friendActions.getFriendCount(other.uid));
   // };
+
+  // const friends=getallFriends();
+
+
+// console.log(auth?.uid);
+// console.log(other?.data.user_name);
+
+
+
 //adding a friend
   const addFriend=(e)=>{
     e.preventDefault();
-    console.log(values);
-   if(validateUsername(info.user_name)){
-      dispatch(friendActions.addFriend(info));
-    }
+    var other_name=other?.data.user_name;
+ 
+    dispatch(friendActions.addFriend(other_name));
 }
 
   React.useEffect(() => {
-    if (friend) 
+    if (friendship) 
       return "Friendship"
-  }, [friend]);
-
-  React.useEffect(() => {
-      getUser();
-      // router.push("/profile/user_name")
-      return "GOT it"
-    
-  }, [user_name]);
+  }, [friendship]);
 
   const getUser = () => {
     if (user_name) {
@@ -110,7 +79,30 @@ const Profile = () => {
     }
   };
 
+  React.useEffect(() => {
+    getUser();
+    // router.push("/profile/user_name")
+    return "GOT it"
+  
+},[user_name]);
+  
+  React.useEffect(() => {
+    if (user_error)
+        setInfo({
+          ...info,
+          error:"User does not exist",
+      }); 
+  }, [user_error]);
 
+  React.useEffect(() => {
+    if (friend_error)
+        setInfo({
+          ...info,
+          error:"Opps try again later",
+      }); 
+  }, [friend_error]);
+
+  
   return (
     <Grid container direction="column">
       <Grid item container>
@@ -161,7 +153,7 @@ const Profile = () => {
                 </Grid>
                 <Grid item>
                   {/* <form onSubmit={addFriend}> */}
-                  <Button variant="contained"  onClick={addFriend}
+                  <Button variant="contained" onClick={addFriend}
                   >
                     <PersonAddAlt1Icon  />
                   </Button>
@@ -210,7 +202,7 @@ const Profile = () => {
                   xs={8}
                 >
                   <Typography color="secondary" variant="body1">
-                    100
+                  1
                   </Typography>
                 </Grid>
               </Grid>

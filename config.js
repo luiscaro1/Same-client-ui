@@ -6,7 +6,8 @@ const config = {
     verify_auth: "/auth/verify",
     add_friend_route:"/friends/addfriend/",//:user_name
     unfriend_route:"/friends/unfriend/",//:user_name
-    get_all_friends:"/friends/getallfriends",
+    // get_all_friends:"/friends/getallfriends",
+    friend_count_route:"/friends/friendcount",
     add_feedback_route:"/feedback/addfeedback",
     get_avg_feedback:"/feedback/getavgfeedbacks", //admin only
     add_report_route:"/report/add",

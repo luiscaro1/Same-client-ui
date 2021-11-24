@@ -48,9 +48,6 @@ const initialState = {
       case BLOCK_ERROR:
         return {
           ...state,
-          blocking:null,
-          unblocking:null,
-          data: null,
           error: action.payload,
           loading: false,
         };

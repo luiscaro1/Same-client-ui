@@ -15,3 +15,4 @@ export const selectAuthLoading = createSelector(
 export const selectUpdate=createSelector(selectAuth,(auth)=>auth.updated);
 export const selectDelete=createSelector(selectAuth,(auth)=>auth.deleted);
 export const selectOtherUser=createSelector(selectAuth,(auth)=>auth.other_user);
+export const selectUserError = createSelector(selectAuth, (auth) => auth.user_error);

@@ -5,30 +5,27 @@ import { friendTypes } from "../actions/types";
 
 const initialState = {
     //uid
-    data:null,
     unfriending:false,
     friending:false,
     loading: true,
     error: null,
+    data:null,
   };
   
-  const { FRIEND_ERROR, ADD_FRIEND_SUCCESSFUL, UNFRIEND_SUCCESSFUL,GET_ALL_FRIENDS } = friendTypes;
+  const { FRIEND_ERROR, ADD_FRIEND_SUCCESSFUL, UNFRIEND_SUCCESSFUL,FRIEND_COUNT } = friendTypes;
   
   export default function friendsReducer(state = initialState, action) {
     switch (action.type) {
-      case GET_ALL_FRIENDS:
+      case FRIEND_COUNT:
           return{
             ...state,
             data:action.payload,
-            unfriending:false,
             friending:true,
-            error: null,
             loading: false,
           };
       case ADD_FRIEND_SUCCESSFUL:
         return {
           ...state,
-          data:action.payload,
           friending:true,
           unfriending:false,
           error: null,
@@ -37,7 +34,6 @@ const initialState = {
       case UNFRIEND_SUCCESSFUL:
         return {
           ...state,
-          data:action.payload,
           unfriending:true,
           friending:false,
           error: null,
@@ -47,8 +43,6 @@ const initialState = {
       case FRIEND_ERROR:
         return {
           ...state,
-          unfriending:null,
-          friending:null,
           error: action.payload,
           loading: false,
         };

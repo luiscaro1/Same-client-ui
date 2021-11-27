@@ -7,7 +7,7 @@ const config = {
     add_friend_route:"/friends/addfriend/",//:user_name
     unfriend_route:"/friends/unfriend/",//:user_name
     // get_all_friends:"/friends/getallfriends",
-    friend_count_route:"/friends/friendcount",
+    friend_count_route:"/friends/friendcount/",
     add_feedback_route:"/feedback/addfeedback",
     get_avg_feedback:"/feedback/getavgfeedbacks", //admin only
     add_report_route:"/report/add",
@@ -18,6 +18,7 @@ const config = {
     block_route:"/block/blockuser/",//:user_name
     unblock_route:"/block/unblock/",//:user_name
     get_all_blocked:"/block/getallblocked",//admin only
+    get_block_count:"/block/blockcount",
     get_all_blocked_by:"/block/getallblocked/by",//admin only
   },
   game_api: {

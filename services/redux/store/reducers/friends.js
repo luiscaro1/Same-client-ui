@@ -5,11 +5,12 @@ import { friendTypes } from "../actions/types";
 
 const initialState = {
     //uid
+    count:null,
     unfriending:false,
     friending:false,
     loading: true,
     error: null,
-    data:null,
+    
   };
   
   const { FRIEND_ERROR, ADD_FRIEND_SUCCESSFUL, UNFRIEND_SUCCESSFUL,FRIEND_COUNT } = friendTypes;
@@ -19,9 +20,11 @@ const initialState = {
       case FRIEND_COUNT:
           return{
             ...state,
-            data:action.payload,
+            count:action.payload,
             friending:true,
             loading: false,
+            error:null
+            
           };
       case ADD_FRIEND_SUCCESSFUL:
         return {

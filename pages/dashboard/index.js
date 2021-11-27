@@ -9,19 +9,40 @@ import {
 
   IconButton,
 } from "@mui/material";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import { useSelector } from "react-redux";
+// import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import { useSelector,useDispatch } from "react-redux";
 import useStyles from "../../pageStyles/dashboard";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
-import { authSelectors } from "../../services/redux/store/selectors";
+import { authSelectors,friendSelectors } from "../../services/redux/store/selectors";
 import DashBoardTab from "../../components/DashBoardTab";
-import BlockReportMenu from "../../components/BlockReportMenu";
+// import BlockReportMenu from "../../components/BlockReportMenu";
 import NavMenu from "../../components/NavMenu";
+import { friendActions } from "../../services/redux/store/actions";
 
 const DashBoard = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
-  console.log(auth);
+  //console.log(auth?.uid);
+  const friend=useSelector(friendSelectors.selectFriendCount);
+  const dispatch=useDispatch();
+
+  const [info, setInfo] = React.useState({
+    uid:"",
+    error: null,
+  });
+
+  //for friend count, works but doesnt want to show in front end
+  const getallFriends = () => {
+    
+    console.log(auth?.uid);
+    var id=auth?.uid;
+    dispatch(friendActions.getFriendCount(id));
+  };
+
+  const count= getallFriends();
+
+
+
 
   return (
     <Grid container direction="column">
@@ -117,9 +138,9 @@ const DashBoard = () => {
                   justifyContent="center"
                   item
                   xs={8}
-                >
+                > 
                   <Typography color="secondary" variant="body1">
-                    100
+                   {count} {friend?.data?.count}
                   </Typography>
                 </Grid>
               </Grid>

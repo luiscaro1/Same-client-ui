@@ -14,4 +14,4 @@ export const selectFriendLoading = createSelector(
 );
 
 export const selectNoFriend=createSelector(selectFriend,(friend)=>friend.unfriending);
-export const selectFriendCount=createSelector(selectFriend,(friend)=>friend.data);
+export const selectFriendCount=createSelector(selectFriend,(friend)=>friend.count);

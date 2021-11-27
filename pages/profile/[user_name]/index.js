@@ -22,6 +22,7 @@ import {authActions} from "../../../services/redux/store/actions";
 import { friendSelectors } from "../../../services/redux/store/selectors";
 
 
+
 const Profile = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
@@ -46,14 +47,14 @@ const Profile = () => {
 
 
 
-//for friend count
-  // const getallFriends = (e) => {
-  //   e.preventDefault();
-  //   dispatch(friendActions.getFriendCount(other.uid));
-  // };
+  const getallFriends = () => {
+    
+    console.log(other?.data?.uid);
+    var id=other?.data?.uid;
+    dispatch(friendActions.getFriendCount(id));
+  };
 
-  // const friends=getallFriends();
-
+  const count= getallFriends();
 
 // console.log(auth?.uid);
 // console.log(other?.data.user_name);
@@ -202,7 +203,7 @@ const Profile = () => {
                   xs={8}
                 >
                   <Typography color="secondary" variant="body1">
-                  1
+                    {friend_count?.data?.count}
                   </Typography>
                 </Grid>
               </Grid>

@@ -7,3 +7,4 @@ export const UPDATE_SUCESSFUL="UPDATE_SUCCESSFUL";
 export const GET_BY_USERNAME="GET_BY_USERNAME";
 export const USER_ERROR="USER_ERROR";
 
+export const LOGOUT = "LOGOUT";

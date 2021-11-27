@@ -9,20 +9,26 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import useStyles from "./_style";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { gameActions } from "../../../services/redux/store/actions";
 import { MEDIA_STREAM, IMAGES } from "../../../constants";
 import PropTypes from "prop-types";
+import { authSelectors } from "../../../services/redux/store/selectors";
 
 const LfgContainer = ({ lobby, disabled }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const router = useRouter();
+  const auth = useSelector(authSelectors.selectToken);
+  console.log(auth);
 
   const joinLobby = async (lid) => {
-    await dispatch(gameActions.joinLobby(lid));
-    dispatch(gameActions.setCurrentLobby(lobby));
-    router.push("/lobby/" + lid);
+    if (!auth) router.push("/login");
+    else {
+      await dispatch(gameActions.joinLobby(lid));
+      dispatch(gameActions.setCurrentLobby(lobby));
+      router.push("/lobby/" + lid);
+    }
   };
   const handlePlatform = (platform) => {
     switch (platform) {
@@ -68,22 +74,22 @@ const LfgContainer = ({ lobby, disabled }) => {
               <Typography variant="body2">{lobby.description}</Typography>
             </Grid>
             <Grid container marginTop="10px" direction="row" spacing={4}>
-              <Grid
-                xs={2}
-                item
-                container
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Typography color="primary" variant="caption">
-                  Region: {lobby.region}
-                </Typography>
+              <Grid xs item container alignItems="center">
+                <Grid item>
+                  <Typography
+                    sx={{ paddingLeft: 2 }}
+                    color="primary"
+                    variant="caption"
+                  >
+                    Region: {lobby.region}
+                  </Typography>
+                </Grid>
               </Grid>
               <Grid
+                xs
                 item
                 container
                 alignItems="center"
-                xs={10}
                 justifyContent="flex-end"
               >
                 <img
@@ -97,11 +103,10 @@ const LfgContainer = ({ lobby, disabled }) => {
       </Card>
     </Grid>
   );
-
-  LfgContainer.propTypes = {
-    lobby: PropTypes.instanceOf(Object).isRequired,
-    disabled: PropTypes.bool.isRequired,
-  };
+};
+LfgContainer.propTypes = {
+  lobby: PropTypes.instanceOf(Object).isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default LfgContainer;

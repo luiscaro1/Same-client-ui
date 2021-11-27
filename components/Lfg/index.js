@@ -178,6 +178,13 @@ const Lfg = () => {
                     </FormControl>
                   </Box>
                 </Grid>
+                <Grid container item justifyContent="center">
+                  <Grid item className={classes.lfgCard}>
+                    <Typography color="primary">
+                      {currentGame?.data?.name}
+                    </Typography>
+                  </Grid>
+                </Grid>
                 <Grid item>
                   <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>

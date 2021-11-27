@@ -9,7 +9,7 @@ const useStyles = makeStyles({
 
   section: {
     margin: "20px 0px 40px 0px",
-    borderBottom: "1px solid white",
+
     paddingBottom: 10,
   },
 });

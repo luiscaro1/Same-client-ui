@@ -113,10 +113,9 @@ export const addFeedPost =
     const { auth, game } = state;
 
     if (auth.token && game.currentGame) {
-      console.log(files);
       const formData = new FormData();
 
-      files.forEach((file) => {
+      files?.forEach((file) => {
         formData.append("files", file);
       });
 

@@ -22,7 +22,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import useStyles from "./_style";
-import { IMAGES } from "../../constants";
+import { IMAGES, MEDIA_STREAM } from "../../constants";
 import { listenForNewLobby } from "../../services/socketio/listeners/game";
 
 const style = {
@@ -179,13 +179,16 @@ const Feed = () => {
         </Fade>
       </Modal>
 
-      <Grid spacing={2} container direction="column">
-        <Grid container item alignItems="center" spacing={1} xs>
-          <Button onClick={handleOpen} variant="outlined">
-            Write a post
-          </Button>
+      <Grid spacing={4} container direction="column">
+        <Grid container item justifyContent="center">
+          <Grid item className={classes.lfgCard}>
+            <Button onClick={handleOpen} variant="outlined">
+              Create
+            </Button>
+          </Grid>
         </Grid>
         {currentGame?.posts?.map((post) => {
+          console.log(post);
           return (
             <Grid item key={post.pid} container justifyContent="center">
               <Card className={classes.postCard}>
@@ -193,7 +196,7 @@ const Feed = () => {
                   <Grid container direction="column" spacing={2}>
                     <Grid container item spacing={2}>
                       <Grid item>
-                        <Avatar>P</Avatar>
+                        <Avatar src={MEDIA_STREAM + auth?.avatar_url}></Avatar>
                       </Grid>
 
                       <Grid
@@ -203,7 +206,9 @@ const Feed = () => {
                         direction="column"
                         justifyContent="center"
                       >
-                        <Typography variant="caption">Username</Typography>
+                        <Typography variant="caption">
+                          {auth?.user_name}
+                        </Typography>
                       </Grid>
                     </Grid>
 
@@ -223,15 +228,17 @@ const Feed = () => {
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <Grid item className={classes.postImage}>
-                        <img
-                          style={{ width: "100%" }}
-                          src={
-                            "http://localhost:5002/stream/" +
-                            post.attachments[0].filename
-                          }
-                        />
-                      </Grid>
+                      {post.attachments?.length > 0 ? (
+                        <Grid item className={classes.postImage}>
+                          <img
+                            style={{ width: "100%" }}
+                            src={
+                              "http://localhost:5002/stream/" +
+                              post?.attachments?.[0]?.filename
+                            }
+                          />
+                        </Grid>
+                      ) : null}
                     </Grid>
                   </Grid>
                 </CardContent>

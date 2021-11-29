@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme)=>({
     width:100,
     flexGrow:1,
     marginTop:10,
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("xs")]: { //added it
       display: "flex",
       margin:"3% 0% 0% 0%",
       

@@ -18,102 +18,90 @@ import BlockReportMenu from "../../../components/BlockReportMenu";
 import NavMenu from "../../../components/NavMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { friendActions } from "../../../services/redux/store/actions";
-import {authActions} from "../../../services/redux/store/actions";
+import { authActions } from "../../../services/redux/store/actions";
 import { friendSelectors } from "../../../services/redux/store/selectors";
-
-
 
 const Profile = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
-  const other=useSelector(authSelectors.selectOtherUser);
-  const user_error=useSelector(authSelectors.selectUserError);
-  const error=useSelector(authSelectors.selectAuthError);
-//friends
-  const friendship=useSelector(friendSelectors.selectFriendship);
-  const friend_error=useSelector(friendSelectors.selectFriendError);
-  const friend_count=useSelector(friendSelectors.selectFriendCount);
+  const other = useSelector(authSelectors.selectOtherUser);
+  const user_error = useSelector(authSelectors.selectUserError);
+  const error = useSelector(authSelectors.selectAuthError);
+  //friends
+  const friendship = useSelector(friendSelectors.selectFriendship);
+  const friend_error = useSelector(friendSelectors.selectFriendError);
+  const friend_count = useSelector(friendSelectors.selectFriendCount);
   const router = useRouter();
 
   const user_name = router?.query?.user_name;
   // function to dispatch events
   const dispatch = useDispatch();
 
-
   const [info, setInfo] = React.useState({
     user_name: "",
     error: null,
   });
 
-
-
   const getallFriends = () => {
-    
     //console.log(other?.data?.uid);
-    var id=other?.data?.uid;
+    var id = other?.data?.uid;
     dispatch(friendActions.getFriendCount(id));
   };
 
   //const count= getallFriends();
 
-// console.log(auth?.uid);
-// console.log(other?.data.user_name);
+  // console.log(auth?.uid);
+  // console.log(other?.data.user_name);
 
-
-
-//adding a friend
-  const addFriend=(e)=>{
+  //adding a friend
+  const addFriend = (e) => {
     e.preventDefault();
-    var other_name=other?.data.user_name;
- 
-    dispatch(friendActions.addFriend(other_name));
-}
+    var other_name = other?.data.user_name;
 
-  React.useEffect(() => {
-    if (friendship) 
-      return "Friendship"
-  }, [friendship]);
+    dispatch(friendActions.addFriend(other_name));
+  };
+
+  // React.useEffect(() => {
+  //   if (friendship) return "Friendship";
+  // }, [friendship]);
 
   const getUser = () => {
-    if (user_name) {
-        dispatch(authActions.getbyUsername(user_name));
+    if (user_name && auth) {
+      console.log("here");
+      dispatch(authActions.getbyUsername(user_name));
     }
   };
 
   React.useEffect(() => {
     getUser();
+
     // router.push("/profile/user_name")
-    return "GOT it"
-  
-},[user_name]);
+  }, [user_name, auth]);
 
   React.useEffect(() => {
     getallFriends();
-  // router.push("/profile/user_name")
+    // router.push("/profile/user_name")
+  }, [friend_count]);
 
-  },[friend_count]);
-  
-  React.useEffect(() => {
-    if (user_error)
-        setInfo({
-          ...info,
-          error:"User does not exist",
-      }); 
-  }, [user_error]);
+  // React.useEffect(() => {
+  //   if (user_error)
+  //     setInfo({
+  //       ...info,
+  //       error: "User does not exist",
+  //     });
+  // }, [user_error]);
 
-  React.useEffect(() => {
-    if (friend_error)
-        setInfo({
-          ...info,
-          error:"Opps try again later",
-      }); 
-  }, [friend_error]);
+  // React.useEffect(() => {
+  //   if (friend_error)
+  //     setInfo({
+  //       ...info,
+  //       error: "Opps try again later",
+  //     });
+  // }, [friend_error]);
 
-  
   return (
     <Grid container direction="column">
       <Grid item container>
-
         <Grid className={classes.section} width="100%" item>
           <Toolbar width="100%">
             <Grid container width="100%">
@@ -124,14 +112,11 @@ const Profile = () => {
                 <NavMenu className={classes.bar} />
               </Grid>
             </Grid>
-
           </Toolbar>
         </Grid>
       </Grid>
 
-
       <Grid item container className={classes.dashboardContent} xs>
-
         <Grid className={classes.info} item xs={4} container>
           <CardContent>
             <Grid
@@ -160,9 +145,8 @@ const Profile = () => {
                 </Grid>
                 <Grid item>
                   {/* <form onSubmit={addFriend}> */}
-                  <Button variant="contained" onClick={addFriend}
-                  >
-                    <PersonAddAlt1Icon  />
+                  <Button variant="contained" onClick={addFriend}>
+                    <PersonAddAlt1Icon />
                   </Button>
                   {/* </form> */}
                 </Grid>
@@ -170,7 +154,6 @@ const Profile = () => {
                 <Grid item>
                   <BlockReportMenu />
                 </Grid>
-
               </Grid>
               <Grid item container wrap spacing={4}>
                 <Grid item xs={3}>
@@ -219,9 +202,7 @@ const Profile = () => {
         <Grid item container xs>
           <Grid className={classes.card}>
             <CardContent>
-
               <DashBoardTab />
-
             </CardContent>
           </Grid>
         </Grid>
@@ -230,6 +211,4 @@ const Profile = () => {
   );
 };
 
-
 export default Profile;
-

@@ -1,19 +1,94 @@
 import React from "react";
-import { FormGroup, Grid, Typography, Checkbox } from "@mui/material";
+import { FormGroup, Grid, Typography, Checkbox,TextField,Alert } from "@mui/material";
 import Button from "@mui/material/Button";
 import useStyles from "../../pageStyles/report";
 import { IMAGES } from "../../constants";
 import { useRouter } from "next/router";
+import {useSelector,useDispatch} from "react-redux";
+import {reportActions} from "../../services/redux/store/actions";
+import { reportSelectors } from "../../services/redux/store/selectors";
+import { authSelectors } from "../../services/redux/store/selectors";
 
 const Report = () => {
   const classes = useStyles();
   const router = useRouter();
-  const [category, setCategory] = React.useState("");
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
 
+  const reported=useSelector(reportSelectors.selectReported);
+  const error= useSelector(reportSelectors.selectError);
+  const loading= useSelector(reportSelectors.selectReportLoading);
+ 
+  const auth = useSelector(authSelectors.selectToken);
+  const dispatch=useDispatch();
+
+  const [values, setValues] = React.useState({
+    user_name:"",
+    stalking:false,
+    spamming:false,
+    offensive:false,
+    harrasment:false,
+    discrimination: false,
+    viruses:false,
+    violationofIp:false,
+    pretending:false,
+    error: null,
+    
+  });
+
+
+  //For username textfield
+  const handleChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
+     
+  const handleChecked = (e) => {
+    setValues({
+      ...values,
+      uid: auth?.uid,
+      [e.target.name]: e.target.value,
+       
+    });
+  };
+ 
+  const report=(e)=>{ 
+    e.preventDefault();
+    console.log(values);
+    
+    dispatch(reportActions.addReport(values));
+     
+    //add info that needs to be passed
+
+  }
+
+  React.useEffect(() => {
+    if (reported) 
+      router.push("/dashboard");
+  }, [reported]);
+
+  React.useEffect(() => {
+    if (error)
+      setValues({
+        ...values,
+        error,
+      });
+  }, [error]);
+
+  // if (loading){
+  //   return "Loading..."
+  // }
+ 
+  // if(reported){
+  //   return "Submitted"
+  // }
   return (
+    <>
+    {/* {values.error ? (
+      <Alert severity="error" color="error">
+        {values.error?.message}
+      </Alert>
+    ) : null} */}
     <Grid height="100vh" container direction="row" className={classes.root}>
       <Grid className={classes.formColumn} item xs={12}>
         <Grid className={classes.reportForm} container direction="column">
@@ -28,19 +103,30 @@ const Report = () => {
               justifyContent="center"
               textAlign="center"
             >
-              Report a player
+              Report 
             </Typography>
           </Grid>
+          <form onSubmit={report}>
           <FormGroup>
             <Grid item>
               <Typography color="secondary" variant="subtitle1" margin="5%">
                 <br></br>
                 As accurately as possible, please tell us what happened with
-                this player. Choose the options that correspond to the
+                this player. Write down the username of the player you want report.
+                Choose the options that correspond to the
                 situation. Mark multiple options if needed.
                 <br></br>
               </Typography>
             </Grid>
+            <Grid item marginLeft="5%">
+              <TextField 
+                        sx={{ color: "text.primary"} }
+                        name="user_name"
+                        required
+                        label="Username of the player"
+                        onChange={handleChange}
+                      />
+              </Grid>
             <Grid item xs={8}>
               <Typography
                 className={classes.text}
@@ -48,7 +134,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox name="stalking" onChange={handleChecked}/>
                 Stalking
               </Typography>
 
@@ -58,7 +144,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox name="spamming"  onChange={handleChecked}/>
                 Spamming inappropriate content
               </Typography>
 
@@ -68,7 +154,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox name="offensive" onChange={handleChecked}/>
                 Offensive Language
               </Typography>
 
@@ -78,8 +164,8 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
-                Sexual Harassment{" "}
+                <Checkbox name="harrasment" onChange={handleChecked}/>
+                Sexual Harassment
               </Typography>
               <Typography
                 className={classes.text}
@@ -87,7 +173,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox name="discrimination" onChange={handleChecked}/>
                 Discrimination
               </Typography>
 
@@ -97,7 +183,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox  name="viruses" onChange={handleChecked}/>
                 Spreading viruses/malicious software
               </Typography>
               <Typography
@@ -106,8 +192,8 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
-                Violation of IP rights(includes stolen content){" "}
+                <Checkbox  name="violationofIp" onChange={handleChecked} />
+                Violation of IP rights(includes stolen content)
               </Typography>
 
               <Typography
@@ -116,7 +202,7 @@ const Report = () => {
                 justifyContent="right"
                 marginLeft="5%"
               >
-                <Checkbox />
+                <Checkbox name="pretending" onChange={handleChecked}/>
                 Pretending to be an admin Same developer
               </Typography>
             </Grid>
@@ -137,17 +223,21 @@ const Report = () => {
 
               {/* Needs to be adjusted to actually submit the form */}
               <Button
-                onClick={() => router.push("/")}
+                // onClick={() => router.push("/")}
                 variant="contained"
+                type="submit"
                 className={classes.submitButton}
               >
                 Submit Report
               </Button>
             </Grid>
           </FormGroup>
+          </form>
         </Grid>
       </Grid>
     </Grid>
+    </>
   );
+   
 };
 export default Report;

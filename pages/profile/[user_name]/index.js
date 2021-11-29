@@ -6,47 +6,110 @@ import {
   CardContent,
   Typography,
   Button,
-
   IconButton,
 } from "@mui/material";
-// import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import { useSelector,useDispatch } from "react-redux";
-import useStyles from "../../pageStyles/dashboard";
-import { IMAGES, MEDIA_STREAM } from "../../constants";
-import { authSelectors,friendSelectors } from "../../services/redux/store/selectors";
-import DashBoardTab from "../../components/DashBoardTab";
-// import BlockReportMenu from "../../components/BlockReportMenu";
-import NavMenu from "../../components/NavMenu";
-import { friendActions } from "../../services/redux/store/actions";
+import { useRouter } from "next/router";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import useStyles from "../../../pageStyles/profile";
+import { IMAGES, MEDIA_STREAM } from "../../../constants";
+import { authSelectors } from "../../../services/redux/store/selectors";
+import DashBoardTab from "../../../components/DashBoardTab";
+import BlockReportMenu from "../../../components/BlockReportMenu";
+import NavMenu from "../../../components/NavMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { friendActions } from "../../../services/redux/store/actions";
+import {authActions} from "../../../services/redux/store/actions";
+import { friendSelectors } from "../../../services/redux/store/selectors";
 
-const DashBoard = () => {
+
+
+const Profile = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
-  //console.log(auth?.uid);
+  const other=useSelector(authSelectors.selectOtherUser);
+  const user_error=useSelector(authSelectors.selectUserError);
+  const error=useSelector(authSelectors.selectAuthError);
+//friends
+  const friendship=useSelector(friendSelectors.selectFriendship);
+  const friend_error=useSelector(friendSelectors.selectFriendError);
   const friend_count=useSelector(friendSelectors.selectFriendCount);
-  const dispatch=useDispatch();
+  const router = useRouter();
+
+  const user_name = router?.query?.user_name;
+  // function to dispatch events
+  const dispatch = useDispatch();
+
 
   const [info, setInfo] = React.useState({
-    uid:"",
+    user_name: "",
     error: null,
   });
 
-  //for friend count, works but doesnt want to show in front end
+
+
   const getallFriends = () => {
     
-    //console.log(auth?.uid);
-    var id=auth?.uid;
+    //console.log(other?.data?.uid);
+    var id=other?.data?.uid;
     dispatch(friendActions.getFriendCount(id));
   };
 
   //const count= getallFriends();
+
+// console.log(auth?.uid);
+// console.log(other?.data.user_name);
+
+
+
+//adding a friend
+  const addFriend=(e)=>{
+    e.preventDefault();
+    var other_name=other?.data.user_name;
+ 
+    dispatch(friendActions.addFriend(other_name));
+}
+
+  React.useEffect(() => {
+    if (friendship) 
+      return "Friendship"
+  }, [friendship]);
+
+  const getUser = () => {
+    if (user_name) {
+        dispatch(authActions.getbyUsername(user_name));
+    }
+  };
+
+  React.useEffect(() => {
+    getUser();
+    // router.push("/profile/user_name")
+    return "GOT it"
+  
+},[user_name]);
+
   React.useEffect(() => {
     getallFriends();
+  // router.push("/profile/user_name")
 
   },[friend_count]);
+  
+  React.useEffect(() => {
+    if (user_error)
+        setInfo({
+          ...info,
+          error:"User does not exist",
+      }); 
+  }, [user_error]);
 
+  React.useEffect(() => {
+    if (friend_error)
+        setInfo({
+          ...info,
+          error:"Opps try again later",
+      }); 
+  }, [friend_error]);
 
-
+  
   return (
     <Grid container direction="column">
       <Grid item container>
@@ -92,18 +155,21 @@ const DashBoard = () => {
               <Grid item container justifyContent="center" xs={8} spacing={2}>
                 <Grid item>
                   <Typography color="secondary" variant="h5">
-                    {auth?.user_name}
+                    {other?.data?.user_name}
                   </Typography>
                 </Grid>
-                {/* <Grid item>
-                  <Button variant="contained">
-                    <PersonAddAlt1Icon />
+                <Grid item>
+                  {/* <form onSubmit={addFriend}> */}
+                  <Button variant="contained" onClick={addFriend}
+                  >
+                    <PersonAddAlt1Icon  />
                   </Button>
-                </Grid> */}
+                  {/* </form> */}
+                </Grid>
 
-                {/* <Grid item>
+                <Grid item>
                   <BlockReportMenu />
-                </Grid> */}
+                </Grid>
 
               </Grid>
               <Grid item container wrap spacing={4}>
@@ -141,9 +207,9 @@ const DashBoard = () => {
                   justifyContent="center"
                   item
                   xs={8}
-                > 
+                >
                   <Typography color="secondary" variant="body1">
-                   {friend_count}
+                    {friend_count?.data?.count}
                   </Typography>
                 </Grid>
               </Grid>
@@ -165,5 +231,5 @@ const DashBoard = () => {
 };
 
 
-export default DashBoard;
+export default Profile;
 

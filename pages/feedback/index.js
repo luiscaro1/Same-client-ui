@@ -9,15 +9,85 @@ import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import GamesIcon from '@mui/icons-material/Games';
 import GamesOutlinedIcon from '@mui/icons-material/GamesOutlined';
+import {useSelector,useDispatch} from "react-redux";
+import {feedbackActions} from "../../services/redux/store/actions";
+import { feedbackSelectors } from "../../services/redux/store/selectors";
+import { authSelectors } from "../../services/redux/store/selectors";
+
 
 const Feedback2 = () => {
 
     const classes = useStyles();
     const router = useRouter();
-    const [category, setCategory] = React.useState('');
-    const handleChange = (event) => {
-        setCategory(event.target.value);
-    }
+    const submit_feed=useSelector(feedbackSelectors.selectSubmittedFeed);
+    const error= useSelector(feedbackSelectors.selectError);
+    //const loading= useSelector(feedbackSelectors.selectLoading);
+ 
+    const auth = useSelector(authSelectors.selectToken);
+    const dispatch=useDispatch();
+
+    const [values, setValues] = React.useState({
+        email:"",
+        websitedesign:"",
+        ratedesign:"",
+        websitefunctionality:"",
+        ratefunctionality:"",
+        gameavailable:"",
+        rategames:"",
+        generalinformation:"",
+        rateoverall:"",
+        error: null,
+        
+      });
+
+      const validateEmail = (val) => {
+        const { email } = val;
+        if (email!== auth?.email) {
+          setValues({
+            ...values,
+            error: {
+              message: "Please write your email!",
+            },
+          });
+          return false;
+        }
+        return true;
+      };
+
+    const handleChange = (e) => {
+        setValues({
+          ...values,
+          [e.target.name]: e.target.value,
+        });
+      };
+    
+    
+    const submitting=(e)=>{ 
+        e.preventDefault();
+        //console.log(values);
+        if(validateEmail(values.email)){
+            dispatch(feedbackActions.addFeedBack(values));
+        }
+        //console.log(checkvalues(values));//add info that needs to be passed
+    
+      }
+
+    React.useEffect(() => {
+        if(submit_feed) 
+            router.push("/dashboard");
+      }, [submit_feed]);
+    
+    React.useEffect(() => {
+        if (error)
+          setValues({
+            ...values,
+            error,
+          });
+      }, [error]);
+    
+    // if (loading){
+    //     return "Loading..."
+    // }
 
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {
@@ -39,6 +109,7 @@ const Feedback2 = () => {
                             We appreciate your Feedback.
                         </Typography>
                     </Grid>
+                    <form onSubmit={submitting}>
                     <FormGroup>
                         <Grid
                             item
@@ -47,7 +118,10 @@ const Feedback2 = () => {
                             <TextField
                                 className={classes.feedbackEmail}
                                 label="Email"
-                                placeholder=" " />
+                                placeholder=" "
+                                name="email"
+                                required 
+                                onChange={handleChange}/>
                         </Grid>
                         <Grid
                             item
@@ -62,10 +136,12 @@ const Feedback2 = () => {
                             justifyContent="center">
                             <TextField
                                 className={classes.feedbackBody}
+                                name="websitedesign"
                                 label="What can we improve in this area?"
                                 placeholder=" "
                                 rows={5}
-                                multiline />
+                                multiline
+                                onChange={handleChange} />
                         </Grid>
                         <Grid
                             item
@@ -79,10 +155,11 @@ const Feedback2 = () => {
                             container
                             justifyContent="center">
                             <StyledRating
-                                name="customized-color"
+                                name="ratedesign"
                                 defaultValue={2}
                                 getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
                                 precision={0.5}
+                                onChange={handleChange}
                                 icon={<GamesIcon className={classes.feedbackRating} />}
                                 emptyIcon={<GamesOutlinedIcon className={classes.feedbackRating} />} />
                         </Grid>
@@ -99,10 +176,12 @@ const Feedback2 = () => {
                             justifyContent="center">
                             <TextField
                                 className={classes.feedbackBody}
+                                name="websitefunctionality"
                                 label="What can we improve in this area?"
                                 placeholder=" "
                                 rows={5}
-                                multiline />
+                                multiline
+                                onChange={handleChange} />
                         </Grid>
                         <Grid
                             item
@@ -116,10 +195,11 @@ const Feedback2 = () => {
                             container
                             justifyContent="center">
                             <StyledRating
-                                name="customized-color"
+                                name="ratefunctionality"
                                 defaultValue={2}
                                 getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
                                 precision={0.5}
+                                onChange={handleChange}
                                 icon={<GamesIcon className={classes.feedbackRating} />}
                                 emptyIcon={<GamesOutlinedIcon className={classes.feedbackRating} />} />
                         </Grid>
@@ -136,10 +216,12 @@ const Feedback2 = () => {
                             justifyContent="center">
                             <TextField
                                 className={classes.feedbackBody}
+                                name="gameavailable"
                                 label="What can we improve in this area?"
                                 placeholder=" "
                                 rows={5}
-                                multiline />
+                                multiline
+                                onChange={handleChange} />
                         </Grid>
                         <Grid
                             item
@@ -153,10 +235,12 @@ const Feedback2 = () => {
                             container
                             justifyContent="center">
                             <StyledRating
-                                name="customized-color"
+                                name="rategames"
                                 defaultValue={2}
                                 getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
                                 precision={0.5}
+                                max={5}
+                                onChange={handleChange}
                                 icon={<GamesIcon className={classes.feedbackRating} />}
                                 emptyIcon={<GamesOutlinedIcon className={classes.feedbackRating} />} />
                         </Grid>
@@ -173,10 +257,12 @@ const Feedback2 = () => {
                             justifyContent="center">
                             <TextField
                                 className={classes.feedbackBody}
+                                name="generalinformation"
                                 label="What can we improve overall?"
                                 placeholder=" "
                                 rows={5}
-                                multiline />
+                                multiline
+                                onChange={handleChange} />
                         </Grid>
                         <Grid
                             item
@@ -190,10 +276,11 @@ const Feedback2 = () => {
                             container
                             justifyContent="center">
                             <StyledRating
-                                name="customized-color"
+                                name="rateoverall"
                                 defaultValue={2}
                                 getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
                                 precision={0.5}
+                                onChange={handleChange}
                                 icon={<GamesIcon className={classes.feedbackRating} />}
                                 emptyIcon={<GamesOutlinedIcon className={classes.feedbackRating} />} />
                         </Grid>
@@ -211,13 +298,15 @@ const Feedback2 = () => {
 
                             {/* Needs to be adjusted to actually submit the form */}
                             <Button
-                                onClick={() => router.push("/")}
+                                //onClick={() => router.push("/dashboard")}
                                 variant="contained"
+                                type="submit"
                                 className={classes.submitButton}>
                                 Submit Feedback
                             </Button>
                         </Grid>
                     </FormGroup>
+                    </form>
                 </Grid>
             </Grid>
         </Grid>

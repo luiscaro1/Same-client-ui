@@ -14,3 +14,4 @@ export const selectBlockLoading = createSelector(
 );
 
 export const selectUnblocked=createSelector(selectBlock,(block)=>block.unblocked);
+export const selectBlockCount=createSelector(selectBlock,(block)=>block.count);

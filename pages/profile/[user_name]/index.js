@@ -49,12 +49,12 @@ const Profile = () => {
 
   const getallFriends = () => {
     
-    console.log(other?.data?.uid);
+    //console.log(other?.data?.uid);
     var id=other?.data?.uid;
     dispatch(friendActions.getFriendCount(id));
   };
 
-  const count= getallFriends();
+  //const count= getallFriends();
 
 // console.log(auth?.uid);
 // console.log(other?.data.user_name);
@@ -86,6 +86,12 @@ const Profile = () => {
     return "GOT it"
   
 },[user_name]);
+
+  React.useEffect(() => {
+    getallFriends();
+  // router.push("/profile/user_name")
+
+  },[friend_count]);
   
   React.useEffect(() => {
     if (user_error)

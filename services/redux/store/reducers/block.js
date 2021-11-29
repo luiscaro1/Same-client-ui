@@ -6,24 +6,22 @@ import config from "../../../../config";
 
 const initialState = {
     //uid
-    data:null,
+    count:null,
     blocking:false,
     unblocking:false,
     loading: true,
     error: null,
   };
   
-  const { BLOCK_ERROR, BLOCK_SUCCESSFUL, UNBLOCK_SUCCESSFUL,GET_ALL_BLOCKED } = blockTypes;
+  const { BLOCK_ERROR, BLOCK_SUCCESSFUL, UNBLOCK_SUCCESSFUL,BLOCK_COUNT } = blockTypes;
   
   export default function blockReducer(state = initialState, action) {
     switch (action.type) {
-      case GET_ALL_BLOCKED:
+      case BLOCK_COUNT:
           return{
             ...state,
+            count:action.payload,
             blocking:true,
-            unblocking:false,
-            data:action.payload,
-            //data:action.payload,
             error: null,
             loading: false,
           };

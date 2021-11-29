@@ -13,6 +13,9 @@ export const selectAuthLoading = createSelector(
 );
 //temp
 export const selectUpdate=createSelector(selectAuth,(auth)=>auth.updated);
-export const selectDelete=createSelector(selectAuth,(auth)=>auth.deleted);
+// export const selectUpdatedInfo=createSelector(selectAuth,(auth)=>auth.update_user_name);
+export const selectEmail=createSelector(selectAuth,(auth)=>auth.email);
+export const selectDeleted=createSelector(selectAuth,(auth)=>auth.deleted);
 export const selectOtherUser=createSelector(selectAuth,(auth)=>auth.other_user);
 export const selectUserError = createSelector(selectAuth, (auth) => auth.user_error);
+export const selectUpdateError=createSelector(selectAuth,(auth)=>auth.update_error);

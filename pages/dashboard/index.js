@@ -23,7 +23,7 @@ const DashBoard = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   //console.log(auth?.uid);
-  const friend=useSelector(friendSelectors.selectFriendCount);
+  const friend_count=useSelector(friendSelectors.selectFriendCount);
   const dispatch=useDispatch();
 
   const [info, setInfo] = React.useState({
@@ -34,13 +34,16 @@ const DashBoard = () => {
   //for friend count, works but doesnt want to show in front end
   const getallFriends = () => {
     
-    console.log(auth?.uid);
+    //console.log(auth?.uid);
     var id=auth?.uid;
     dispatch(friendActions.getFriendCount(id));
   };
 
-  const count= getallFriends();
+  //const count= getallFriends();
+  React.useEffect(() => {
+    getallFriends();
 
+  },[friend_count]);
 
 
 
@@ -140,7 +143,7 @@ const DashBoard = () => {
                   xs={8}
                 > 
                   <Typography color="secondary" variant="body1">
-                   {count} {friend?.data?.count}
+                   {friend_count}
                   </Typography>
                 </Grid>
               </Grid>

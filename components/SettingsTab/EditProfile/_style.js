@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme)=>({
   
   textgrid:{
       margin:"5% 0% 0% 0%",
-      justifyContent:"left"
+      justifyContent:"left",
 
   },
 
@@ -37,7 +37,14 @@ const useStyles = makeStyles((theme)=>({
   save:{
     height:50,
     width:100,
-    margin:"10% 0% 0% 30%"
+    flexGrow:1,
+    marginTop:10,
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      margin:"3% 0% 0% 0%",
+      
+    },
+    
   },
 }));
 

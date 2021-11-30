@@ -34,16 +34,16 @@ const DashBoard = () => {
   //for friend count, works but doesnt want to show in front end
   const getallFriends = () => {
     
-    //console.log(auth?.uid);
-    var id=auth?.uid;
-    dispatch(friendActions.getFriendCount(id));
+    if(auth){//console.log(auth?.uid);
+      var id=auth?.uid;
+      dispatch(friendActions.getFriendCount(id));}
   };
 
   //const count= getallFriends();
   React.useEffect(() => {
     getallFriends();
 
-  },[friend_count]);
+  },[auth,friend_count]);
 
 
 

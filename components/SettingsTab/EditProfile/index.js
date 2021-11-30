@@ -57,11 +57,11 @@ const EditProfileTab = () => {
   //   // dispatch(authActions.login(values));
   // };
 
-  React.useEffect(() => {
-    if(updated) 
-      return "Saved";
-      // router.push("/settings");
-  }, [updated]);
+  // React.useEffect(() => {
+  //   if(updated && auth){
+  //       router.push("/settings");
+  //   }
+  // }, [auth,updated]);
 
 
 

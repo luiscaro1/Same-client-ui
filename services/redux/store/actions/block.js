@@ -10,7 +10,7 @@ const {BLOCK_SUCCESSFUL,BLOCK_ERROR,GET_ALL_BLOCKED,
 export const getBlockCount = (uid) => async (dispatch,getState) => {
     const state=getState();
     const {auth}=state;
-    if (auth.token){
+    if (auth?.token){
         try {
             const res = await axios.post(
                 auth_api.base_url + auth_api.get_block_count,{uid}

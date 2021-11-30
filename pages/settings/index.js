@@ -26,6 +26,7 @@ const Settings = () => {
   const friend_count=useSelector(friendSelectors.selectFriendCount);
   const deleted=useSelector(authSelectors.selectDeleted);
   
+  
   //console.log(auth);
   //console.log(friend_count?.count);
 
@@ -37,9 +38,11 @@ const Settings = () => {
   });
 
   const getFriendNumber=()=>{
-    console.log(auth?.uid);
-    var id=auth?.uid;
-    dispatch(friendActions.getFriendCount(id));
+    //console.log(auth?.uid);
+    if(auth){
+      var id=auth?.uid;
+      dispatch(friendActions.getFriendCount(id));
+    }
 
   };
 
@@ -78,13 +81,14 @@ const Settings = () => {
 
   React.useEffect(()=>{
     getFriendNumber();
-  },[friend_count]);
+  },[auth,friend_count]);
 
   React.useEffect(()=>{
     if(deleted)
         logout();
         
   },[deleted]);
+
 
   return (
     <Grid container direction="column">

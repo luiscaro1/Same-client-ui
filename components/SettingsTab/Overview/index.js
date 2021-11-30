@@ -28,15 +28,18 @@ const OverviewTab = () => {
   });
 
   const getUserEmail=()=>{
-    //console.log(auth?.user_name);
-    var name=auth?.user_name;
-    dispatch(authActions.getEmail(name));
+    if(auth){//console.log(auth?.user_name);
+      var name=auth?.user_name;
+      dispatch(authActions.getEmail(name));
+    }
+
   }
 
   const getBlockedUsers=()=>{
-    //console.log(auth?.uid);
-    var id=auth?.uid;
-    dispatch(blockActions.getBlockCount(id));
+    if(auth){//console.log(auth?.uid);
+      var id=auth?.uid;
+      dispatch(blockActions.getBlockCount(id));
+    }
   }
 
   // const count=getBlockedUsers();
@@ -46,7 +49,7 @@ const OverviewTab = () => {
   React.useEffect(()=>{
     getBlockedUsers();
     getUserEmail();
-  },[block_count,email]);
+  },[auth,block_count,email]);
 
   return (
     <Grid

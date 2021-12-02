@@ -20,15 +20,15 @@ const {ADD_FRIEND_SUCCESSFUL,UNFRIEND_SUCCESSFUL,FRIEND_COUNT,FRIEND_ERROR}=frie
   export const getFriendCount=(uid)=>async(dispatch,getState)=>{
     const state = getState();
     const {auth} = state;
-    if(auth.token){
+    if(auth?.token){
         try {
         const res = await axios.post(
-            auth_api.base_url + auth_api.friend_count_route, 
+            auth_api.base_url + auth_api.friend_count_route,
             {uid}
         );
       dispatch({ type: FRIEND_COUNT, payload: res.data });
     } catch (err) {
-      dispatch({ type: FRIEND_ERROR, payload: err });
+      dispatch({ type: FRIEND_ERROR, payload: err.response.data });
         }
     }else{
         dispatch({type:FRIEND_ERROR,payload:"Oops"});

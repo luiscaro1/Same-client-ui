@@ -43,9 +43,10 @@ const Profile = () => {
   });
 
   const getallFriends = () => {
-    //console.log(other?.data?.uid);
-    var id = other?.data?.uid;
-    dispatch(friendActions.getFriendCount(id));
+    if(auth && other){//console.log(other?.data?.uid);
+        var id = other?.data?.uid;
+        dispatch(friendActions.getFriendCount(id));
+      }
   };
 
   //const count= getallFriends();
@@ -72,6 +73,7 @@ const Profile = () => {
     }
   };
 
+
   React.useEffect(() => {
     getUser();
 
@@ -79,9 +81,10 @@ const Profile = () => {
   }, [user_name, auth]);
 
   React.useEffect(() => {
-    getallFriends();
+      getallFriends();
+      
     // router.push("/profile/user_name")
-  }, [friend_count]);
+  }, [other,friend_count]);
 
   // React.useEffect(() => {
   //   if (user_error)
@@ -170,10 +173,7 @@ const Profile = () => {
                   xs={8}
                 >
                   <Typography color="secondary" variant="body1">
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore veritatis et
-                    quasi architecto beatae vitae dicta sunt explicabo.
+                    {other?.data?.bio}
                   </Typography>
                 </Grid>
               </Grid>

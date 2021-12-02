@@ -8,6 +8,7 @@ const initialState = {
   deleted: false,
   updated: false,
   email: null,
+  bio:null,
   // update_user_name:null,
 
   other_user: {
@@ -26,7 +27,9 @@ const {
   UPDATE_EMAIL_SUCCESSFUL,
   UPDATE_PASSWORD_SUCCESSFUL,
   UPDATE_USERNAME_SUCCESSFUL,
+  UPDATE_BIO_SUCCESSFUL,
   GET_BY_USERNAME,
+  GET_BIO,
   DELETE_SUCCESSFUL,
   UPDATE_ERROR,
   USER_ERROR,
@@ -71,6 +74,12 @@ export default function authReducer(state = initialState, action) {
         email: action.payload,
         error: null,
       };
+    case GET_BIO:
+        return {
+          ...state,
+          bio: action.payload,
+          
+      };
 
     case DELETE_SUCCESSFUL:
       return {
@@ -102,6 +111,14 @@ export default function authReducer(state = initialState, action) {
         deleted: false,
         updated: true,
       };
+    case UPDATE_BIO_SUCCESSFUL:
+      return{
+        ...state,
+        loading: false,
+        deleted: false,
+        updated: true,
+        
+      }
     case USER_ERROR:
       return {
         ...state,

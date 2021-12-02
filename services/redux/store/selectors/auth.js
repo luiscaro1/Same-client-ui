@@ -13,7 +13,7 @@ export const selectAuthLoading = createSelector(
 );
 //temp
 export const selectUpdate=createSelector(selectAuth,(auth)=>auth.updated);
-// export const selectUpdatedInfo=createSelector(selectAuth,(auth)=>auth.update_user_name);
+export const selectBio=createSelector(selectAuth,(auth)=>auth.bio);
 export const selectEmail=createSelector(selectAuth,(auth)=>auth.email);
 export const selectDeleted=createSelector(selectAuth,(auth)=>auth.deleted);
 export const selectOtherUser=createSelector(selectAuth,(auth)=>auth.other_user);

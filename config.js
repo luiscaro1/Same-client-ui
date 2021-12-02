@@ -8,6 +8,7 @@ const config = {
     unfriend_route:"/friends/unfriend/",//:user_name
     // get_all_friends:"/friends/getallfriends",
     get_email_route:"/auth/getemail/",
+    get_bio_route:"/auth/getbio/",
     friend_count_route:"/friends/friendcount/",
     add_feedback_route:"/feedback/addfeedback",
     get_avg_feedback:"/feedback/getavgfeedbacks", //admin only
@@ -18,7 +19,7 @@ const config = {
     update_user_name:"/auth/update/user_name",
     update_password:"/auth/update/password",
     update_email:"/auth/update/email",
-    //update_bio:"auth/update/bio",
+    update_bio:"/auth/update/bio",
     block_route:"/block/blockuser/",//:user_name
     unblock_route:"/block/unblock/",//:user_name
     get_all_blocked:"/block/getallblocked",//admin only

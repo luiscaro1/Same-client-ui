@@ -105,23 +105,23 @@ React.useEffect(()=>{
     return "This person is unblocked"
 },[unblocked]);
 
-React.useEffect(() => {
-  if (friend_error)
-      setInfo({
-        ...info,
-        error:"Opps try again later",
-    }); 
+// React.useEffect(() => {
+//   if (friend_error)
+//       setInfo({
+//         ...info,
+//         error:"Opps try again later",
+//     }); 
 
-}, [friend_error]);
+// }, [friend_error]);
 
-React.useEffect(() => {
-  if (block_error)
-      setInfo({
-        ...info,
-        error:"Opps try again later",
-    }); 
+// React.useEffect(() => {
+//   if (block_error)
+//       setInfo({
+//         ...info,
+//         error:"Opps try again later",
+//     }); 
 
-}, [block_error]);
+// }, [block_error]);
 
   return (
     <div>

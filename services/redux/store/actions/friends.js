@@ -28,7 +28,7 @@ const {ADD_FRIEND_SUCCESSFUL,UNFRIEND_SUCCESSFUL,FRIEND_COUNT,FRIEND_ERROR}=frie
         );
       dispatch({ type: FRIEND_COUNT, payload: res.data });
     } catch (err) {
-      dispatch({ type: FRIEND_ERROR, payload: err });
+      dispatch({ type: FRIEND_ERROR, payload: err.response.data });
         }
     }else{
         dispatch({type:FRIEND_ERROR,payload:"Oops"});

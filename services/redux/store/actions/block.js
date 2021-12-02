@@ -18,7 +18,7 @@ export const getBlockCount = (uid) => async (dispatch,getState) => {
         
             dispatch({ type: BLOCK_COUNT, payload: res.data });
             } catch (err) {
-            dispatch({ type: BLOCK_ERROR, payload: err });
+            dispatch({ type: BLOCK_ERROR, payload: err.response.data });
             }
     }else{
         dispatch({type:BLOCK_ERROR,payload:"Oops try again later"});

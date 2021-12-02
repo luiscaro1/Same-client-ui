@@ -30,6 +30,7 @@ const Settings = () => {
   
   //console.log(auth);
   //console.log(friend_count?.count);
+  console.log(friend_count);
 
   const dispatch=useDispatch();
 

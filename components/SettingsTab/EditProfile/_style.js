@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme)=>({
     height:"100%",
     width:300,
     margin:10,
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "flex",
-      width: "80%",
+      width: "40%",
     },
   },
   save:{

@@ -73,6 +73,7 @@ const Profile = () => {
     }
   };
 
+
   React.useEffect(() => {
     getUser();
 
@@ -81,6 +82,7 @@ const Profile = () => {
 
   React.useEffect(() => {
       getallFriends();
+      
     // router.push("/profile/user_name")
   }, [other,friend_count]);
 
@@ -171,10 +173,7 @@ const Profile = () => {
                   xs={8}
                 >
                   <Typography color="secondary" variant="body1">
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore veritatis et
-                    quasi architecto beatae vitae dicta sunt explicabo.
+                    {other?.data?.bio}
                   </Typography>
                 </Grid>
               </Grid>

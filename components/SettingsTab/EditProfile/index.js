@@ -12,8 +12,9 @@ const EditProfileTab = () => {
   const dispatch = useDispatch();
   const router=useRouter();
   const auth = useSelector(authSelectors.selectToken);
-  //const updatedinfo=useSelector(authSelectors.selectUpdatedInfo);
+  
   const updated=useSelector(authSelectors.selectUpdate);
+  // const updated_bio=useSelector(authSelectors.selectBio);
   //console.log(auth);
 
   const [name, setName] = React.useState({
@@ -24,6 +25,10 @@ const EditProfileTab = () => {
   const [mail, setMail] = React.useState({
     email: "",
   });
+
+  const [bio,setBio]=React.useState({
+    bio:"",
+  })
 
   const handleUsernameChange = (e) => {
     setName({
@@ -39,7 +44,14 @@ const EditProfileTab = () => {
     });
   };
 
-   const submittingUsername=(e)=>{
+  const handleBioChange = (e) => {
+    setBio({
+      ...bio,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submittingUsername=(e)=>{
      e.preventDefault();
      //console.log(name);
      dispatch(authActions.updateUsername(name.user_name));
@@ -48,6 +60,10 @@ const EditProfileTab = () => {
   const submittingEmail=(e)=>{
     e.preventDefault();
     dispatch(authActions.updateEmail(mail.email));
+  };
+  const submittingBio=(e)=>{
+    e.preventDefault();
+    dispatch(authActions.updateBio(bio.bio));
   };
 
   //submiting changes for edit profile
@@ -108,14 +124,29 @@ const EditProfileTab = () => {
                     </Grid>
             </FormGroup>
             </form>
-                    {/* <TextField
+            <form onSubmit={submittingBio}>
+            <FormGroup>
+            <Grid item direction="row">
+                    <TextField
                           label="Bio"
+                          name="bio"
                           className={classes.biobox}
                           variant="outlined"
-                          onChange={handleChange}
+                          onChange={handleBioChange}
                           multiline
                           rowsmax={Infinity}
-                          inputProps={{ style: { color: "white" } }}></TextField> */}
+                          inputProps={{ style: { color: "white" } }}></TextField>
+                        <Button
+                          className={classes.save}
+                          variant="contained"
+                          type="submit"
+                        >
+                          Save
+                        </Button>
+                    </Grid>
+            </FormGroup>
+            </form>
+                    
       </Grid>
        
     </Grid>

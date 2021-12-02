@@ -2,17 +2,19 @@ import { authTypes } from "./types";
 import axios from "axios";
 import config from "../../../../config";
 import cookieCutter from "cookie-cutter";
-import { GET_EMAIL } from "./types/auth";
 
 const {
   LOGIN_SUCCESSFUL,
   AUTH_ERROR,
   SIGNUP_SUCCESSFUL,
   GET_BY_USERNAME,
+  GET_EMAIL,
+  GET_BIO,
   DELETE_SUCCESSFUL,
   UPDATE_EMAIL_SUCCESSFUL,
   UPDATE_PASSWORD_SUCCESSFUL,
   UPDATE_USERNAME_SUCCESSFUL,
+  UPDATE_BIO_SUCCESSFUL,
   UPDATE_ERROR,
   USER_ERROR,
   LOGOUT,
@@ -140,6 +142,22 @@ export const getEmail = (user_name) => async (dispatch, getState) => {
   } else dispatch({ type: USER_ERROR, payload: "Oops" });
 };
 
+export const getBio = (user_name) => async (dispatch, getState) => {
+  const state = getState();
+  const { auth } = state;
+
+  if (auth?.token) {
+    try {
+      const res = await axios.get(
+        auth_api.base_url + auth_api.get_bio_route + user_name
+      );
+      dispatch({ type: GET_BIO, payload: res.data });
+    } catch (err) {
+      dispatch({ type: USER_ERROR, payload: err.response.data });
+    }
+  } else dispatch({ type: USER_ERROR, payload: "Oops" });
+};
+
 export const deleteAccount = (uid) => async (dispatch, getState) => {
   const state = getState();
   const { auth } = state;
@@ -202,6 +220,23 @@ export const updatePassword = (password) => async (dispatch, getState) => {
         { uid: auth.token.uid, password }
       );
       dispatch({ type: UPDATE_PASSWORD_SUCCESSFUL, payload: res.data });
+    } catch (err) {
+      dispatch({ type: UPDATE_ERROR, payload: err.response.data });
+    }
+  } else dispatch({ type: UPDATE_ERROR, payload: "Oops try again later" });
+};
+
+export const updateBio = (bio) => async (dispatch, getState) => {
+  const state = getState();
+  const { auth } = state;
+
+  if (auth.token) {
+    try {
+      const res = await axios.put(
+        auth_api.base_url + auth_api.update_bio,
+        { uid: auth.token.uid, bio }
+      );
+      dispatch({ type: UPDATE_BIO_SUCCESSFUL, payload: res.data });
     } catch (err) {
       dispatch({ type: UPDATE_ERROR, payload: err.response.data });
     }

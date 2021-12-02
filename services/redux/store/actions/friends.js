@@ -23,7 +23,7 @@ const {ADD_FRIEND_SUCCESSFUL,UNFRIEND_SUCCESSFUL,FRIEND_COUNT,FRIEND_ERROR}=frie
     if(auth?.token){
         try {
         const res = await axios.post(
-            auth_api.base_url + auth_api.friend_count_route, 
+            auth_api.base_url + auth_api.friend_count_route,
             {uid}
         );
       dispatch({ type: FRIEND_COUNT, payload: res.data });

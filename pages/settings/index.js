@@ -25,6 +25,7 @@ const Settings = () => {
   const auth = useSelector(authSelectors.selectToken);
   const friend_count=useSelector(friendSelectors.selectFriendCount);
   const deleted=useSelector(authSelectors.selectDeleted);
+  const updated_bio=useSelector(authSelectors.selectBio);
   
   
   //console.log(auth);
@@ -42,6 +43,14 @@ const Settings = () => {
     if(auth){
       var id=auth?.uid;
       dispatch(friendActions.getFriendCount(id));
+    }
+
+  };
+
+  const getUserBio=()=>{
+    if(auth){//console.log(auth?.user_name);
+      var name=auth?.user_name;
+      dispatch(authActions.getBio(name));
     }
 
   };
@@ -81,12 +90,13 @@ const Settings = () => {
 
   React.useEffect(()=>{
     getFriendNumber();
-  },[auth,friend_count]);
+    if(auth){getUserBio();}
+  },[auth,friend_count,updated_bio]);
 
   React.useEffect(()=>{
-    if(deleted)
+    if(deleted){
         logout();
-        
+    } 
   },[deleted]);
 
 
@@ -155,10 +165,7 @@ const Settings = () => {
                   xs={8}
                 >
                   <Typography color="secondary" variant="body1">
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore veritatis et
-                    quasi architecto beatae vitae dicta sunt explicabo.
+                    {updated_bio}
                   </Typography>
                 </Grid>
               </Grid>

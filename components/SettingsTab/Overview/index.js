@@ -47,8 +47,8 @@ const OverviewTab = () => {
   // const name=getUserEmail();
 
   React.useEffect(()=>{
-    getBlockedUsers();
-    getUserEmail();
+      getBlockedUsers();
+      getUserEmail();
   },[auth,block_count,email]);
 
   return (

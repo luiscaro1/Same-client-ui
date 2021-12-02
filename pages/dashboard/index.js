@@ -17,13 +17,14 @@ import { authSelectors,friendSelectors } from "../../services/redux/store/select
 import DashBoardTab from "../../components/DashBoardTab";
 // import BlockReportMenu from "../../components/BlockReportMenu";
 import NavMenu from "../../components/NavMenu";
-import { friendActions } from "../../services/redux/store/actions";
+import { friendActions,authActions } from "../../services/redux/store/actions";
 
 const DashBoard = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   //console.log(auth?.uid);
   const friend_count=useSelector(friendSelectors.selectFriendCount);
+  const get_bio=useSelector(authSelectors.selectBio);
   const dispatch=useDispatch();
 
   const [info, setInfo] = React.useState({
@@ -39,11 +40,21 @@ const DashBoard = () => {
       dispatch(friendActions.getFriendCount(id));}
   };
 
+  const getUserBio=()=>{
+    if(auth){//console.log(auth?.user_name);
+      var name=auth?.user_name;
+      dispatch(authActions.getBio(name));
+    }
+
+  };
+
   //const count= getallFriends();
   React.useEffect(() => {
     getallFriends();
+    if(auth){getUserBio();}
+    
 
-  },[auth,friend_count]);
+  },[auth,friend_count,get_bio]);
 
 
 
@@ -121,10 +132,7 @@ const DashBoard = () => {
                   xs={8}
                 >
                   <Typography color="secondary" variant="body1">
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore veritatis et
-                    quasi architecto beatae vitae dicta sunt explicabo.
+                   {get_bio}
                   </Typography>
                 </Grid>
               </Grid>
@@ -142,6 +150,7 @@ const DashBoard = () => {
                   item
                   xs={8}
                 > 
+                
                   <Typography color="secondary" variant="body1">
                    {friend_count}
                   </Typography>

@@ -23,7 +23,6 @@ import { friendSelectors } from "../../../services/redux/store/selectors";
 import { useRouter } from "next/router";
 
 const Profile = () => {
-  const router = useRouter();
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
   const loading = useSelector(authSelectors.selectAuthLoading);

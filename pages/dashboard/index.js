@@ -6,62 +6,67 @@ import {
   CardContent,
   Typography,
   Button,
-
   IconButton,
 } from "@mui/material";
 // import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useStyles from "../../pageStyles/dashboard";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
-import { authSelectors,friendSelectors } from "../../services/redux/store/selectors";
+import {
+  authSelectors,
+  friendSelectors,
+} from "../../services/redux/store/selectors";
 import DashBoardTab from "../../components/DashBoardTab";
 // import BlockReportMenu from "../../components/BlockReportMenu";
 import NavMenu from "../../components/NavMenu";
-import { friendActions,authActions } from "../../services/redux/store/actions";
+import { friendActions, authActions } from "../../services/redux/store/actions";
+import { useRouter } from "next/router";
 
 const DashBoard = () => {
+  const router = useRouter();
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
+  const loading = useSelector(authSelectors.selectAuthLoading);
   //console.log(auth?.uid);
-  const friend_count=useSelector(friendSelectors.selectFriendCount);
-  const get_bio=useSelector(authSelectors.selectBio);
-  const dispatch=useDispatch();
+  const friend_count = useSelector(friendSelectors.selectFriendCount);
+  const get_bio = useSelector(authSelectors.selectBio);
+  const dispatch = useDispatch();
 
   const [info, setInfo] = React.useState({
-    uid:"",
+    uid: "",
     error: null,
   });
 
   //for friend count, works but doesnt want to show in front end
   const getallFriends = () => {
-    
-    if(auth){//console.log(auth?.uid);
-      var id=auth?.uid;
-      dispatch(friendActions.getFriendCount(id));}
+    if (auth) {
+      //console.log(auth?.uid);
+      var id = auth?.uid;
+      dispatch(friendActions.getFriendCount(id));
+    }
   };
 
-  const getUserBio=()=>{
-    if(auth){//console.log(auth?.user_name);
-      var name=auth?.user_name;
+  const getUserBio = () => {
+    if (auth) {
+      //console.log(auth?.user_name);
+      var name = auth?.user_name;
       dispatch(authActions.getBio(name));
     }
-
   };
 
   //const count= getallFriends();
   React.useEffect(() => {
     getallFriends();
-    if(auth){getUserBio();}
-    
+    if (auth) {
+      getUserBio();
+    }
+  }, [auth, friend_count, get_bio]);
 
-  },[auth,friend_count,get_bio]);
-
-
+  if (!auth && !loading) router.push("/login");
 
   return (
     <Grid container direction="column">
       <Grid item container>
-
         <Grid className={classes.section} width="100%" item>
           <Toolbar width="100%">
             <Grid container width="100%">
@@ -72,14 +77,11 @@ const DashBoard = () => {
                 <NavMenu className={classes.bar} />
               </Grid>
             </Grid>
-
           </Toolbar>
         </Grid>
       </Grid>
 
-
       <Grid item container className={classes.dashboardContent} xs>
-
         <Grid className={classes.info} item xs={4} container>
           <CardContent>
             <Grid
@@ -115,7 +117,6 @@ const DashBoard = () => {
                 {/* <Grid item>
                   <BlockReportMenu />
                 </Grid> */}
-
               </Grid>
               <Grid item container wrap spacing={4}>
                 <Grid item xs={3}>
@@ -132,7 +133,7 @@ const DashBoard = () => {
                   xs={8}
                 >
                   <Typography color="secondary" variant="body1">
-                   {get_bio}
+                    {get_bio}
                   </Typography>
                 </Grid>
               </Grid>
@@ -149,10 +150,9 @@ const DashBoard = () => {
                   justifyContent="center"
                   item
                   xs={8}
-                > 
-                
+                >
                   <Typography color="secondary" variant="body1">
-                   {friend_count}
+                    {friend_count}
                   </Typography>
                 </Grid>
               </Grid>
@@ -162,9 +162,7 @@ const DashBoard = () => {
         <Grid item container xs>
           <Grid className={classes.card}>
             <CardContent>
-
               <DashBoardTab />
-
             </CardContent>
           </Grid>
         </Grid>
@@ -173,6 +171,4 @@ const DashBoard = () => {
   );
 };
 
-
 export default DashBoard;
-

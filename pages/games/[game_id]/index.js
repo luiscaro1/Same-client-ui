@@ -7,7 +7,10 @@ import { Toolbar, Typography } from "@mui/material";
 import NavMenu from "../../../components/NavMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { gameActions } from "../../../services/redux/store/actions";
-import { gameSelectors } from "../../../services/redux/store/selectors";
+import {
+  gameSelectors,
+  authSelectors,
+} from "../../../services/redux/store/selectors";
 import TabPanel from "../../../components/TabPanel";
 import Lfg from "../../../components/Lfg";
 import Feed from "../../../components/Feed";
@@ -24,6 +27,8 @@ const GameFeed = () => {
   const dispatch = useDispatch();
   const currentGame = useSelector(gameSelectors.selectCurrentGame);
   const [value, setValue] = React.useState(0);
+  const auth = useSelector(authSelectors.selectToken);
+  const loading = useSelector(authSelectors.selectAuthLoading);
 
   const a11yProps = (index) => {
     return {
@@ -54,6 +59,7 @@ const GameFeed = () => {
     clearCurrentLobby();
   }, []);
 
+  if (!auth && !loading) router.push("/login");
   return (
     <>
       <Grid item container>

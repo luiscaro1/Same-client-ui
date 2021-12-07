@@ -20,10 +20,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { friendActions } from "../../../services/redux/store/actions";
 import { authActions } from "../../../services/redux/store/actions";
 import { friendSelectors } from "../../../services/redux/store/selectors";
+import { useRouter } from "next/router";
 
 const Profile = () => {
+  const router = useRouter();
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
+  const loading = useSelector(authSelectors.selectAuthLoading);
   const other = useSelector(authSelectors.selectOtherUser);
   const user_error = useSelector(authSelectors.selectUserError);
   const error = useSelector(authSelectors.selectAuthError);
@@ -43,10 +46,11 @@ const Profile = () => {
   });
 
   const getallFriends = () => {
-    if(auth && other){//console.log(other?.data?.uid);
-        var id = other?.data?.uid;
-        dispatch(friendActions.getFriendCount(id));
-      }
+    if (auth && other) {
+      //console.log(other?.data?.uid);
+      var id = other?.data?.uid;
+      dispatch(friendActions.getFriendCount(id));
+    }
   };
 
   //const count= getallFriends();
@@ -73,7 +77,6 @@ const Profile = () => {
     }
   };
 
-
   React.useEffect(() => {
     getUser();
 
@@ -81,10 +84,10 @@ const Profile = () => {
   }, [user_name, auth]);
 
   React.useEffect(() => {
-      getallFriends();
-      
+    getallFriends();
+
     // router.push("/profile/user_name")
-  }, [other,friend_count]);
+  }, [other, friend_count]);
 
   // React.useEffect(() => {
   //   if (user_error)
@@ -101,6 +104,8 @@ const Profile = () => {
   //       error: "Opps try again later",
   //     });
   // }, [friend_error]);
+
+  if (!auth && !loading) router.push("/login");
 
   return (
     <Grid container direction="column">

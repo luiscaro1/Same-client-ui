@@ -9,56 +9,58 @@ import {
   Button,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useStyles from "../../pageStyles/settings";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
-import { authSelectors,friendSelectors } from "../../services/redux/store/selectors";
+import {
+  authSelectors,
+  friendSelectors,
+} from "../../services/redux/store/selectors";
 import SettingsTab from "../../components/SettingsTab";
 import Link from "next/link";
 import NavMenu from "../../components/NavMenu";
-import { friendActions,authActions } from "../../services/redux/store/actions";
+import { friendActions, authActions } from "../../services/redux/store/actions";
 import router, { useRouter } from "next/router";
 import { route } from "next/dist/server/router";
 
 const Settings = () => {
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
-  const friend_count=useSelector(friendSelectors.selectFriendCount);
-  const deleted=useSelector(authSelectors.selectDeleted);
-  const updated_bio=useSelector(authSelectors.selectBio);
-  
-  
+  const loading = useSelector(authSelectors.selectAuthLoading);
+  const friend_count = useSelector(friendSelectors.selectFriendCount);
+  const deleted = useSelector(authSelectors.selectDeleted);
+  const updated_bio = useSelector(authSelectors.selectBio);
+
   //console.log(auth);
   //console.log(friend_count?.count);
   console.log(friend_count);
 
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
-  const [info,setInfo]=React.useState({
-    uid:"",
-    error:null,
+  const [info, setInfo] = React.useState({
+    uid: "",
+    error: null,
   });
 
-  const getFriendNumber=()=>{
+  const getFriendNumber = () => {
     //console.log(auth?.uid);
-    if(auth){
-      var id=auth?.uid;
+    if (auth) {
+      var id = auth?.uid;
       dispatch(friendActions.getFriendCount(id));
     }
-
   };
 
-  const getUserBio=()=>{
-    if(auth){//console.log(auth?.user_name);
-      var name=auth?.user_name;
+  const getUserBio = () => {
+    if (auth) {
+      //console.log(auth?.user_name);
+      var name = auth?.user_name;
       dispatch(authActions.getBio(name));
     }
-
   };
 
-  const deleteUser=()=>{
+  const deleteUser = () => {
     //console.log(auth?.uid);
-    var id=auth?.uid;
+    var id = auth?.uid;
     dispatch(authActions.deleteAccount(id));
   };
 
@@ -67,14 +69,12 @@ const Settings = () => {
     router.push("/");
   };
 
-
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   //const count=getFriendNumber();
-  
 
   const [click, setClick] = React.useState(false);
   const [button, setButton] = React.useState(true);
@@ -89,17 +89,20 @@ const Settings = () => {
     };
   };
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     getFriendNumber();
-    if(auth){getUserBio();}
-  },[auth,friend_count,updated_bio]);
+    if (auth) {
+      getUserBio();
+    }
+  }, [auth, friend_count, updated_bio]);
 
-  React.useEffect(()=>{
-    if(deleted){
-        logout();
-    } 
-  },[deleted]);
+  React.useEffect(() => {
+    if (deleted) {
+      logout();
+    }
+  }, [deleted]);
 
+  if (!auth && !loading) router.push("/login");
 
   return (
     <Grid container direction="column">
@@ -142,7 +145,7 @@ const Settings = () => {
               <Grid item container justifyContent="center" xs={8} spacing={2}>
                 <Grid item>
                   <Typography color="secondary" variant="h5">
-                    {auth?.user_name} 
+                    {auth?.user_name}
                   </Typography>
                 </Grid>
                 {/* <Grid item>
@@ -184,7 +187,7 @@ const Settings = () => {
                   item
                   xs={8}
                 >
-                  <Typography color="secondary" variant="body1"> 
+                  <Typography color="secondary" variant="body1">
                     {friend_count} {/*not sure if its working */}
                   </Typography>
                 </Grid>

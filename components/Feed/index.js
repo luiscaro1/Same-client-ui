@@ -23,7 +23,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import useStyles from "./_style";
 import { IMAGES, MEDIA_STREAM } from "../../constants";
-import { listenForNewLobby } from "../../services/socketio/listeners/game";
+import {
+  listenForFeedPosts,
+  listenForNewLobby,
+} from "../../services/socketio/listeners/game";
 
 const style = {
   position: "absolute",
@@ -97,7 +100,7 @@ const Feed = () => {
   }, [game_id]);
 
   React.useEffect(() => {
-    listenForNewLobby(getFeedPosts);
+    listenForFeedPosts(getFeedPosts);
   }, []);
 
   return (

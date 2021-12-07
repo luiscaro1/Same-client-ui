@@ -49,6 +49,7 @@ const Lobby = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const auth = useSelector(authSelectors.selectToken);
+  const loading = useSelector(authSelectors.selectAuthLoading);
   const currentLobby = useSelector(gameSelectors.selectCurrentLobby);
   const lobby_id = router?.query?.lobby_id;
   const [mute, setMute] = React.useState(true);
@@ -69,6 +70,7 @@ const Lobby = () => {
   }, [userInVoiceChat, auth, lobby_id]);
 
   const messageBoxRef = React.useRef();
+  const messageInputRef = React.useRef();
 
   const handleChange = (e) => {
     setMessage({
@@ -123,6 +125,9 @@ const Lobby = () => {
     e.preventDefault();
 
     if (auth) dispatch(gameActions.sendMessage(message));
+
+    if (messageInputRef.current)
+      messageInputRef.current.childNodes[0].children[0].value = "";
   };
 
   const joinVL = () => {
@@ -216,6 +221,13 @@ const Lobby = () => {
       listenToVoiceLobbyUpdates(() => getUsersInVoiceChat());
     }
   }, [lobby_id]);
+
+  React.useEffect(() => {
+    if (messageBoxRef.current)
+      messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+  }, [currentLobby?.messages]);
+
+  if (!auth && !loading) router.push("/login");
 
   if (currentLobby?.loadingLobby) {
     return (
@@ -462,6 +474,7 @@ const Lobby = () => {
                 <Grid item container direction="row">
                   <Grid item xs={10}>
                     <TextField
+                      ref={messageInputRef}
                       className={classes.chatBox}
                       name="TEXT"
                       type="text"
@@ -522,18 +535,7 @@ const Lobby = () => {
                             item
                             direction="column"
                             justifyContent="center"
-                          >
-                            <Grid
-                              item
-                              className={classes.status}
-                              style={{
-                                backgroundColor:
-                                  auth?.uid === player.uid || player.online
-                                    ? "green"
-                                    : "red",
-                              }}
-                            ></Grid>
-                          </Grid>
+                          ></Grid>
                         </Grid>
                       )
                     )}

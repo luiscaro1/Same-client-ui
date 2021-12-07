@@ -8,7 +8,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { useRouter } from "next/router";
+
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import useStyles from "../../../pageStyles/profile";
 import { IMAGES, MEDIA_STREAM } from "../../../constants";

@@ -191,7 +191,6 @@ const Feed = () => {
           </Grid>
         </Grid>
         {currentGame?.posts?.map((post) => {
-          console.log(post);
           return (
             <Grid item key={post.pid} container justifyContent="center">
               <Card className={classes.postCard}>
@@ -199,7 +198,7 @@ const Feed = () => {
                   <Grid container direction="column" spacing={2}>
                     <Grid container item spacing={2}>
                       <Grid item>
-                        <Avatar src={MEDIA_STREAM + auth?.avatar_url}></Avatar>
+                        <Avatar src={MEDIA_STREAM + post?.avatar_url}></Avatar>
                       </Grid>
 
                       <Grid
@@ -210,7 +209,7 @@ const Feed = () => {
                         justifyContent="center"
                       >
                         <Typography variant="caption">
-                          {auth?.user_name}
+                          {post?.user_name}
                         </Typography>
                       </Grid>
                     </Grid>

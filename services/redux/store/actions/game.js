@@ -19,6 +19,7 @@ const {
   SEND_MESSAGE,
   GET_MEMBERS,
   GET_USERS_IN_VOICE_CHAT,
+  GET_USER_LFG_POSTS,
 } = gameTypes;
 
 export const getAllGames = () => async (dispatch) => {
@@ -80,6 +81,18 @@ export const getUserLfgLobbies = (id) => async (dispatch, getState) => {
     );
 
     dispatch({ type: GET_USER_LFG_LOBBIES, payload: res.data });
+  } catch (err) {
+    dispatch({ type: GAME_ERROR, payload: err });
+  }
+};
+
+export const getUserLfgPosts = (id) => async (dispatch, getState) => {
+  try {
+    const res = await axios.get(
+      game_api.base_url + game_api.get_feed_post_by_user_route + id
+    );
+
+    dispatch({ type: GET_USER_LFG_POSTS, payload: res.data });
   } catch (err) {
     dispatch({ type: GAME_ERROR, payload: err });
   }

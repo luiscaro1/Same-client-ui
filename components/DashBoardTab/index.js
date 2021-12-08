@@ -3,6 +3,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 import useStyles from "./_style";
 import TabPanel from "../TabPanel";
 import LobbiesTab from "./Lobbies";
+import PostsTab from "./Posts";
 import { useDispatch, useSelector } from "react-redux";
 import { gameActions } from "../../services/redux/store/actions";
 import { authSelectors } from "../../services/redux/store/selectors";
@@ -27,9 +28,13 @@ const DashBoardTab = () => {
   const getUserLfgLobbies = () => {
     if (auth?.uid) dispatch(gameActions.getUserLfgLobbies(auth.uid));
   };
+  const getUserLfgPosts = () => {
+    if (auth?.uid) dispatch(gameActions.getUserLfgPosts(auth.uid));
+  };
 
   React.useEffect(() => {
     getUserLfgLobbies();
+    getUserLfgPosts();
   }, [auth?.uid]);
 
   return (
@@ -42,7 +47,7 @@ const DashBoardTab = () => {
           aria-label="basic tabs example"
         >
           <Tab label="Lobbies" {...a11yProps(0)} />
-          <Tab label="Servers" {...a11yProps(1)} />
+
           <Tab label="Posts" {...a11yProps(2)} />
         </Tabs>
       </Box>
@@ -50,10 +55,7 @@ const DashBoardTab = () => {
         <LobbiesTab />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
+        <PostsTab />
       </TabPanel>
     </Box>
   );

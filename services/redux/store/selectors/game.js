@@ -17,6 +17,11 @@ export const selectUserLobbies = createSelector(
   selectGame,
   (game) => game.userLobbies
 );
+export const selectUserPosts = createSelector(
+  selectGame,
+  (game) => game.userPosts
+);
+
 export const selectCurrentLobby = createSelector(
   selectGame,
   (game) => game.currentLobby

@@ -13,6 +13,7 @@ const {
   SEND_MESSAGE,
   GET_MEMBERS,
   GET_USERS_IN_VOICE_CHAT,
+  GET_USER_LFG_POSTS,
 } = gameTypes;
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   games: null,
   error: null,
   userLobbies: null,
+  userPosts: null,
   loading: true,
 
   // when members go online attach a new paramater to the user (online) and use it to disply a green dot
@@ -91,6 +93,12 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         userLobbies: action.payload,
+      };
+    }
+    case GET_USER_LFG_POSTS: {
+      return {
+        ...state,
+        userPosts: action.payload,
       };
     }
 

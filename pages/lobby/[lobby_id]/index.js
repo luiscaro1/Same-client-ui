@@ -257,7 +257,7 @@ const Lobby = () => {
             <Grid item xs={4} maxWidth={400} minWidth={300} height="100%">
               <Card className={classes.lobbyCard}>
                 <CardContent className={classes.lobbyCard}>
-                  <Grid height="100%" container direction="column" spacing={2}>
+                  <Grid height="100%" container direction="column">
                     <Grid item>
                       <Typography color="primary">
                         Hosted by {currentLobby?.data?.user_name}
